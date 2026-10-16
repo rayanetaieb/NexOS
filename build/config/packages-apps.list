@@ -1,0 +1,87 @@
+# Applications intégrées NexOS (catégorie B : installées, AUCUNE ne démarre au boot).
+# Aucun de ces paquets n'active de service permanent : vérifié par build/check-autostart.sh.
+
+# --- Électronique / Arduino (IDE 1.8.19 Debian + chaîne AVR hors ligne) ---
+arduino
+arduino-core-avr
+arduino-builder
+arduino-ctags
+gcc-avr
+avr-libc
+avrdude
+esptool
+python3-serial
+
+# --- KiCad 9 (schéma, PCB, empreintes, 3D, kicad-cli) ---
+# Les modèles 3D (kicad-packages3d, ~6 Go) sont un composant complémentaire (catégorie C).
+kicad
+kicad-symbols
+kicad-footprints
+kicad-templates
+kicad-demos
+kicad-doc-fr
+
+# --- LaTeX : TeXmaker + TeX Live (moteur testé) ; MiKTeX : installation assistée ---
+texmaker
+texlive-latex-recommended
+texlive-latex-extra
+texlive-fonts-recommended
+texlive-lang-french
+texlive-lang-arabic
+texlive-xetex
+texlive-luatex
+texlive-science
+texlive-pictures
+texlive-bibtex-extra
+biber
+latexmk
+fonts-hosny-amiri
+
+# --- Développement Android / Java (Android Studio : installation assistée, licence Google) ---
+openjdk-21-jdk
+adb
+fastboot
+android-sdk-platform-tools-common
+cpu-checker
+
+# --- Bureautique et multimédia ---
+libreoffice-writer
+libreoffice-calc
+libreoffice-impress
+libreoffice-kf6
+libreoffice-l10n-fr
+libreoffice-l10n-ar
+vlc
+kamoso
+filelight
+kcharselect
+
+# --- Impression ---
+cups
+print-manager
+printer-driver-cups-pdf
+
+# --- Sauvegarde, instantanés, disques ---
+snapper
+btrfs-assistant
+partitionmanager
+
+# --- Langues (arabe), accessibilité ---
+fonts-arabeyes
+fonts-noto-ui-extra
+orca
+kmag
+kmousetool
+
+# --- Matériel réel : firmwares (section non-free-firmware), microcode ---
+firmware-linux-nonfree
+firmware-misc-nonfree
+firmware-iwlwifi
+firmware-realtek
+firmware-atheros
+firmware-amd-graphics
+firmware-sof-signed
+firmware-intel-sound
+intel-microcode
+amd64-microcode
+bluez

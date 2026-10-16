@@ -24,7 +24,7 @@ ROOTFS="$OUT/rootfs.tar"
 
 mkdir -p "$OUT"
 lists=("$HERE/config/packages-base.list")
-case "$EDITION" in desktop|live) lists+=("$HERE/config/packages-desktop.list") ;; esac
+case "$EDITION" in desktop|live) lists+=("$HERE/config/packages-desktop.list" "$HERE/config/packages-apps.list") ;; esac
 [ "$EDITION" = live ] && lists+=("$HERE/config/packages-live.list")
 pkgs="$(cat "${lists[@]}" | grep -vE '^\s*(#|$)' | paste -sd, -),$KERNEL"
 hooks=()

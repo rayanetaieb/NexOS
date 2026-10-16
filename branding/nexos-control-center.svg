@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>NexOS Control Center</title>
+  <rect x="12" y="12" width="232" height="232" rx="56" fill="#14181D"/>
+  <polygon points="128,40 204,84 204,172 128,216 52,172 52,84" fill="none" stroke="#01AFF2" stroke-width="12" stroke-linejoin="round"/>
+  <g stroke="#FFFFFF" stroke-width="12" stroke-linecap="round">
+    <line x1="92" y1="98" x2="164" y2="98"/><line x1="92" y1="128" x2="164" y2="128"/><line x1="92" y1="158" x2="164" y2="158"/>
+  </g>
+  <circle cx="112" cy="98" r="11" fill="#01AFF2"/><circle cx="148" cy="128" r="11" fill="#01AFF2"/><circle cx="122" cy="158" r="11" fill="#01AFF2"/>
+</svg>

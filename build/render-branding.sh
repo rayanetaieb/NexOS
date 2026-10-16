@@ -29,6 +29,7 @@ cp "$B/nexos-mark-white.svg" "$ICO/nexos-start.svg"
 cp "$B/nexos-assistant.svg" "$ICO/nexos-assistant.svg"
 cp "$B/nexos-python-center.svg" "$ICO/nexos-python-center.svg"
 cp "$B/nexos-installer.svg" "$ICO/nexos-installer.svg"
+for i in nexos-control-center nexos-android-studio nexos-miktex; do cp "$B/$i.svg" "$ICO/$i.svg"; done
 cp "$B"/*.svg "$R/usr/share/nexos/branding/"
 rsvg-convert -w 256 "$B/nexos-mark.svg" -o "$R/usr/share/pixmaps/nexos-logo.png"
 for s in 16 22 24 32 48 64 128 256; do

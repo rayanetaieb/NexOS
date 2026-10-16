@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Android Studio
+Comment=Développement Android en Kotlin et Java (installé au premier lancement, licence Google)
+Exec=nexos-setup android
+Icon=nexos-android-studio
+Terminal=false
+Categories=Development;IDE;
+Keywords=android;kotlin;java;gradle;apk;

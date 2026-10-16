@@ -23,13 +23,18 @@ printf '[Layout]\nLayoutList=fr\nUse=true\n' > "$R/etc/xdg/kxkbrc"
 if ! chroot "$R" id nexos >/dev/null 2>&1; then
   chroot "$R" useradd -m -s /bin/bash -c "Utilisateur NexOS" nexos
 fi
-for g in sudo audio video plugdev netdev render input; do
+for g in sudo audio video plugdev netdev render input dialout kvm lpadmin bluetooth; do
   chroot "$R" getent group "$g" >/dev/null && chroot "$R" usermod -aG "$g" nexos
 done
 echo 'nexos:nexos' | chroot "$R" chpasswd
 
 # Root verrouillé dans l'édition bureau (administration via sudo).
 chroot "$R" passwd -l root >/dev/null
+
+# --- Services : rien de lourd au démarrage ---
+# Impression : CUPS démarre à la première demande (socket), pas au boot.
+chroot "$R" systemctl disable cups.service cups-browsed.service >/dev/null 2>&1 || true
+chroot "$R" systemctl enable cups.socket >/dev/null 2>&1 || true
 
 # --- Services ---
 chroot "$R" systemctl enable sddm NetworkManager >/dev/null 2>&1
@@ -101,6 +106,26 @@ find "$R/usr/share/nexos/python/profiles" -name '.venv' -prune -exec rm -rf {} +
 if [ -x "$REPO/out/uv-dist/uv" ]; then
   mkdir -p "$R/usr/lib/nexos/uv"; cp -a "$REPO/out/uv-dist/." "$R/usr/lib/nexos/uv/"
 fi
+
+# --- Control Center, nexos-admin (polkit), installations assistées ---
+for pkg in nexos-control-center:nexos_cc nexos-setup:nexos_setup; do
+  src="${pkg%%:*}"; mod="${pkg##*:}"
+  rm -rf "$PY/$mod"; cp -r "$REPO/packages/$src/$mod" "$PY/$mod"
+  find "$PY/$mod" -name '__pycache__' -prune -exec rm -rf {} +
+  cp "$REPO/packages/$src/data/"*.desktop "$R/usr/share/applications/"
+done
+printf '#!/usr/bin/python3\nimport sys\nfrom nexos_cc.gui import main\nsys.exit(main())\n' > "$R/usr/bin/nexos-control-center"
+printf '#!/usr/bin/python3\nimport sys\nfrom nexos_setup.cli import main\nsys.exit(main())\n' > "$R/usr/bin/nexos-setup"
+chmod 755 "$R/usr/bin/nexos-control-center" "$R/usr/bin/nexos-setup"
+install -D -m 0755 "$REPO/packages/nexos-control-center/nexos_cc/admin.py" "$R/usr/lib/nexos/nexos-admin"
+install -D -m 0644 "$REPO/packages/nexos-control-center/data/org.nexos.admin.policy" "$R/usr/share/polkit-1/actions/org.nexos.admin.policy"
+
+# Lanceurs sur le bureau (demandés) : TeXmaker et MiKTeX
+mkdir -p "$R/etc/skel/Desktop"
+for f in texmaker.desktop org.nexos.MiKTeX.desktop; do
+  [ -f "$R/usr/share/applications/$f" ] && install -m 0755 "$R/usr/share/applications/$f" "$R/etc/skel/Desktop/$f"
+done
+mkdir -p "$R/home/nexos/Desktop"; cp -a "$R/etc/skel/Desktop/." "$R/home/nexos/Desktop/" 2>/dev/null || true
 
 # --- Session : pas d'assistant de bienvenue KDE au premier lancement (NexOS a le sien plus tard) ---
 mkdir -p "$R/etc/skel/.config"

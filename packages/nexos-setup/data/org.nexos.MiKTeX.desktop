@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=MiKTeX
+Comment=Installer la distribution TeX MiKTeX (TeX Live est déjà fourni)
+Exec=nexos-setup miktex
+Icon=nexos-miktex
+Terminal=false
+Categories=Office;Publishing;

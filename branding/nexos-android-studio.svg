@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Android Studio (installation NexOS)</title>
+  <rect x="12" y="12" width="232" height="232" rx="56" fill="#1E2A22"/>
+  <rect x="78" y="40" width="100" height="176" rx="16" fill="none" stroke="#7CD992" stroke-width="12"/>
+  <path d="M110 112 l-16 16 l16 16 M146 112 l16 16 l-16 16" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="128" cy="196" r="7" fill="#7CD992"/>
+</svg>

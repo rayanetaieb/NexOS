@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=NexOS Control Center
+Name[fr]=Centre de contrôle NexOS
+Comment=Ressources, démarrage, matériel, mises à jour, sauvegardes, sécurité, composants
+Exec=nexos-control-center
+Icon=nexos-control-center
+Terminal=false
+Categories=System;Settings;
+Keywords=système;services;mises à jour;sauvegarde;pilotes;sécurité;
