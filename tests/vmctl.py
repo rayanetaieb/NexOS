@@ -27,6 +27,15 @@ D = Path(os.environ.get("VMDIR", "out/vm")).resolve()
 SOCK, SERIAL, PIDF = D / "qmp.sock", D / "serial.log", D / "qemu.pid"
 W, H = 1440, 900
 AZERTY = {"a": "q", "q": "a", "z": "w", "w": "z", "m": "semicolon"}
+# Caractères spéciaux sur un clavier AZERTY français (codes de touches physiques QEMU).
+AZERTY_SPECIAL = {
+    "/": ["shift", "dot"], ".": ["shift", "comma"], ";": ["comma"], ":": ["dot"], ",": ["m"],
+    "!": ["slash"], "=": ["equal"], "+": ["shift", "equal"], "-": ["6"], "_": ["8"],
+    '"': ["3"], "'": ["4"], "(": ["5"], ")": ["minus"], "&": ["1"], "<": ["less"],
+    ">": ["shift", "less"], "|": ["alt_r", "6"], "\\": ["alt_r", "8"], "*": ["backslash"],
+    "@": ["alt_r", "0"], "#": ["alt_r", "3"], "~": ["alt_r", "2"], "{": ["alt_r", "4"], "}": ["alt_r", "equal"],
+    "[": ["alt_r", "5"], "]": ["alt_r", "minus"], "$": ["bracket_right"],
+}
 SHIFTED_QWERTY = {"@": ("shift", "2"), "!": ("shift", "1"), "_": ("shift", "minus"), ":": ("shift", "semicolon")}
 
 
@@ -94,6 +103,8 @@ def type_text(text, azerty=True):
             keys(["spc"])
         elif ch == "\n":
             keys(["ret"])
+        elif azerty and ch in AZERTY_SPECIAL:
+            keys(AZERTY_SPECIAL[ch])
         elif ch.isdigit():
             keys(["shift", ch] if azerty else [ch])      # chiffres = Maj en AZERTY
         elif ch.isalpha():
@@ -126,7 +137,9 @@ if __name__ == "__main__":
     elif c == "shot":
         shot(rest[0])
     elif c == "keys":
-        keys(rest)
+        # Lettres converties vers la touche physique AZERTY (ex. ctrl a → ctrl q), sauf --qwerty.
+        qw = "--qwerty" in rest
+        keys([k if qw or len(k) != 1 else AZERTY.get(k, k) for k in rest if k != "--qwerty"])
     elif c == "type":
         type_text(rest[0], azerty="--qwerty" not in rest)
     elif c == "click":

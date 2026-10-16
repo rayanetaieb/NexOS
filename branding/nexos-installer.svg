@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Installer NexOS</title>
+  <rect x="12" y="12" width="232" height="232" rx="56" fill="#01AFF2"/>
+  <path d="M128 36 L200 78 L200 162 L128 204 L56 162 L56 78 Z" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M128 82 v66 M100 122 l28 28 l28 -28" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

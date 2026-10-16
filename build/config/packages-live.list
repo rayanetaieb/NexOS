@@ -14,3 +14,4 @@ btrfs-progs
 dosfstools
 cryptsetup
 rsync
+cracklib-runtime

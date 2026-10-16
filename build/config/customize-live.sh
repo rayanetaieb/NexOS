@@ -16,3 +16,8 @@ rm -f "$R/usr/share/applications/calamares-install-debian.desktop" "$R/etc/xdg/a
 chroot "$R" chown -R nexos:nexos /home/nexos
 # initramfs avec live-boot (démarrage depuis le squashfs).
 chroot "$R" update-initramfs -u -k all >/dev/null
+# Compte de démonstration live : pas de répétition automatique des touches (tests en VM
+# lente fiables). Ce compte est supprimé du système installé.
+mkdir -p "$R/home/nexos/.config"
+printf '[Keyboard]\nKeyRepeat=nothing\n' > "$R/home/nexos/.config/kcminputrc"
+chroot "$R" chown -R nexos:nexos /home/nexos

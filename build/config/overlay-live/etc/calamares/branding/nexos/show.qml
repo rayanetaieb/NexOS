@@ -5,7 +5,7 @@ Presentation {
     id: presentation
     Slide {
         Rectangle { anchors.fill: parent; color: "#14181C" }
-        Image { source: "nexos-welcome.png"; width: parent.width * 0.6; fillMode: Image.PreserveAspectFit; anchors.centerIn: parent }
+        Image { source: "nexos-welcome-dark.png"; width: parent.width * 0.6; fillMode: Image.PreserveAspectFit; anchors.centerIn: parent }
         Text {
             anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: parent.bottom; anchors.bottomMargin: 30
             text: "Installation de NexOS en cours… Python, outils de développement et assistant IA local vous attendent."
