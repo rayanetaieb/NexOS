@@ -1,0 +1,15 @@
+# Paquets du prototype minimal (phase 2). Un paquet par ligne.
+systemd
+systemd-sysv
+udev
+dbus
+kmod
+initramfs-tools
+iproute2
+ifupdown
+procps
+sudo
+less
+nano
+python3
+ca-certificates

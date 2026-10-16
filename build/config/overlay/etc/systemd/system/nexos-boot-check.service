@@ -1,0 +1,12 @@
+[Unit]
+Description=NexOS boot self-check report
+After=systemd-user-sessions.service
+
+[Service]
+# Type=simple : le script attend lui-même la fin du démarrage (is-system-running --wait),
+# ce qui serait impossible en oneshot (le job resterait en cours).
+Type=simple
+ExecStart=/usr/lib/nexos/boot-check.sh
+
+[Install]
+WantedBy=multi-user.target

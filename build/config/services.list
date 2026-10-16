@@ -1,0 +1,2 @@
+# Services explicitement activés dans l'image (le reste garde les valeurs Debian).
+nexos-boot-check.service
