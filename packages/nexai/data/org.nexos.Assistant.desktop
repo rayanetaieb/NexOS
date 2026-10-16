@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Assistant NexOS
+Name[en]=NexOS Assistant
+Comment=Assistant IA local (hors-ligne)
+Exec=nexai gui
+Icon=nexos-assistant
+Terminal=false
+Categories=Utility;
+Keywords=ia;assistant;aide;ai;help;
+# Raccourci global proposé (Plasma lit cette clé via kglobalaccel) : Meta+Espace
+X-KDE-Shortcuts=Meta+Space
+StartupNotify=true

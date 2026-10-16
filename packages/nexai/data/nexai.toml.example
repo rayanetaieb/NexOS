@@ -1,0 +1,12 @@
+# ~/.config/nexos/nexai.toml — tous les champs sont facultatifs.
+enabled = true
+model_path = ""                 # renseigné par « nexai models use <fichier.gguf> »
+server_binary = "llama-server"
+idle_unload_seconds = 120       # déchargement automatique après inactivité
+ctx_size = 2048                 # contexte maximal (tokens)
+max_tokens = 384                # longueur maximale d'une réponse
+threads = 0                     # 0 = automatique
+min_free_ram_mb = 0             # 0 = automatique (taille modèle + cache + marge)
+ram_margin_mb = 512
+weight_repack = false           # true : ~+11 % de vitesse, ~+225 Mio de RAM (mesuré, 0,5B Q4)
+gpu = "off"                     # "auto" ne s'activera qu'après un test GPU réel
