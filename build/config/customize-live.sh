@@ -21,3 +21,7 @@ chroot "$R" update-initramfs -u -k all >/dev/null
 mkdir -p "$R/home/nexos/.config"
 printf '[Keyboard]\nKeyRepeat=nothing\n' > "$R/home/nexos/.config/kcminputrc"
 chroot "$R" chown -R nexos:nexos /home/nexos
+# Pas de verrouillage automatique de l'écran sur le support live (constaté : l'écran se
+# verrouillait pendant l'installation).
+printf '[Daemon]\nAutolock=false\nLockOnResume=false\n' > "$R/home/nexos/.config/kscreenlockerrc"
+chroot "$R" chown -R nexos:nexos /home/nexos

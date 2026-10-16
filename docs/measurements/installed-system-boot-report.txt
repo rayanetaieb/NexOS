@@ -1,0 +1,17 @@
+NEXOS-REPORT-BEGIN
+os=NexOS 0.2 (prototype, base Debian 13)
+kernel=6.12.107+deb13-amd64
+state=running
+failed_units=0
+failed_list=
+boot_time: Startup finished in 12.685s (kernel) + 47.400s (userspace) = 1min 85ms 
+desktop_plasmashell=running
+desktop_session_type=
+desktop_ready_uptime_s=506
+desktop_kwin=running
+desktop_plasmashell_rss_kib=160972
+mem_used_kib=727608 mem_total_kib=4009784
+processes=149
+python=Python 3.13.5
+NEXOS-BOOT-OK
+NEXOS-REPORT-END

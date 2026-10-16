@@ -10,7 +10,10 @@ if command -v sddm >/dev/null 2>&1; then
   for i in $(seq 1 900); do pgrep -x plasmashell >/dev/null && break; sleep 1; done
   sleep 20   # laisse la session se stabiliser avant de mesurer
   pid=$(pgrep -x plasmashell | head -1)
-  sess=$(loginctl list-sessions --no-legend | awk '$3=="nexos"{print $1; exit}')
+  # session graphique de l'utilisateur connecté (quel qu'il soit)
+  sess=$(for s in $(loginctl list-sessions --no-legend | awk '{print $1}'); do
+           t=$(loginctl show-session "$s" -p Type --value); c=$(loginctl show-session "$s" -p Class --value)
+           [ "$c" = user ] && [ "$t" = wayland -o "$t" = x11 ] && echo "$s" && break; done)
   desktop=$(cat <<D
 desktop_plasmashell=$( [ -n "$pid" ] && echo running || echo ABSENT )
 desktop_session_type=$( [ -n "$sess" ] && loginctl show-session "$sess" -p Type --value )
