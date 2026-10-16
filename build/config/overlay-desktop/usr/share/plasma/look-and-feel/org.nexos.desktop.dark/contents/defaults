@@ -2,21 +2,21 @@
 widgetStyle=Breeze
 
 [kdeglobals][General]
-ColorScheme=BreezeDark
+ColorScheme=NexOSDark
 AccentColor=1,175,242
 
 [kdeglobals][Icons]
 Theme=breeze-dark
 
 [plasmarc][Theme]
-name=breeze-dark
+name=nexos
 
 [kcminputrc][Mouse]
 cursorTheme=breeze_cursors
 
 [kwinrc][org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__NexOS
 
 [Wallpaper]
 Image=NexOS

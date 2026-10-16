@@ -1,36 +1,24 @@
-// Disposition par défaut du bureau NexOS (Plasma 6, API de script du shell).
-// Barre supérieure : menu NexOS · espace · horloge (centre) · espace · zone système.
-// Dock flottant en bas, centré, ajusté à son contenu : applications épinglées + fenêtres.
+// NexOS — disposition « îlot » : une seule barre flottante, centrée, ajustée à son contenu.
+// [ menu NexOS ] | applications épinglées et fenêtres | [ zone système ] [ horloge ]
+// Pas de barre plein écran (Windows), pas de barre de menus (macOS), pas de panneau KDE.
+var island = new Panel;
+island.location = "bottom";
+island.height = 2 * Math.floor(gridUnit * 3.2 / 2);
+island.floating = true;
+island.lengthMode = "fit";
+island.alignment = "center";
+island.hiding = "none";
 
-var top = new Panel;
-top.location = "top";
-top.height = 2 * Math.floor(gridUnit * 1.7 / 2);
-top.floating = false;
-
-var menu = top.addWidget("org.kde.plasma.kickoff");
+var menu = island.addWidget("org.kde.plasma.kickoff");
 menu.currentConfigGroup = ["General"];
 menu.writeConfig("icon", "nexos-start");
-menu.writeConfig("favoritesDisplay", "0");      // favoris en grille
-menu.writeConfig("applicationsDisplay", "1");   // applications en liste
+menu.writeConfig("favoritesDisplay", "0");
+menu.writeConfig("applicationsDisplay", "0");
 menu.writeConfig("showActionButtonCaptions", "false");
+menu.writeConfig("compactMode", "true");
 
-top.addWidget("org.kde.plasma.panelspacer");
-var clock = top.addWidget("org.kde.plasma.digitalclock");
-clock.currentConfigGroup = ["Appearance"];
-clock.writeConfig("showDate", "true");
-clock.writeConfig("dateDisplayFormat", "BesideTime");
-top.addWidget("org.kde.plasma.panelspacer");
-top.addWidget("org.kde.plasma.systemtray");
-
-var dock = new Panel;
-dock.location = "bottom";
-dock.height = 2 * Math.floor(gridUnit * 3.4 / 2);
-dock.floating = true;
-dock.lengthMode = "fit";
-dock.alignment = "center";
-dock.hiding = "dodgewindows";
-
-var tasks = dock.addWidget("org.kde.plasma.icontasks");
+island.addWidget("org.kde.plasma.marginsseparator");
+var tasks = island.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
 tasks.writeConfig("launchers", [
     "applications:org.kde.dolphin.desktop",
@@ -38,15 +26,19 @@ tasks.writeConfig("launchers", [
     "applications:org.kde.konsole.desktop",
     "applications:org.nexos.PythonCenter.desktop",
     "applications:org.nexos.Assistant.desktop",
-    "applications:org.kde.discover.desktop",
-    "applications:systemsettings.desktop"
+    "applications:org.nexos.ControlCenter.desktop",
+    "applications:org.kde.discover.desktop"
 ].join(","));
-tasks.writeConfig("showOnlyCurrentDesktop", "false");
 tasks.writeConfig("indicateAudioStreams", "true");
-dock.addWidget("org.kde.plasma.marginsseparator");
-dock.addWidget("org.kde.plasma.trash");
+tasks.writeConfig("iconSpacing", "2");
+island.addWidget("org.kde.plasma.marginsseparator");
+var tray = island.addWidget("org.kde.plasma.systemtray");
+var clock = island.addWidget("org.kde.plasma.digitalclock");
+clock.currentConfigGroup = ["Appearance"];
+clock.writeConfig("showDate", "true");
+clock.writeConfig("dateDisplayFormat", "BelowTime");
+clock.writeConfig("dateFormat", "shortDate");
 
-// Fond d'écran NexOS sur tous les bureaux (paquet avec variantes clair/sombre).
 var all = desktops();
 for (var i = 0; i < all.length; i++) {
     var d = all[i];
