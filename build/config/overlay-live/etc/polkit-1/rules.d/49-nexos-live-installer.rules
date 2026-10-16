@@ -1,0 +1,6 @@
+// Support live uniquement : le compte de démonstration lance l'installateur sans mot de passe.
+polkit.addRule(function(action, subject) {
+    if (action.id == "com.github.calamares.calamares.pkexec.run" && subject.user == "nexos") {
+        return polkit.Result.YES;
+    }
+});

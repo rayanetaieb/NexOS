@@ -88,6 +88,20 @@ if [ -x "$REPO/out/llama-dist/llama-server" ]; then
   cp -a "$REPO/out/llama-dist/." "$R/usr/lib/nexos/llama/"
 fi
 
+# --- Centre Python : module, commande, profils verrouillés, uv ---
+rm -rf "$PY/nexos_python"; cp -r "$REPO/packages/nexos-python-center/nexos_python" "$PY/nexos_python"
+find "$PY/nexos_python" -name '__pycache__' -prune -exec rm -rf {} +
+printf '#!/usr/bin/python3\nimport sys\nfrom nexos_python.cli import main\nsys.exit(main())\n' > "$R/usr/bin/nexos-python"
+chmod 755 "$R/usr/bin/nexos-python"
+cp "$REPO/packages/nexos-python-center/data/org.nexos.PythonCenter.desktop" "$R/usr/share/applications/"
+mkdir -p "$R/usr/share/nexos/python"
+rm -rf "$R/usr/share/nexos/python/profiles"
+cp -r "$REPO/python/profiles" "$R/usr/share/nexos/python/profiles"
+find "$R/usr/share/nexos/python/profiles" -name '.venv' -prune -exec rm -rf {} +
+if [ -x "$REPO/out/uv-dist/uv" ]; then
+  mkdir -p "$R/usr/lib/nexos/uv"; cp -a "$REPO/out/uv-dist/." "$R/usr/lib/nexos/uv/"
+fi
+
 # --- Session : pas d'assistant de bienvenue KDE au premier lancement (NexOS a le sien plus tard) ---
 mkdir -p "$R/etc/skel/.config"
 printf '[General]\nShouldShow=false\n' > "$R/etc/skel/.config/plasma-welcomerc"
@@ -95,6 +109,3 @@ install -d -o 1000 -g 1000 "$R/home/nexos/.config" 2>/dev/null || mkdir -p "$R/h
 cp "$R/etc/skel/.config/plasma-welcomerc" "$R/home/nexos/.config/"
 chroot "$R" chown -R nexos:nexos /home/nexos
 
-# --- Nettoyage ---
-chroot "$R" apt-get clean
-rm -rf "$R/var/lib/apt/lists/"*

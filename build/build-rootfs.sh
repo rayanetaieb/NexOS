@@ -19,19 +19,24 @@ SUITE="${SUITE:-trixie}"
 MIRROR="${MIRROR:-http://deb.debian.org/debian}"
 KERNEL="${KERNEL:-linux-image-amd64}"
 OUT="${OUT:-$PWD/out}"
-EDITION="${EDITION:-base}"             # base | desktop
+EDITION="${EDITION:-base}"             # base | desktop | live (ISO)
 ROOTFS="$OUT/rootfs.tar"
 
 mkdir -p "$OUT"
 lists=("$HERE/config/packages-base.list")
-[ "$EDITION" = desktop ] && lists+=("$HERE/config/packages-desktop.list")
+case "$EDITION" in desktop|live) lists+=("$HERE/config/packages-desktop.list") ;; esac
+[ "$EDITION" = live ] && lists+=("$HERE/config/packages-live.list")
 pkgs="$(cat "${lists[@]}" | grep -vE '^\s*(#|$)' | paste -sd, -),$KERNEL"
 hooks=()
-if [ "$EDITION" = desktop ]; then
+if [ "$EDITION" = desktop ] || [ "$EDITION" = live ]; then
   "$HERE/render-branding.sh"
   hooks+=(--customize-hook="cp -a '$HERE/config/overlay-desktop/.' \"\$1/\"")
   hooks+=(--customize-hook="cp -a '$OUT/branding-root/.' \"\$1/\"")
   hooks+=(--customize-hook="'$HERE/config/customize-desktop.sh' \"\$1\"")
+fi
+if [ "$EDITION" = live ]; then
+  hooks+=(--customize-hook="cp -a '$HERE/config/overlay-live/.' \"\$1/\"")
+  hooks+=(--customize-hook="'$HERE/config/customize-live.sh' \"\$1\"")
 fi
 
 case "$SUITE" in
@@ -64,6 +69,7 @@ mmdebstrap \
   --customize-hook='chroot "$1" passwd -d root' \
   --customize-hook="for s in \$(grep -vE '^\\s*(#|\$)' '$HERE/config/services.list'); do chroot \"\$1\" systemctl enable \"\$s\"; done" \
   "${hooks[@]}" \
+  --customize-hook='chroot "$1" apt-get clean' \
   --customize-hook='rm -f "$1/etc/apt/apt.conf.d/99mmdebstrap"' \
   "$SUITE" "$ROOTFS" "$MIRROR"
 

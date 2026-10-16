@@ -1,0 +1,11 @@
+#!/bin/sh
+# Installe le paquet GRUB adapté (UEFI ou BIOS) dans le système cible, HORS LIGNE,
+# depuis les .deb embarqués dans l'image (pas de dépôt APT sur le support NexOS).
+set -e
+CHROOT=$(mount | grep proc | grep calamares | awk '{print $3}' | sed -e "s#/proc##g")
+POOL=/usr/share/nexos/installer/pool
+if [ -d /sys/firmware/efi/efivars ]; then pkg=grub-efi-amd64; else pkg=grub-pc; fi
+echo "NexOS : installation de $pkg (hors ligne)"
+DEBIAN_FRONTEND=noninteractive chroot "$CHROOT" sh -c "dpkg -i $POOL/${pkg}_*.deb"
+sed -i "s/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/" "$CHROOT/etc/default/grub" || true
+sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="NexOS"/' "$CHROOT/etc/default/grub" || true

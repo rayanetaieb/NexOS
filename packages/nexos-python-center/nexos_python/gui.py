@@ -127,12 +127,16 @@ class CenterWindow(QMainWindow):
         return w
 
     def refresh_profiles(self):
+        cur = self.profile_list.currentItem()
+        selected = cur.data(Qt.ItemDataRole.UserRole) if cur else None
         self.profile_list.clear()
         for p in core.list_profiles():
             state = f"✔ installé · {p.size_mb():.0f} Mio" if p.installed else "non installé"
             it = QListWidgetItem(f"{p.name}  —  {p.description}\n      {p.locked_packages} paquets verrouillés · {state}")
             it.setData(Qt.ItemDataRole.UserRole, p.name)
             self.profile_list.addItem(it)
+            if p.name == selected:
+                self.profile_list.setCurrentItem(it)
 
     def _selected_profile(self) -> str | None:
         it = self.profile_list.currentItem()

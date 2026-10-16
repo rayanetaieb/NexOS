@@ -1,0 +1,36 @@
+---
+componentName:  nexos
+welcomeStyleCalamares: false
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 900px,600px
+windowPlacement: center
+sidebar: widget
+navigation: widget
+
+strings:
+    productName:         NexOS
+    shortProductName:    NexOS
+    version:             0.2 (prototype)
+    shortVersion:        0.2
+    versionedName:       NexOS 0.2
+    shortVersionedName:  NexOS 0.2
+    bootloaderEntryName: NexOS
+    productUrl:          https://github.com/
+    supportUrl:          https://github.com/
+    knownIssuesUrl:      https://github.com/
+    releaseNotesUrl:     https://github.com/
+
+images:
+    productLogo:         "nexos-mark.png"
+    productIcon:         "nexos-mark.png"
+    productWelcome:      "nexos-welcome.png"
+
+slideshow:               "show.qml"
+slideshowAPI:            2
+
+style:
+   SidebarBackground:        "#14181C"
+   SidebarText:              "#FFFFFF"
+   SidebarTextCurrent:       "#FFFFFF"
+   SidebarBackgroundCurrent: "#01AFF2"

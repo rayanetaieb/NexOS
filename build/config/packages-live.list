@@ -1,0 +1,16 @@
+# Édition ISO live + installateur (phase 6) — en plus de base + desktop.
+live-boot
+calamares
+calamares-settings-debian
+x11-xserver-utils
+pkexec
+grub2-common
+grub-pc-bin
+grub-efi-amd64-bin
+grub-efi-amd64-signed
+shim-signed
+efibootmgr
+btrfs-progs
+dosfstools
+cryptsetup
+rsync

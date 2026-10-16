@@ -1,0 +1,6 @@
+---
+type:       "job"
+name:       "nexos-bootloader-config"
+interface:  "process"
+command:    "/usr/share/calamares/helpers/nexos-bootloader-config"
+timeout:    600

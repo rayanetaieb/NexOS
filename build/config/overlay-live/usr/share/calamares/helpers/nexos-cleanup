@@ -1,0 +1,11 @@
+#!/bin/sh
+# Retire du système installé tout ce qui ne sert qu'au support live.
+set -e
+CHROOT=$(mount | grep proc | grep calamares | awk '{print $3}' | sed -e "s#/proc##g")
+rm -f "$CHROOT/etc/sddm.conf.d/90-nexos-autologin.conf"
+rm -f "$CHROOT/etc/polkit-1/rules.d/49-nexos-live-installer.rules"
+rm -f "$CHROOT/usr/share/applications/org.nexos.Installer.desktop"
+rm -f "$CHROOT/etc/xdg/autostart/calamares-desktop-icon.desktop"
+rm -rf "$CHROOT/usr/share/nexos/installer"
+rm -rf "$CHROOT/etc/calamares"
+echo "NexOS : nettoyage du système installé terminé"

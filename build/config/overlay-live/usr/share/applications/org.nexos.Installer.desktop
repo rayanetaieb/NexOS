@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Installer NexOS
+Comment=Installer NexOS sur cet ordinateur
+Exec=calamares-install-debian
+Icon=nexos-logo
+Terminal=false
+Categories=System;
