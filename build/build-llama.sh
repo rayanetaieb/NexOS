@@ -28,6 +28,10 @@ mmdebstrap --variant=minbase --include=build-essential,cmake,ca-certificates "${
   --customize-hook="cp -a \"\$1/src/llama.cpp/build/bin/.\" '$DIST/'" \
   "$SUITE" /dev/null "$MIRROR"
 
+# RPATH=$ORIGIN : llama-server et ses bibliothèques se trouvent mutuellement dans leur dossier.
+for f in "$DIST/llama-server" "$DIST"/*.so*; do
+  [ -L "$f" ] || patchelf --set-rpath '$ORIGIN' "$f"
+done
 cp "$SRC/LICENSE" "$DIST/LICENSE.llama.cpp"
 echo "$COMMIT" > "$DIST/VERSION"
 find "$DIST" -maxdepth 1 -type f ! -name 'llama-server' ! -name '*.so*' ! -name 'LICENSE*' ! -name VERSION -delete
