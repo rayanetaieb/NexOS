@@ -32,5 +32,21 @@ Le système installé utilise le shim et GRUB signés de Debian.
 - Retrait de l'auto-connexion, des règles et outils propres au live (live-boot, Calamares).
 - Régénération de l'initramfs.
 
-## Vérification
-Les résultats réellement obtenus sont consignés dans `docs/MEASUREMENTS.md`.
+## Vérification réelle (17/10/2026, QEMU UEFI, émulation logicielle)
+`tests/install/run_install.sh out/live/nexos-0.2-amd64.iso` puis redémarrage sur le disque seul.
+Captures : `docs/screenshots/v0.2-installer/`.
+
+| Étape | Résultat |
+|---|---|
+| Démarrage de l'ISO (UEFI) jusqu'au bureau live | ✅ Plasma Wayland, 0 unité en échec |
+| Installateur (langue, Europe/Paris, AZERTY, Btrfs sur disque entier, compte) | ✅ « Installation terminée » |
+| Redémarrage sur le disque installé | ✅ GRUB UEFI installé hors ligne, écran de connexion NexOS |
+| Connexion avec le compte créé | ✅ bureau NexOS |
+| Contrôles dans le système installé | ✅ racine Btrfs `@` ; 5 entrées de sous-volumes dans fstab ; live-boot et calamares retirés ; compte de démo absent ; auto-connexion retirée ; assistant, Centre Python, llama, uv présents ; 0 unité en échec ; 711 Mio utilisés après ouverture de session |
+
+Défauts trouvés par ces essais et corrigés : dictionnaire de mots de passe absent
+(cracklib), `unsquashfs` absent (échec de copie), `mkfs.ext4` absent, fuseau New York par
+défaut, logos illisibles, verrouillage de l'écran live pendant l'installation.
+
+Non vérifié à ce jour : installation en mode BIOS, chiffrement LUKS, option ext4,
+VirtualBox et matériel réel, Secure Boot.
