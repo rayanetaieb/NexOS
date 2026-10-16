@@ -10,6 +10,37 @@ VM de développement cloud : Intel Xeon @ 2,10 GHz (AVX2, AMX), **2 cœurs**,
 Ces chiffres ne représentent PAS un PC de bureau ; ils servent de référence
 reproductible et de non-régression.
 
+## Priorité 1 — build Debian 13 (16/10/2026, soir)
+Commande : `make keyring && make rootfs disk boot-test OUT=out/debian MIRROR=https://deb.debian.org/debian`
+(+ `APT_PROXY`/`APT_CAINFO` dans l'environnement de build qui impose un proxy).
+
+| Mesure | Valeur |
+|---|---|
+| Vérification des signatures APT | trousseau trixie obtenu par chaîne de confiance (InRelease bookworm → index → paquet), InRelease trixie : 3 signatures valides |
+| Test de démarrage automatisé | **SUCCÈS** — `NexOS 0.1 prototype (base trixie)`, noyau `6.12.107+deb13-amd64`, `state=running`, 0 unité en échec, Python 3.13.5 |
+| Durée du build rootfs | 189 s |
+| RAM utilisée (système minimal, VM 1 Gio) | 141 Mio |
+
+## Priorité 2 — bureau Plasma 6
+Voir `docs/DESKTOP.md` : session Wayland ouverte et pilotée en VM (succès), 745 Mio
+utilisés après ouverture de session (VM 4 Gio, émulation logicielle).
+
+## Priorité 4 — profils Python (installation exacte depuis uv.lock + tests fonctionnels)
+Machine de build (2 cœurs, réseau PyPI). Journaux : `docs/measurements/python-profiles/`.
+
+| Profil | Installation | Taille | Tests | Remarque |
+|---|---|---|---|---|
+| base | 2 s | 55 Mio | 2/2 | |
+| science | 6 s* | 539 Mio | 6/6 | *cache uv partiellement chaud |
+| electronics | 51 s | 530 Mio | 5/5 | port série en boucle, VISA, filtrage, pyqtgraph |
+| appdev | 37 s | 453 Mio | 4/4 | fenêtre Kivy/KivyMD réelle (Xvfb), PySide6, Ruff/Mypy, exécutable PyInstaller lancé |
+| ai | 233 s | **7 819 Mio** | 4/4 | entraînement PyTorch + export ONNX vérifié, Keras, XGBoost ; GPU : aucun (CPU) |
+| vision | 168 s | **5 988 Mio** | 3/3 | OpenCV, Pillow, YOLO construit et inféré hors ligne |
+
+Taille des profils ai/vision : le PyTorch de PyPI embarque CUDA. Variante CPU seule
+(`download.pytorch.org`) non testable depuis l'environnement de build — à faire.
+Centre Python : 11/11 tests (cœur, projets, restauration après échec, interface pilotée).
+
 ## Phase 2 — démarrage du prototype
 
 Commande : `make rootfs SUITE=noble MIRROR=http://archive.ubuntu.com/ubuntu KERNEL=linux-image-virtual && make disk && make boot-test`
@@ -69,3 +100,35 @@ Décision : `--no-repack` par défaut (−225 Mio, −11 % de vitesse), option
 (AMX/AVX2) : à re-mesurer sur les processeurs ciblés.
 
 Fichiers bruts : `docs/measurements/nexai-bench-proxy-q4km-run{1,2}.json`.
+
+### Priorité 3 — vrais modèles (remplace le proxy pour toute conclusion)
+Fichiers téléchargés depuis les dépôts officiels Hugging Face, SHA-256 vérifiés
+(`nexai models download`). Licences : Apache-2.0. Évaluation : `nexai eval`, tâches notées
+automatiquement (code Python **exécuté** contre des tests, commandes/explications par motifs).
+
+Évaluation v1 (22 tâches ; renotée après correction d'un faux négatif du détecteur de français) :
+
+| Modèle | Fichier | Score | Code |
+|---|---|---|---|
+| SmolLM2-360M Q8_0 | 369 Mio | 7/22 | 1/5 |
+| Qwen3-0.6B Q8_0 | 610 Mio | 12/22 | 3/5 |
+| Qwen2.5-0.5B Q4_K_M | 469 Mio | 13/22 | 2/5 |
+| Qwen2.5-1.5B Q4_K_M | 1 066 Mio | 18/22 | 5/5 |
+
+Constat v1 : le prompt système (« tu ne peux exécuter aucune commande ») provoquait des
+refus d'écrire du code ; les questions NexOS échouaient (mémo du prompt ignoré).
+Corrections : prompt réécrit + base de connaissances injectée par mots-clés (`knowledge.py`)
++ 2 questions NexOS de contrôle formulées différemment.
+
+Évaluation v2 (24 tâches, 1 passage chacun, température 0,3) :
+
+| Modèle | Score | Question | Commande | Erreur | Code | Résumé | NexOS | RAM anonyme pic |
+|---|---|---|---|---|---|---|---|---|
+| **Qwen2.5-1.5B Q4_K_M** | **20/24** | 4/4 | 5/6 | 3/4 | 5/5 | 1/1 | 2/4 | 156 Mio |
+| Qwen2.5-0.5B Q4_K_M | 12/24 | 3/4 | 3/6 | 1/4 | 2/5 | 1/1 | 2/4 | 130 Mio |
+| Qwen3-0.6B Q8_0 | 10/24 | 1/4 | 2/6 | 1/4 | 3/5 | 1/1 | 2/4 | 381 Mio |
+
+Les vitesses mesurées pendant ces évaluations ne sont **pas retenues** (machine chargée par
+d'autres builds). Choix provisoire : Qwen2.5-1.5B si RAM ≥ 6 Go, sinon Qwen2.5-0.5B
+(qualité nettement plus faible : 12/24). Qwen3-0.6B écarté. À faire : passages répétés
+(variance), mesure de vitesse au calme, test sur PC réel.
