@@ -15,3 +15,5 @@ dosfstools
 cryptsetup
 rsync
 cracklib-runtime
+squashfs-tools
+e2fsprogs
