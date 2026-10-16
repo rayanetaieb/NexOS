@@ -15,8 +15,8 @@ import numpy as np
 from gguf import GGUFReader, GGUFValueType, GGUFWriter
 
 # Dimensions publiées de Qwen2.5-0.5B (config.json du dépôt Qwen).
-CFG = dict(hidden=896, layers=24, heads=14, kv_heads=2, ffn=4864,
-           ctx=32768, rope_theta=1_000_000.0, eps=1e-6)
+CFG = {"hidden": 896, "layers": 24, "heads": 14, "kv_heads": 2, "ffn": 4864,
+           "ctx": 32768, "rope_theta": 1_000_000.0, "eps": 1e-6}
 
 
 def copy_tokenizer(reader: GGUFReader, w: GGUFWriter) -> int:
