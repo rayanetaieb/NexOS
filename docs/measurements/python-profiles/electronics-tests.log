@@ -1,0 +1,12 @@
+.....                                                                    [100%]
+=============================== warnings summary ===============================
+tests/test_electronics.py::test_pyvisa_py_backend
+  /tmp/claude-0/-home-claude/f6f12d47-5c31-5634-aac6-38fcc34657f0/scratchpad/pyc-data/nexos/python/envs/electronics/lib/python3.13/site-packages/pyvisa_py/tcpip.py:443: UserWarning: TCPIP:instr resource discovery is limited to the default interface.Install psutil: pip install psutil if you want to scan all interfaces.
+    warnings.warn(
+
+tests/test_electronics.py::test_pyvisa_py_backend
+  /tmp/claude-0/-home-claude/f6f12d47-5c31-5634-aac6-38fcc34657f0/scratchpad/pyc-data/nexos/python/envs/electronics/lib/python3.13/site-packages/pyvisa_py/tcpip.py:122: UserWarning: TCPIP::hislip resource discovery requires the zeroconf package to be installed... try 'pip install zeroconf'
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+5 passed, 2 warnings in 6.69s
