@@ -1,0 +1,90 @@
+{
+  "measured": true,
+  "date": "2026-10-17T00:51:40+0200",
+  "machine": {
+    "cpu": "x86_64",
+    "cores_physical": 2,
+    "ram_total_mb": 8029,
+    "avx2": true
+  },
+  "model": "/tmp/claude-0/-home-claude/f6f12d47-5c31-5634-aac6-38fcc34657f0/scratchpad/xdg/data/nexos/nexai/models/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+  "model_file_mb": 468.6,
+  "settings": {
+    "ctx_size": 2048,
+    "max_tokens": 384,
+    "weight_repack": false,
+    "threads": 2,
+    "gpu": "off"
+  },
+  "mem_available_before_mb": 7340,
+  "engine_start_s": 0.845,
+  "engine_rss_loaded_idle_mb": 558.9,
+  "engine_pss_loaded_idle_mb": 556.4,
+  "engine_anon_loaded_idle_mb": 79.9,
+  "engine_file_loaded_idle_mb": 476.6,
+  "tasks": [
+    {
+      "task": "question_simple",
+      "prompt": "Quelle est la différence entre la RAM et le stockage ?",
+      "answer": "La RAM (Réseau d'Amélioration de la Vitesse) est un type de mémoire qui stocke des données et des instructions, tandis que le stockage est un type de mémoire qui stocke des données.",
+      "first_token_s": 2.138,
+      "total_s": 4.714,
+      "completion_tokens": 49,
+      "tokens_per_s": 18.62,
+      "engine_peak_rss_mb": 585.1
+    },
+    {
+      "task": "parametre",
+      "prompt": "Comment changer le fond d'écran sur un bureau KDE Plasma ?",
+      "answer": "Pour changer le fond d'écran sur un bureau KDE Plasma, vous pouvez suivre ces étapes :\n\n1. **Modifier le fichier de fond d'écran** :\n   - Ouvrez le fichier de fond d'écran dans votre bureau KDE Plasma.\n   - Cliquez sur \"Configurer le bureau et le fond d'écran\" pour accéder à ce menu.\n\n2. **Modifier le nom du fichier** :\n   - Dans le menu de fond d'écran, vous pouvez choisir le nom de votre nouveau fichier de fond d'écran.\n   - Par exemple, vous pouvez nommer le fichier \"Fond d'écran Plasma\".\n\n3. **Modifier le mode clair/sombre** :\n   - Si vous voulez changer le mode clair/sombre, vous pouvez utiliser le menu de mode clair/sombre.\n   - Cliquez sur \"Mode clair/sombre\" et choisissez le mode que vous souhaitez.\n\n4. **Modifier le fond d'écran** :\n   - Si vous avez choisi le mode clair/sombre, vous pouvez modifier le fond d'écran en cliquant sur \"Fond d'écran\".\n   - Cliquez sur \"Fond d'écran\" et choisissez le fond que vous souhaitez.\n\n5. **Modifier le fond d'écran** :\n   - Si vous avez choisi le mode clair/sombre, vous pouvez modifier le fond d'écran en cliquant sur \"Fond d'écran\".\n   - Cliquez sur \"Fond d'écran\" et choisissez le fond que vous souhaitez.\n\n6. **Modifier le fond d'écran** :\n   - Si vous avez choisi le mode clair/sombre, vous pouvez modifier le fond d'écran en cliquant sur \"Fond d'écran\".\n   - Cliquez sur \"Fond d",
+      "first_token_s": 0.557,
+      "total_s": 22.632,
+      "completion_tokens": 384,
+      "tokens_per_s": 17.35,
+      "engine_peak_rss_mb": 585.4
+    },
+    {
+      "task": "erreur",
+      "prompt": "Que signifie l'erreur Python « ModuleNotFoundError: No module named 'numpy' » et comment la corriger ?",
+      "answer": "L'erreur `ModuleNotFoundError: No module named 'numpy'` signifie que Python n'a pas trouvé le module NumPy. Voici comment corriger cela :\n\n1. **Installation du module NumPy :**\n   - Dans le terminal, exécutez `nexos-python install numpy` pour installer le module NumPy si vous n'en avez pas déjà.\n\n2. **Importation du module NumPy :**\n   - Après installation, importez le module NumPy en utilisant `import numpy` dans un script Python.\n\n3. **Exécution du script :**\n   - Exécutez le script Python en utilisant `numpy` comme nom du module.\n\nExemple de script Python pour exécuter NumPy :\n\n```python\nimport numpy as np\n\n# Exécution du script\nprint(np.random.rand())\n```\n\nSi vous rencontrez des problèmes d'apprentissage, n'hésitez pas à me demander.",
+      "first_token_s": 0.527,
+      "total_s": 11.487,
+      "completion_tokens": 198,
+      "tokens_per_s": 17.98,
+      "engine_peak_rss_mb": 594.8
+    },
+    {
+      "task": "code",
+      "prompt": "Écris une fonction Python qui renvoie les nombres premiers inférieurs à n.",
+      "answer": "D'accord, voici une fonction Python qui renvoie les nombres premiers inférieurs à n :\n\n```python\ndef find_primes(n):\n    # Fonction pour trouver les nombres premiers inférieurs à n\n    def is_prime(num):\n        if num <= 1:\n            return False\n        for i in range(2, int(num**0.5) + 1):\n            if num % i == 0:\n                return False\n        return True\n\n    # Fonction pour compter les nombres premiers\n    def count_primes(num):\n        count = 0\n        for i in range(2, num):\n            if is_prime(i):\n                count += 1\n        return count\n\n    # Fonction pour retourner les nombres premiers inférieurs à n\n    def get_primes():\n        return [i for i in range(2, n) if is_prime(i)]\n\n    return get_primes()\n```\n\nCette fonction `find_primes` prend un entier `n` et retourne une liste de nombres premiers inférieurs à `n`. Elle utilise deux fonctions principales : `is_prime` pour vérifier si un nombre est premier et `count_primes` pour compter les nombres premiers. Elle utilise ensuite `get_primes`, qui retourne une liste de nombres premiers inférieurs à `n`.",
+      "first_token_s": 0.312,
+      "total_s": 16.077,
+      "completion_tokens": 288,
+      "tokens_per_s": 18.21,
+      "engine_peak_rss_mb": 594.9
+    },
+    {
+      "task": "resume",
+      "prompt": "Résume en une phrase : Le processeur exécute les instructions des programmes. La mémoire vive conserve temporairement les données utilisées. Le disque stocke durablement les fichiers, même lorsque l'ordinateur est éteint.",
+      "answer": "Le processeur exécute les instructions des programmes, la mémoire vive conserve temporairement les données, et le disque stocke durable les fichiers.",
+      "first_token_s": 0.892,
+      "total_s": 2.813,
+      "completion_tokens": 35,
+      "tokens_per_s": 17.7,
+      "engine_peak_rss_mb": 602.3
+    },
+    {
+      "task": "commande",
+      "prompt": "Quelle commande Linux affiche l'espace disque libre ? Explique-la.",
+      "answer": "La commande Linux qui affiche l'espace disque libre est `df`.",
+      "first_token_s": 0.323,
+      "total_s": 1.171,
+      "completion_tokens": 17,
+      "tokens_per_s": 18.88,
+      "engine_peak_rss_mb": 602.4
+    }
+  ],
+  "mem_available_during_mb": 7229,
+  "engine_running_after_unload": false,
+  "mem_available_after_unload_mb": 7347
+}

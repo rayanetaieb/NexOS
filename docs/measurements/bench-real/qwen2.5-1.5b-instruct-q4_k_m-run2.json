@@ -1,0 +1,90 @@
+{
+  "measured": true,
+  "date": "2026-10-17T00:54:30+0200",
+  "machine": {
+    "cpu": "x86_64",
+    "cores_physical": 2,
+    "ram_total_mb": 8029,
+    "avx2": true
+  },
+  "model": "/tmp/claude-0/-home-claude/f6f12d47-5c31-5634-aac6-38fcc34657f0/scratchpad/xdg/data/nexos/nexai/models/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+  "model_file_mb": 1065.6,
+  "settings": {
+    "ctx_size": 2048,
+    "max_tokens": 384,
+    "weight_repack": false,
+    "threads": 2,
+    "gpu": "off"
+  },
+  "mem_available_before_mb": 7415,
+  "engine_start_s": 1.033,
+  "engine_rss_loaded_idle_mb": 1188.0,
+  "engine_pss_loaded_idle_mb": 1185.5,
+  "engine_anon_loaded_idle_mb": 112.1,
+  "engine_file_loaded_idle_mb": 1073.5,
+  "tasks": [
+    {
+      "task": "question_simple",
+      "prompt": "Quelle est la différence entre la RAM et le stockage ?",
+      "answer": "La RAM (Réservoir de mémoire) est un espace mémoire temporaire où les données sont stockées pour les processus en cours. Elle est volatile, c'est-à-dire que lorsque le système se désactive, toutes les données dans la RAM sont perdues.\n\nLe stockage, en revanche, est un espace de données stocké sur un disque dur ou une mémoire vive. Il est non-volatile, ce qui signifie que même lorsque le système se désactive, les données dans le stockage sont conservées.",
+      "first_token_s": 3.054,
+      "total_s": 14.793,
+      "completion_tokens": 118,
+      "tokens_per_s": 9.97,
+      "engine_peak_rss_mb": 1236.8
+    },
+    {
+      "task": "parametre",
+      "prompt": "Comment changer le fond d'écran sur un bureau KDE Plasma ?",
+      "answer": "Pour changer le fond d'écran sur un bureau KDE Plasma, suivez ces étapes :\n\n1. Cliquez sur le bureau pour ouvrir la fenêtre d'administration.\n2. Cliquez sur le lien \"Paramètres\" en haut de la fenêtre.\n3. Dans la liste déroulante, cliquez sur \"Fond d'écran\".\n4. Cliquez sur \"Changer\".\n5. Choisissez une image ou un fond d'écran de votre choix.\n6. Cliquez sur \"Appliquer\" pour enregistrer les modifications.\n\nSi vous ne voyez pas ce menu, vous pouvez peut-être utiliser la touche \"F\" (Fond) dans la barre d'outils pour accéder aux options de fond d'écran.",
+      "first_token_s": 0.978,
+      "total_s": 17.469,
+      "completion_tokens": 167,
+      "tokens_per_s": 10.07,
+      "engine_peak_rss_mb": 1237.0
+    },
+    {
+      "task": "erreur",
+      "prompt": "Que signifie l'erreur Python « ModuleNotFoundError: No module named 'numpy' » et comment la corriger ?",
+      "answer": "L'erreur \"ModuleNotFoundError: No module named 'numpy'\" s'indique lorsque Python n'arrive pas à trouver le module numpy dans votre environnement Python.\n\nPour corriger cette erreur, vous pouvez :\n\n1. Vérifier que numpy est installé. Vous pouvez le faire en exécutant :\n   ```python\n   import numpy\n   ```\n\n2. Si numpy n'est pas installé, vous pouvez le faire en utilisant la commande :\n   ```bash\n   sudo apt-get install python3-numpy\n   ```\n\n3. Si vous avez plusieurs versions de Python, vérifiez que numpy est installé pour la version de Python que vous utilisez. Par exemple :\n   ```bash\n   python3 -m pip install numpy\n   ```\n\n4. Si vous avez installé numpy avec pip, mais que Python ne trouve pas le module, vous pouvez vérifier que pip est installé et que numpy est dans la liste des paquets installés :\n   ```bash\n   sudo apt-get install python3-pip\n   ```\n\n5. Si vous avez installé numpy avec pip, mais que Python ne trouve pas le module, vous pouvez vérifier que la variable d'environnement PYTHONPATH est correcte :\n   ```bash\n   export PYTHONPATH=/usr/lib/python3/dist-packages\n   ```\n\nSi vous avez installé numpy avec pip mais que Python ne trouve pas le module, vous pouvez vérifier que la variable d'environnement PYTHONPATH est correcte :\n```bash\nexport PYTHONPATH=/usr/lib/python3/dist-packages\n```",
+      "first_token_s": 0.836,
+      "total_s": 33.732,
+      "completion_tokens": 325,
+      "tokens_per_s": 9.85,
+      "engine_peak_rss_mb": 1237.2
+    },
+    {
+      "task": "code",
+      "prompt": "Écris une fonction Python qui renvoie les nombres premiers inférieurs à n.",
+      "answer": "```python\ndef nombres_premiers_inf(n):\n    premier = 2\n    while premier < n:\n        for i in range(2, premier):\n            if premier % i == 0:\n                break\n        else:\n            yield premier\n        premier += 1\n```",
+      "first_token_s": 0.437,
+      "total_s": 6.299,
+      "completion_tokens": 60,
+      "tokens_per_s": 10.06,
+      "engine_peak_rss_mb": 1257.1
+    },
+    {
+      "task": "resume",
+      "prompt": "Résume en une phrase : Le processeur exécute les instructions des programmes. La mémoire vive conserve temporairement les données utilisées. Le disque stocke durablement les fichiers, même lorsque l'ordinateur est éteint.",
+      "answer": "Le processeur exécute les instructions, la mémoire vive conserve les données et le disque stocke les fichiers.",
+      "first_token_s": 1.132,
+      "total_s": 3.863,
+      "completion_tokens": 28,
+      "tokens_per_s": 9.89,
+      "engine_peak_rss_mb": 1257.2
+    },
+    {
+      "task": "commande",
+      "prompt": "Quelle commande Linux affiche l'espace disque libre ? Explique-la.",
+      "answer": "La commande Linux pour afficher l'espace disque libre est `df -h`.\n\nExplication :\n- `df` fait le test des disques.\n- `-h` affiche les résultats en unités de taille humaine (G, M, K).\n\nExemple de sortie :\n```\nFilesystem      Size  Used Avail Use% Mounted on\n/dev/sda1       20G  15G   5G  75%  /mnt/disk\n```\n\nCette commande vous permet de voir la taille totale, utilisée, disponible et la proportion de chaque partition du système.",
+      "first_token_s": 0.448,
+      "total_s": 13.444,
+      "completion_tokens": 130,
+      "tokens_per_s": 9.93,
+      "engine_peak_rss_mb": 1257.2
+    }
+  ],
+  "mem_available_during_mb": 7237,
+  "engine_running_after_unload": false,
+  "mem_available_after_unload_mb": 7412
+}

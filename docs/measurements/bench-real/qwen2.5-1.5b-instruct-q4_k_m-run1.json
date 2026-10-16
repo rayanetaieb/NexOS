@@ -1,0 +1,90 @@
+{
+  "measured": true,
+  "date": "2026-10-17T00:52:42+0200",
+  "machine": {
+    "cpu": "x86_64",
+    "cores_physical": 2,
+    "ram_total_mb": 8029,
+    "avx2": true
+  },
+  "model": "/tmp/claude-0/-home-claude/f6f12d47-5c31-5634-aac6-38fcc34657f0/scratchpad/xdg/data/nexos/nexai/models/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+  "model_file_mb": 1065.6,
+  "settings": {
+    "ctx_size": 2048,
+    "max_tokens": 384,
+    "weight_repack": false,
+    "threads": 2,
+    "gpu": "off"
+  },
+  "mem_available_before_mb": 7347,
+  "engine_start_s": 2.168,
+  "engine_rss_loaded_idle_mb": 1187.9,
+  "engine_pss_loaded_idle_mb": 1185.5,
+  "engine_anon_loaded_idle_mb": 112.1,
+  "engine_file_loaded_idle_mb": 1073.4,
+  "tasks": [
+    {
+      "task": "question_simple",
+      "prompt": "Quelle est la différence entre la RAM et le stockage ?",
+      "answer": "La RAM (Réservoir de Mémoire) et le stockage sont deux types de mémoire différents utilisés dans un système informatique. La RAM est une mémoire volatile, c'est-à-dire qu'elle perd son contenu lorsque le système s'éteint. Elle est utilisée pour stocker les données en cours d'exécution, comme les programmes en cours d'exécution et les données temporaires générées par les processus.\n\nLe stockage, en revanche, est une mémoire non volatile. Il est utilisé pour stocker les données qui ne doivent pas disparaître même lorsque le système s'éteint. Les stockages les plus courants sont les disques durs et les SSDs (Solid State Drives). Le stockage est utilisé pour stocker les données importantes, comme les fichiers de programmes, les données de base de données, et les données de stockage temporaire pour les processus en cours d'exécution.\n\nLa RAM est plus rapide que le stockage, mais elle ne peut stocker que des données en cours d'exécution. Le stockage, en revanche, peut stocker des données à long terme, mais il est plus lent que la RAM.",
+      "first_token_s": 3.305,
+      "total_s": 29.702,
+      "completion_tokens": 254,
+      "tokens_per_s": 9.58,
+      "engine_peak_rss_mb": 1236.9
+    },
+    {
+      "task": "parametre",
+      "prompt": "Comment changer le fond d'écran sur un bureau KDE Plasma ?",
+      "answer": "Pour changer le fond d'écran sur un bureau KDE Plasma, suivez ces étapes :\n\n1. Cliquez sur le bureau pour ouvrir la fenêtre de bureau.\n2. Cliquez droit sur le bureau → \"Paramètres\" → \"Fond d'écran\".\n3. Dans la fenêtre \"Fond d'écran\", vous pouvez choisir entre des fonds d'écran préselectionnés ou télécharger des fonds d'écran personnels.\n4. Si vous voulez utiliser un fond d'écran personnalisé, vous pouvez télécharger un fichier PNG ou JPEG et l'ajouter dans la liste des fonds d'écran.\n\nSi vous ne voyez pas les options de fond d'écran dans la fenêtre \"Paramètres\", vous pouvez vérifier que votre bureau KDE Plasma est activé. Cliquez sur le bureau pour ouvrir la fenêtre de bureau, puis cliquez sur le bureau pour le fermer. Si vous n'avez pas d'option de fond d'écran, vous pouvez vérifier que votre bureau KDE Plasma est activé.",
+      "first_token_s": 0.966,
+      "total_s": 23.85,
+      "completion_tokens": 227,
+      "tokens_per_s": 9.88,
+      "engine_peak_rss_mb": 1237.1
+    },
+    {
+      "task": "erreur",
+      "prompt": "Que signifie l'erreur Python « ModuleNotFoundError: No module named 'numpy' » et comment la corriger ?",
+      "answer": "L'erreur \"ModuleNotFoundError: No module named 'numpy'\" signifie que le module numpy, qui est une bibliothèque importante pour Python, n'est pas installé sur votre système.\n\nPour corriger cette erreur, vous pouvez utiliser le Centre Python (onglet Profils) ou le Centre Python (onglet Catalogue) pour installer numpy. Voici comment :\n\n1. Dans le Centre Python, cliquez sur le profil Python que vous utilisez et sélectionnez \"Add\".\n\n2. Dans la fenêtre qui s'ouvre, tapez \"numpy\" dans la zone de recherche.\n\n3. Sélectionnez le module numpy dans la liste des résultats.\n\n4. Cliquez sur \"Add\" pour installer le module.\n\nSi vous ne voyez pas le module numpy dans la liste, vous pouvez aussi :\n\n1. Ouvrez un terminal et tapez :\n   ```\n   sudo apt-get install python3-numpy\n   ```\n   \n2. Si vous utilisez Python 3, remplacez \"python3-numpy\" par \"python3\".\n\nSi vous avez besoin de plus d'aide ou si vous rencontrez d'autres erreurs, n'hésitez pas à demander.",
+      "first_token_s": 0.875,
+      "total_s": 26.552,
+      "completion_tokens": 246,
+      "tokens_per_s": 9.54,
+      "engine_peak_rss_mb": 1237.2
+    },
+    {
+      "task": "code",
+      "prompt": "Écris une fonction Python qui renvoie les nombres premiers inférieurs à n.",
+      "answer": "```python\ndef nombres_primes_inf_n(n):\n    def est_premier(num):\n        if num < 2:\n            return False\n        for i in range(2, int(num**0.5) + 1):\n            if num % i == 0:\n                return False\n        return True\n\n    return [num for num in range(2, n) if est_premier(num)]\n```",
+      "first_token_s": 0.431,
+      "total_s": 9.393,
+      "completion_tokens": 88,
+      "tokens_per_s": 9.71,
+      "engine_peak_rss_mb": 1254.9
+    },
+    {
+      "task": "resume",
+      "prompt": "Résume en une phrase : Le processeur exécute les instructions des programmes. La mémoire vive conserve temporairement les données utilisées. Le disque stocke durablement les fichiers, même lorsque l'ordinateur est éteint.",
+      "answer": "Le processeur exécute les instructions, la mémoire vive conserve données, et le disque stocke des fichiers durables.",
+      "first_token_s": 1.248,
+      "total_s": 4.194,
+      "completion_tokens": 30,
+      "tokens_per_s": 9.84,
+      "engine_peak_rss_mb": 1255.0
+    },
+    {
+      "task": "commande",
+      "prompt": "Quelle commande Linux affiche l'espace disque libre ? Explique-la.",
+      "answer": "La commande Linux qui affiche l'espace disque libre est `df -h`. C'est une commande qui affiche les détails sur les fichiers système, incluant l'espace disque disponible.\n\n- `df` : affiche les détails sur les fichiers système.\n- `-h` : affiche les détails en utilisant une notation de taille humaine (gigas, teras, etc.).\n\nCette commande est utile pour vérifier la capacité de stockage disponible sur votre système Linux.",
+      "first_token_s": 0.435,
+      "total_s": 11.112,
+      "completion_tokens": 108,
+      "tokens_per_s": 10.02,
+      "engine_peak_rss_mb": 1255.1
+    }
+  ],
+  "mem_available_during_mb": 7242,
+  "engine_running_after_unload": false,
+  "mem_available_after_unload_mb": 7413
+}

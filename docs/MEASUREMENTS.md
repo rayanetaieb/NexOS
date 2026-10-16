@@ -128,7 +128,33 @@ Corrections : prompt réécrit + base de connaissances injectée par mots-clés 
 | Qwen2.5-0.5B Q4_K_M | 12/24 | 3/4 | 3/6 | 1/4 | 2/5 | 1/1 | 2/4 | 130 Mio |
 | Qwen3-0.6B Q8_0 | 10/24 | 1/4 | 2/6 | 1/4 | 3/5 | 1/1 | 2/4 | 381 Mio |
 
-Les vitesses mesurées pendant ces évaluations ne sont **pas retenues** (machine chargée par
+#### Mesures au calme (17/10/2026, 2 passages concordants, `docs/measurements/bench-real/`)
+Machine : VM cloud Xeon 2,1 GHz, **2 cœurs**, 8 Go ; contexte 2048, réponses ≤ 384 tokens,
+`--no-repack`, CPU uniquement. Charge de fond de l'environnement : ~1,7.
+
+| Modèle | Prêt en | RAM anonyme (non récupérable) | Fichier mappé (récupérable) | Pic RSS | 1er token (médiane) | Génération (médiane) | Après déchargement |
+|---|---|---|---|---|---|---|---|
+| Qwen2.5-0.5B Q4_K_M | 0,8–1,4 s | 80 Mio | 476 Mio | 595–602 Mio | 0,54–0,57 s | 18,1 tokens/s | processus arrêté, RAM dispo revenue au niveau initial |
+| Qwen2.5-1.5B Q4_K_M | 1,0–2,2 s | 112 Mio | 1 073 Mio | 1 255–1 257 Mio | 0,91–0,92 s | 9,8–10,0 tokens/s | idem |
+
+#### Mémoire limitée (PC modeste simulé par cgroup, limite stricte du noyau)
+Génération de 96 tokens, `llama-server` portable de l'image :
+
+| Modèle | Limite | Génération | Usage max | Résultat |
+|---|---|---|---|---|
+| 0.5B | 2048 / 900 Mio | 21,6 tokens/s | 573 Mio | normal |
+| 0.5B | 500 Mio | 22,7 tokens/s | 500 Mio | normal (pages du fichier recyclées) |
+| 0.5B | 300 Mio | **3,8 tokens/s** | 300 Mio | très ralenti, pas de plantage |
+| 1.5B | 2048 / 1300 Mio | 9,9–10,2 tokens/s | 1 204 Mio | normal |
+| 1.5B | 800 Mio | **1,7 tokens/s** | 800 Mio | 6× plus lent, pas de plantage |
+| 1.5B | 500 Mio | **1,4 tokens/s** | 500 Mio | inutilisable en pratique |
+
+Aucun arrêt par manque de mémoire (OOM) : sous la taille du modèle, le noyau relit le
+fichier en permanence. D'où la garde de l'assistant : démarrage refusé si la RAM disponible
+est inférieure à taille du modèle + cache + marge (1,7 Go pour le 1,5B, 1,1 Go pour le 0,5B).
+Non mesuré : vrai PC de 2–4 Go, CPU sans AVX2.
+
+Les vitesses mesurées pendant les évaluations de qualité ne sont **pas retenues** (machine chargée par
 d'autres builds). Choix provisoire : Qwen2.5-1.5B si RAM ≥ 6 Go, sinon Qwen2.5-0.5B
 (qualité nettement plus faible : 12/24). Qwen3-0.6B écarté. À faire : passages répétés
 (variance), mesure de vitesse au calme, test sur PC réel.
