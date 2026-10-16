@@ -1,0 +1,12 @@
+{
+  "KPlugin": {
+    "Id": "org.nexos.desktop.light",
+    "Name": "NexOS clair",
+    "Description": "Thème global NexOS (light) : barre supérieure, dock flottant, accent bleu NexOS",
+    "Authors": [{"Name": "NexOS"}],
+    "License": "GPL-2.0-or-later",
+    "Version": "0.1"
+  },
+  "KPackageStructure": "Plasma/LookAndFeel",
+  "X-Plasma-APIVersion": "2"
+}

@@ -1,0 +1,69 @@
+# Édition bureau NexOS (phase 3) — en plus de packages-base.list.
+# Session et affichage
+plasma-desktop
+plasma-workspace
+kwin-wayland
+xwayland
+qt6-wayland
+sddm
+sddm-theme-breeze
+kde-config-sddm
+xdg-desktop-portal-kde
+polkit-kde-agent-1
+kde-cli-tools
+plasma-browser-integration
+breeze-icon-theme
+libgl1-mesa-dri
+mesa-utils
+dbus-user-session
+libpam-systemd
+# Applications du quotidien
+dolphin
+kio-extras
+ffmpegthumbs
+konsole
+systemsettings
+kinfocenter
+plasma-systemmonitor
+plasma-discover
+plasma-discover-backend-flatpak
+flatpak
+kde-spectacle
+ark
+gwenview
+okular
+kate
+kcalc
+firefox-esr
+firefox-esr-l10n-fr
+# Matériel, réseau, son, énergie
+network-manager
+plasma-nm
+pipewire-audio
+plasma-pa
+bluedevil
+kscreen
+udisks2
+upower
+power-profiles-daemon
+# Sécurité et système
+firewalld
+plasma-firewall
+systemd-oomd
+zram-tools
+# Langue et clavier
+locales
+keyboard-configuration
+console-setup
+fonts-inter
+fonts-noto-core
+# Python (système, protégé) et assistant
+python3-venv
+python3-pyside6.qtwidgets
+python3-pyside6.qtcore
+python3-pyside6.qtgui
+# Machines virtuelles
+qemu-guest-agent
+spice-vdagent
+xdg-user-dirs
+xdg-user-dirs-gtk

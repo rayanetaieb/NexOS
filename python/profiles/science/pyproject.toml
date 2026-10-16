@@ -1,0 +1,20 @@
+[project]
+name = "nexos-profile-science"
+version = "0.2.0"
+description = "Calcul scientifique : NumPy, SciPy, Pandas, SymPy, Matplotlib, JupyterLab, Statsmodels"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "numpy>=2",
+    "scipy>=1.14",
+    "pandas>=2.2",
+    "sympy>=1.13",
+    "matplotlib>=3.9",
+    "jupyterlab>=4.2",
+    "ipython>=8",
+    "ipykernel>=6.29",
+    "statsmodels>=0.14",
+    "pytest>=8",
+]
+
+[tool.uv]
+package = false

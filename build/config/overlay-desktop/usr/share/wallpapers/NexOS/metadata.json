@@ -1,0 +1,8 @@
+{
+  "KPlugin": {
+    "Id": "NexOS",
+    "Name": "NexOS",
+    "Authors": [{"Name": "NexOS"}],
+    "License": "CC-BY-SA-4.0"
+  }
+}

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Centre Python
+Name[en]=Python Center
+Comment=Profils, projets et bibliothèques Python
+Exec=nexos-python gui
+Icon=nexos-python-center
+Terminal=false
+Categories=Development;
+Keywords=python;pip;bibliothèque;numpy;pandas;jupyter;

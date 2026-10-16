@@ -1,0 +1,6 @@
+[org.kde.kdecoration2]
+ButtonsOnLeft=
+ButtonsOnRight=IAX
+[Plugins]
+blurEnabled=false
+contrastEnabled=false

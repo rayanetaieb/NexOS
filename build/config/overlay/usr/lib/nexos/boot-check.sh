@@ -1,9 +1,25 @@
 #!/bin/sh
-# Rapport de démarrage NexOS sur la console série, utilisé par tests/boot/test-boot.sh.
-# Le rapport est construit en mémoire PUIS écrit d'un bloc : le getty série fait un
-# vhangup du terminal au démarrage, qui invaliderait un descripteur ouvert trop tôt.
+# Rapport de démarrage NexOS sur la console série (tests/boot, tests/desktop).
+# Construit en mémoire puis écrit d'un bloc (le getty série fait un vhangup du terminal).
+# Édition bureau : attend aussi l'ouverture de la session graphique (plasmashell).
 # La machine ne s'éteint que si "nexos.autotest=1" est passé au noyau.
 state=$(systemctl is-system-running --wait)
+desktop=""
+if command -v sddm >/dev/null 2>&1; then
+  t0=$(cut -d. -f1 /proc/uptime)
+  for i in $(seq 1 900); do pgrep -x plasmashell >/dev/null && break; sleep 1; done
+  sleep 20   # laisse la session se stabiliser avant de mesurer
+  pid=$(pgrep -x plasmashell | head -1)
+  sess=$(loginctl list-sessions --no-legend | awk '$3=="nexos"{print $1; exit}')
+  desktop=$(cat <<D
+desktop_plasmashell=$( [ -n "$pid" ] && echo running || echo ABSENT )
+desktop_session_type=$( [ -n "$sess" ] && loginctl show-session "$sess" -p Type --value )
+desktop_ready_uptime_s=$(cut -d. -f1 /proc/uptime)
+desktop_kwin=$(pgrep -x kwin_wayland >/dev/null && echo running || echo ABSENT)
+desktop_plasmashell_rss_kib=$( [ -n "$pid" ] && awk '/VmRSS/{print $2}' /proc/$pid/status )
+D
+)
+fi
 . /etc/os-release
 report=$(cat <<R
 NEXOS-REPORT-BEGIN
@@ -13,6 +29,7 @@ state=$state
 failed_units=$(systemctl --failed --no-legend | wc -l)
 failed_list=$(systemctl --failed --no-legend --plain | awk '{print $1}' | paste -sd, -)
 boot_time: $(systemd-analyze 2>/dev/null | head -1)
+$desktop
 $(free -k | awk '/^Mem:/ {print "mem_used_kib=" $3 " mem_total_kib=" $2}')
 processes=$(ps -e --no-headers | wc -l)
 python=$(python3 --version 2>&1)

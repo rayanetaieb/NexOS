@@ -1,0 +1,33 @@
+{
+  "accel": "tcg",
+  "memory_mib": 4096,
+  "measured": true,
+  "desktop_ready_wallclock_s": 128,
+  "os": "NexOS 0.2 (prototype, base Debian 13)",
+  "kernel": "6.12.107+deb13-amd64",
+  "state": "running",
+  "failed_units": "0",
+  "failed_list": "",
+  "boot_time: Startup finished in 9.694s (kernel) + 44.158s (userspace)": "53.852s",
+  "desktop_plasmashell": "running",
+  "desktop_session_type": "wayland",
+  "desktop_ready_uptime_s": "122",
+  "desktop_kwin": "running",
+  "desktop_plasmashell_rss_kib": "187908",
+  "mem_used_kib": "763204 mem_total_kib=4015948",
+  "processes": "145",
+  "python": "Python 3.13.5",
+  "screens": [
+    "/home/claude/nexos/out/desktop/screens/01-bureau.png",
+    "/home/claude/nexos/out/desktop/screens/02-menu.png",
+    "/home/claude/nexos/out/desktop/screens/03-recherche-parametres.png",
+    "/home/claude/nexos/out/desktop/screens/04-fermer-menu.png",
+    "/home/claude/nexos/out/desktop/screens/05-terminal.png",
+    "/home/claude/nexos/out/desktop/screens/06-terminal-commande.png",
+    "/home/claude/nexos/out/desktop/screens/07-fermer-terminal.png",
+    "/home/claude/nexos/out/desktop/screens/08-assistant.png",
+    "/home/claude/nexos/out/desktop/screens/09-fermer-assistant.png",
+    "/home/claude/nexos/out/desktop/screens/10-fichiers.png"
+  ],
+  "success": true
+}

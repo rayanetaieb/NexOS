@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from . import sysinfo
 from .config import Config
 from .engine import Engine, GenerationStats, LlamaServerEngine
+from .knowledge import augment
 from .prompts import system_prompt
 
 
@@ -195,7 +196,7 @@ class AssistantManager:
             self._touch()
             messages = [{"role": "system", "content": system_prompt()}]
             messages += (history or [])[-6:]          # historique court : contexte borné
-            messages.append({"role": "user", "content": question[:4000]})
+            messages.append({"role": "user", "content": augment(question[:4000])})
             stats = stats if stats is not None else GenerationStats()
             extra = model_request_options(self.config.model_path)
             for piece in strip_think(engine.chat(messages, self.config.max_tokens, stats, extra)):

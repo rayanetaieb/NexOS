@@ -31,11 +31,14 @@ EN_WORDS = {"the", "is", "and", "you", "to", "of", "this", "with", "for", "your"
 
 
 def is_french(text: str) -> bool:
+    """Faux seulement si la prose est manifestement en anglais. Une réponse faite
+    uniquement de code ou très courte (« 12 multiplié par 15 fait 180. ») est
+    neutre et n'est pas pénalisée (correctif après relecture des résultats v1)."""
     prose = re.sub(r"```.*?```", " ", text, flags=re.DOTALL)
     words = re.findall(r"[a-zàâçéèêëîïôûùüÿœ']+", prose.lower())
     fr = sum(w in FR_WORDS for w in words)
     en = sum(w in EN_WORDS for w in words)
-    return fr >= 2 and fr > en
+    return not (en >= 3 and en > fr)
 
 
 def extract_code(text: str) -> str:
@@ -139,7 +142,36 @@ TASKS: list[Task] = [
     Task("nexos_python", "nexos", "Sur NexOS, où puis-je installer une bibliothèque Python comme pandas sans terminal ?",
          has(r"centre python")),
     Task("nexos_maj", "nexos", "Comment mettre à jour NexOS ?", has(r"centre de mises? à jour")),
+    # Questions NexOS de contrôle, formulées autrement (ajoutées avec la base de connaissances)
+    Task("nexos_fond", "nexos", "Je voudrais changer l'image derrière mes fenêtres, comment faire ?",
+         has(r"param[eè]tres|configurer le bureau")),
+    Task("nexos_ram", "nexos", "Mon ordinateur rame, comment voir quel programme utilise toute la mémoire ?",
+         has(r"moniteur syst[eè]me|ctrl\+[ée]chap")),
 ]
+
+
+def rescore(report: dict) -> dict:
+    """Renote des réponses déjà enregistrées avec les correcteurs actuels."""
+    by_id = {t.id: t for t in TASKS}
+    for r in report["results"]:
+        t = by_id.get(r["id"])
+        if t:
+            r["pass"], r["detail"] = t.grade(r["answer"])
+            r["french"] = is_french(r["answer"]) if t.require_french else True
+    _summarize(report)
+    return report
+
+
+def _summarize(report: dict) -> None:
+    results = report["results"]
+    cats: dict[str, list[bool]] = {}
+    for r in results:
+        cats.setdefault(r["category"], []).append(r["pass"])
+    report["score"] = sum(r["pass"] for r in results)
+    report["score_french_and_pass"] = sum(r["pass"] and r["french"] for r in results)
+    report["total"] = len(results)
+    report["french_rate"] = round(sum(r["french"] for r in results) / len(results), 2)
+    report["by_category"] = {c: f"{sum(v)}/{len(v)}" for c, v in cats.items()}
 
 
 def evaluate(cfg: Config, tasks: list[Task] = TASKS, out: Path | None = None) -> dict:

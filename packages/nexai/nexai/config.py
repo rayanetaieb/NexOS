@@ -9,6 +9,8 @@ import tomllib
 from dataclasses import asdict, dataclass, fields
 from pathlib import Path
 
+SYSTEM_CONFIG = Path("/etc/xdg/nexos/nexai.toml")
+
 
 def config_dir() -> Path:
     base = os.environ.get("XDG_CONFIG_HOME") or str(Path.home() / ".config")
@@ -38,14 +40,15 @@ class Config:
 
     @classmethod
     def load(cls, path: Path | None = None) -> Config:
-        path = path or config_dir() / "nexai.toml"
+        """Valeurs par défaut < /etc/xdg/nexos/nexai.toml (système) < fichier utilisateur."""
         cfg = cls()
-        if path.exists():
-            data = tomllib.loads(path.read_text(encoding="utf-8"))
-            known = {f.name: f.type for f in fields(cls)}
-            for key, value in data.items():
-                if key in known:
-                    setattr(cfg, key, type(getattr(cfg, key))(value))
+        paths = [path] if path else [SYSTEM_CONFIG, config_dir() / "nexai.toml"]
+        known = {f.name for f in fields(cls)}
+        for p in paths:
+            if p.exists():
+                for key, value in tomllib.loads(p.read_text(encoding="utf-8")).items():
+                    if key in known:
+                        setattr(cfg, key, type(getattr(cfg, key))(value))
         cfg.validate()
         return cfg
 

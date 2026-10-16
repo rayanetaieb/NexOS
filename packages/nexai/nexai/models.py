@@ -51,6 +51,17 @@ CATALOG: list[ModelInfo] = [
 ]
 
 
+def recommended_model(mem_total_mb: int) -> ModelInfo:
+    """Choix par défaut selon la RAM totale (seuils issus des mesures de docs/MEASUREMENTS.md).
+    ≥ 6 Go : Qwen2.5-1.5B (meilleure qualité mesurée) ; sinon Qwen2.5-0.5B (plus léger)."""
+    key = "qwen2.5-1.5b-q4km" if mem_total_mb >= 6000 else "qwen2.5-0.5b-q4km"
+    return next(m for m in CATALOG if m.key == key)
+
+
+SIZES_MB = {"qwen2.5-0.5b-q4km": 469, "qwen3-0.6b-q8": 610, "smollm2-360m-q8": 369,
+            "qwen2.5-1.5b-q4km": 1066}
+
+
 def models_dir() -> Path:
     d = data_dir() / "models"
     d.mkdir(parents=True, exist_ok=True)

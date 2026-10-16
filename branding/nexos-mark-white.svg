@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="220 480 744 840" width="744" height="840">
+  <title>NexOS</title>
+  <g fill="none" stroke="#FFFFFF" stroke-width="40" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M591 522 L921 710 L921 1086 L591 1275 L261 1086 L261 710 Z"/>
+    <path d="M261 991 L414 991 L492 768 L584 1072 L700 772"/>
+  </g>
+  <circle cx="709" cy="747" r="38" fill="#01AFF2"/>
+</svg>

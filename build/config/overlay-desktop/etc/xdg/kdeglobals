@@ -1,0 +1,15 @@
+[KDE]
+LookAndFeelPackage=org.nexos.desktop.dark
+widgetStyle=Breeze
+SingleClick=false
+
+[General]
+ColorScheme=BreezeDark
+AccentColor=1,175,242
+font=Inter,10
+menuFont=Inter,10
+toolBarFont=Inter,9
+smallestReadableFont=Inter,8
+
+[Icons]
+Theme=breeze-dark

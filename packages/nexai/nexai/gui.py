@@ -11,17 +11,20 @@ from PySide6.QtCore import QObject, QThread, QTimer, Signal, Slot
 from PySide6.QtGui import QFont, QKeySequence, QShortcut
 from PySide6.QtWidgets import (
     QApplication,
+    QFileDialog,
     QHBoxLayout,
     QLabel,
     QMainWindow,
     QMessageBox,
     QPlainTextEdit,
+    QProgressBar,
     QPushButton,
     QTextBrowser,
     QVBoxLayout,
     QWidget,
 )
 
+from . import models, sysinfo
 from .config import Config
 from .engine import GenerationStats
 from .manager import AssistantManager
@@ -48,6 +51,24 @@ class Worker(QObject):
             self.failed.emit(str(e))
 
 
+class Downloader(QObject):
+    progress = Signal(int, int)
+    done = Signal(str)
+    failed = Signal(str)
+
+    def __init__(self, info):
+        super().__init__()
+        self.info = info
+
+    @Slot()
+    def run(self):
+        try:
+            path = models.download(self.info, lambda d, t: self.progress.emit(d // 2**20, max(t, 1) // 2**20))
+            self.done.emit(str(path))
+        except Exception as e:  # noqa: BLE001 — frontière UI
+            self.failed.emit(str(e))
+
+
 class AssistantWindow(QMainWindow):
     def __init__(self, mgr: AssistantManager):
         super().__init__()
@@ -70,6 +91,26 @@ class AssistantWindow(QMainWindow):
         lay = QVBoxLayout(); lay.addWidget(self.view, 1); lay.addWidget(self.input); lay.addLayout(buttons); lay.addWidget(self.status)
         root = QWidget(); root.setLayout(lay); self.setCentralWidget(root)
 
+        # Gestion du modèle : rien n'est téléchargé sans clic explicite.
+        self.setup_box = QWidget(); sl = QVBoxLayout(self.setup_box)
+        rec = models.recommended_model(sysinfo.mem_total_mb())
+        self._rec = rec
+        self.setup_label = QLabel(
+            f"Aucun modèle IA installé.\n\nModèle recommandé pour cette machine : {rec.name} "
+            f"({models.SIZES_MB.get(rec.key, '?')} Mio, licence {rec.license}).\n"
+            "Le fichier est téléchargé une seule fois depuis Hugging Face puis vérifié (SHA-256).\n"
+            "Ensuite, l'assistant fonctionne entièrement hors ligne.")
+        self.setup_label.setWordWrap(True)
+        self.dl_btn = QPushButton(f"Télécharger {rec.name}")
+        self.pick_btn = QPushButton("Utiliser un fichier .gguf déjà téléchargé…")
+        self.progress = QProgressBar(); self.progress.hide()
+        for wdg in (self.setup_label, self.dl_btn, self.pick_btn, self.progress):
+            sl.addWidget(wdg)
+        lay.insertWidget(0, self.setup_box)
+        self.dl_btn.clicked.connect(self.download_model)
+        self.pick_btn.clicked.connect(self.pick_model)
+        self._update_setup()
+
         self.send_btn.clicked.connect(self.send)
         self.free_btn.clicked.connect(self.free)
         QShortcut(QKeySequence("Ctrl+Return"), self, self.send)
@@ -79,6 +120,61 @@ class AssistantWindow(QMainWindow):
         if not mgr.config.enabled:
             self.view.setPlainText("L'assistant est désactivé (nexai enable pour le réactiver).")
             self.send_btn.setEnabled(False)
+
+    def _has_model(self) -> bool:
+        import os
+        return bool(self.mgr.config.model_path) and os.path.isfile(self.mgr.config.model_path)
+
+    def _update_setup(self):
+        ok = self._has_model()
+        self.setup_box.setVisible(not ok)
+        self.view.setVisible(ok); self.input.setVisible(ok)
+        self.send_btn.setEnabled(ok and self.mgr.config.enabled)
+
+    def _use_model(self, path: str):
+        self.mgr.config.model_path = path
+        self.mgr.config.save()
+        self._update_setup()
+        self.view.append("<p style='color:gray'>Modèle installé. Posez votre question.</p>")
+
+    def download_model(self):
+        self.dl_btn.setEnabled(False); self.pick_btn.setEnabled(False); self.progress.show()
+        self._dl_thread = QThread(self)
+        self._dl = Downloader(self._rec)
+        self._dl.moveToThread(self._dl_thread)
+        self._dl_thread.started.connect(self._dl.run)
+        self._dl.progress.connect(self.on_progress)
+        self._dl.done.connect(self.on_downloaded)
+        self._dl.failed.connect(self.on_download_failed)
+        self._dl_thread.start()
+
+    @Slot(int, int)
+    def on_progress(self, done: int, total: int):
+        self.progress.setMaximum(total); self.progress.setValue(done)
+        self.progress.setFormat(f"{done} / {total} Mio")
+
+    def _end_download(self):
+        self._dl_thread.quit(); self._dl_thread.wait()
+        self.dl_btn.setEnabled(True); self.pick_btn.setEnabled(True); self.progress.hide()
+
+    @Slot(str)
+    def on_downloaded(self, path: str):
+        self._end_download(); self._use_model(path)
+
+    @Slot(str)
+    def on_download_failed(self, msg: str):
+        self._end_download()
+        QMessageBox.warning(self, "Assistant", f"Échec du téléchargement :\n{msg}")
+
+    def pick_model(self):
+        path, _ = QFileDialog.getOpenFileName(self, "Choisir un modèle", "", "Modèles GGUF (*.gguf)")
+        if path:
+            try:
+                dest, digest = models.import_local(path)
+            except Exception as e:  # noqa: BLE001 — frontière UI
+                QMessageBox.warning(self, "Assistant", str(e)); return
+            self._use_model(str(dest))
+            self.view.append(f"<p style='color:gray'>SHA-256 : {digest}</p>")
 
     def refresh(self):
         s = self.mgr.status()
@@ -155,6 +251,7 @@ class AssistantWindow(QMainWindow):
 def main() -> int:
     app = QApplication(sys.argv)
     app.setApplicationName("nexai")
+    app.setDesktopFileName("org.nexos.Assistant")   # rattache la fenêtre à son icône (Wayland)
     w = AssistantWindow(AssistantManager(Config.load()))
     w.show()
     return app.exec()

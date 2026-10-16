@@ -161,3 +161,17 @@ def test_qwen3_disables_thinking():
     from nexai.manager import model_request_options
     assert model_request_options("/m/Qwen3-0.6B-Q8_0.gguf") == {"chat_template_kwargs": {"enable_thinking": False}}
     assert model_request_options("/m/qwen2.5-0.5b.gguf") == {}
+
+
+def test_knowledge_injection():
+    from nexai.knowledge import augment, relevant_facts
+    assert any("Centre Python" in f for f in relevant_facts("Comment installer pandas ?"))
+    assert any("Centre de mises à jour" in f for f in relevant_facts("Comment mettre à jour le système ?"))
+    assert augment("Combien font 2+2 ?") == "Combien font 2+2 ?"
+
+
+def test_french_detector_is_neutral_on_code():
+    from nexai.evaluate import is_french
+    assert is_french("```python\ndef f():\n    return 1\n```")
+    assert is_french("12 multiplié par 15 fait 180.")
+    assert not is_french("You can use the command df to show the free space of your file system and it is easy.")

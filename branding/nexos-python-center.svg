@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>Centre Python NexOS</title>
+  <rect x="12" y="12" width="232" height="232" rx="56" fill="#252121"/>
+  <path d="M128 40 L204 84 L204 172 L128 216 L52 172 L52 84 Z" fill="none" stroke="#01AFF2"
+        stroke-width="12" stroke-linejoin="round"/>
+  <text x="128" y="156" text-anchor="middle" font-family="Inter, 'DejaVu Sans', sans-serif"
+        font-weight="800" font-size="82" fill="#FFFFFF">Py</text>
+  <circle cx="178" cy="78" r="13" fill="#01AFF2"/>
+</svg>
