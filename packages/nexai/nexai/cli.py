@@ -40,6 +40,9 @@ def main(argv: list[str] | None = None) -> int:
     mr = msub.add_parser("remove"); mr.add_argument("file", type=Path)
     b = sub.add_parser("bench", help="mesures RAM/latence/vitesse (section G)")
     b.add_argument("-o", "--output", type=Path)
+    e = sub.add_parser("eval", help="évalue la qualité des réponses (notation automatique)")
+    e.add_argument("-o", "--output", type=Path)
+    e.add_argument("--model", type=Path, help="modèle à évaluer (défaut : modèle actif)")
     sub.add_parser("gui", help="ouvre la fenêtre de l'assistant")
     args = p.parse_args(argv)
 
@@ -108,6 +111,15 @@ def main(argv: list[str] | None = None) -> int:
         from .bench import run
         report = run(cfg, args.output)
         print(json.dumps(report, ensure_ascii=False, indent=2))
+    elif args.cmd == "eval":
+        from .evaluate import evaluate
+        if args.model:
+            cfg.model_path = str(args.model.resolve())
+        r = evaluate(cfg, out=args.output)
+        print(f"{r['model']} : {r['score']}/{r['total']} réussites "
+              f"({r['score_french_and_pass']} réussies ET en français) · {r['by_category']} · "
+              f"1er token médian {r['median_first_token_s']} s · {r['median_tokens_per_s']} tokens/s · "
+              f"RAM anonyme pic {r['engine_anon_peak_mb']} Mio")
     elif args.cmd == "gui":
         from .gui import main as gui_main
         return gui_main()

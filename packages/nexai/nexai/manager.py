@@ -14,6 +14,51 @@ from .engine import Engine, GenerationStats, LlamaServerEngine
 from .prompts import system_prompt
 
 
+def model_request_options(model_path: str) -> dict:
+    """Options propres à une famille de modèles. Qwen3 « réfléchit » par défaut,
+    ce qui multiplie la latence : on désactive ce mode pour un assistant rapide."""
+    if "qwen3" in os.path.basename(model_path).lower():
+        return {"chat_template_kwargs": {"enable_thinking": False}}
+    return {}
+
+
+def strip_think(pieces: Iterator[str]) -> Iterator[str]:
+    """Retire un éventuel bloc <think>…</think> en tête de réponse (même vide)."""
+    buf, state = "", "start"
+    for p in pieces:
+        if state == "pass":
+            yield p
+            continue
+        if state == "after":          # espaces qui suivent </think>
+            p = p.lstrip()
+            if p:
+                state = "pass"
+                yield p
+            continue
+        buf += p
+        if state == "start":
+            stripped = buf.lstrip()
+            if not stripped:
+                continue
+            if "<think>".startswith(stripped[:7]) and len(stripped) < 7:
+                continue
+            if stripped.startswith("<think>"):
+                state = "think"
+            else:
+                state = "pass"
+                yield buf
+                buf = ""
+                continue
+        if state == "think" and "</think>" in buf:
+            rest = buf.split("</think>", 1)[1].lstrip()
+            buf = ""
+            state = "pass" if rest else "after"
+            if rest:
+                yield rest
+    if state != "pass" and buf and state == "start":
+        yield buf
+
+
 class AssistantDisabled(RuntimeError):
     pass
 
@@ -152,7 +197,8 @@ class AssistantManager:
             messages += (history or [])[-6:]          # historique court : contexte borné
             messages.append({"role": "user", "content": question[:4000]})
             stats = stats if stats is not None else GenerationStats()
-            for piece in engine.chat(messages, self.config.max_tokens, stats):
+            extra = model_request_options(self.config.model_path)
+            for piece in strip_think(engine.chat(messages, self.config.max_tokens, stats, extra)):
                 self._touch()
                 yield piece
         finally:

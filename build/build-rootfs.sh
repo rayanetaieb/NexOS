@@ -7,6 +7,9 @@
 #   MIRROR  (défaut http://deb.debian.org/debian)
 #   KERNEL  (défaut linux-image-amd64)      paquet noyau
 #   OUT     (défaut ./out)
+#   KEYRING    (facultatif) trousseau de vérification (voir build/fetch-debian-keyring.sh)
+#   APT_PROXY  (facultatif) proxy HTTP(S) utilisé UNIQUEMENT pendant le build
+#   APT_CAINFO (facultatif) certificat d'autorité pour ce proxy
 # Exemple de repli testé dans un environnement sans accès Debian :
 #   SUITE=noble MIRROR=http://archive.ubuntu.com/ubuntu KERNEL=linux-image-virtual ./build/build-rootfs.sh
 set -euo pipefail
@@ -27,11 +30,22 @@ case "$SUITE" in
 esac
 
 # NB : root sans mot de passe = PROTOTYPE VM UNIQUEMENT (console de test).
+aptopts=()
+if [ -n "${KEYRING:-}" ]; then aptopts+=(--keyring="$KEYRING"); fi
+if [ -n "${APT_PROXY:-}" ]; then
+  aptopts+=(--aptopt="Acquire::http::Proxy \"$APT_PROXY\"" --aptopt="Acquire::https::Proxy \"$APT_PROXY\"")
+fi
+if [ -n "${APT_CAINFO:-}" ]; then
+  # _apt ne peut pas lire un CA situé dans un dossier privé : téléchargement en root (build seulement).
+  aptopts+=(--aptopt="Acquire::https::CaInfo \"$APT_CAINFO\"" --aptopt="APT::Sandbox::User \"root\"")
+fi
+
 echo ">> mmdebstrap $SUITE depuis $MIRROR"
 mmdebstrap \
   --variant=minbase \
   --components="$components" \
   --include="$pkgs" \
+  "${aptopts[@]}" \
   --customize-hook="cp -a '$HERE/config/overlay/.' \"\$1/\"" \
   --customize-hook='echo nexos > "$1/etc/hostname"' \
   --customize-hook='printf "127.0.0.1 localhost\n127.0.1.1 nexos\n" > "$1/etc/hosts"' \
@@ -39,6 +53,7 @@ mmdebstrap \
   --customize-hook="sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME=\"NexOS 0.1 prototype (base $SUITE)\"/' \"\$1/usr/lib/os-release\"" \
   --customize-hook='chroot "$1" passwd -d root' \
   --customize-hook="for s in \$(grep -vE '^\\s*(#|\$)' '$HERE/config/services.list'); do chroot \"\$1\" systemctl enable \"\$s\"; done" \
+  --customize-hook='rm -f "$1/etc/apt/apt.conf.d/99mmdebstrap"' \
   "$SUITE" "$ROOTFS" "$MIRROR"
 
 echo ">> rootfs : $ROOTFS ($(du -h "$ROOTFS" | cut -f1))"

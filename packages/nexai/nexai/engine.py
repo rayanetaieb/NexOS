@@ -53,7 +53,7 @@ class Engine(ABC):
 
     @abstractmethod
     def chat(self, messages: list[dict], max_tokens: int,
-             stats: GenerationStats) -> Iterator[str]:
+             stats: GenerationStats, extra_body: dict | None = None) -> Iterator[str]:
         """Génère la réponse morceau par morceau et remplit `stats`."""
 
 
@@ -152,12 +152,13 @@ class LlamaServerEngine(Engine):
         return f"http://{LOOPBACK}:{self._port}{path}"
 
     def chat(self, messages: list[dict], max_tokens: int,
-             stats: GenerationStats) -> Iterator[str]:
+             stats: GenerationStats, extra_body: dict | None = None) -> Iterator[str]:
         if not self.running:
             raise EngineError("Moteur non démarré")
         body = json.dumps({
             "messages": messages, "max_tokens": max_tokens, "stream": True,
             "temperature": 0.3, "stream_options": {"include_usage": True},
+            **(extra_body or {}),
         }).encode()
         req = urllib.request.Request(self._url("/v1/chat/completions"), data=body,
                                      headers={"Content-Type": "application/json"})

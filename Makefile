@@ -2,9 +2,15 @@
 SUITE  ?= trixie
 MIRROR ?= http://deb.debian.org/debian
 KERNEL ?= linux-image-amd64
-export SUITE MIRROR KERNEL
+OUT    ?= $(CURDIR)/out
+# Hôte non-Debian (ex. Ubuntu 24.04) : trousseau récupéré par chaîne de confiance.
+KEYRING ?= $(if $(wildcard $(OUT)/debian-archive-keyring.gpg),$(OUT)/debian-archive-keyring.gpg,)
+export SUITE MIRROR KERNEL OUT KEYRING APT_PROXY APT_CAINFO
 
-.PHONY: rootfs disk boot-test vm test-nexai clean
+.PHONY: keyring rootfs disk boot-test vm test-nexai clean
+
+keyring:
+	./build/fetch-debian-keyring.sh
 
 rootfs:
 	./build/build-rootfs.sh
@@ -17,8 +23,8 @@ boot-test:
 
 vm:
 	qemu-system-x86_64 -machine q35,accel=kvm:tcg -m 1024 -smp 2 -nographic \
-	  -kernel out/vmlinuz -initrd out/initrd.img -append "root=/dev/vda rw console=ttyS0" \
-	  -drive file=out/nexos.img,format=raw,if=virtio,snapshot=on -nic user,model=virtio-net-pci
+	  -kernel $(OUT)/vmlinuz -initrd $(OUT)/initrd.img -append "root=/dev/vda rw console=ttyS0" \
+	  -drive file=$(OUT)/nexos.img,format=raw,if=virtio,snapshot=on -nic user,model=virtio-net-pci
 
 test-nexai:
 	cd packages/nexai && python -m pytest -q && ruff check nexai tests

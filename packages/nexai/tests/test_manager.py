@@ -147,3 +147,17 @@ def test_sysinfo_reads_proc():
     assert sysinfo.mem_available_mb() > 0
     assert sysinfo.rss_mb(os.getpid()) > 0
     assert sysinfo.physical_cores() >= 1
+
+
+def test_strip_think_removes_leading_block():
+    from nexai.manager import strip_think
+    assert "".join(strip_think(iter(["<th", "ink>\n\n</th", "ink>\n\nBon", "jour"]))) == "Bonjour"
+    assert "".join(strip_think(iter(["<think>raisonnement</think>", " Oui"]))) == "Oui"
+    assert "".join(strip_think(iter(["Salut ", "<think> reste"]))) == "Salut <think> reste"
+    assert "".join(strip_think(iter(["  ", "Ok"]))) == "  Ok"
+
+
+def test_qwen3_disables_thinking():
+    from nexai.manager import model_request_options
+    assert model_request_options("/m/Qwen3-0.6B-Q8_0.gguf") == {"chat_template_kwargs": {"enable_thinking": False}}
+    assert model_request_options("/m/qwen2.5-0.5b.gguf") == {}

@@ -1,10 +1,9 @@
-"""Gestion des modèles : catalogue de candidats, import local, téléchargement
-VÉRIFIÉ (SHA-256 obligatoire), suppression.
+"""Gestion des modèles : catalogue, import local, téléchargement VÉRIFIÉ
+(SHA-256 obligatoire), suppression.
 
-Le catalogue ci-dessous liste des CANDIDATS À ÉVALUER. Les empreintes SHA-256
-ne sont pas encore renseignées : tant qu'une empreinte n'a pas été relevée et
-validée par l'équipe NexOS, le téléchargement depuis le catalogue est refusé.
-Les noms de dépôts/fichiers doivent être revérifiés avant activation.
+Les empreintes SHA-256 du catalogue ont été relevées le 16/10/2026 depuis l'API
+Hugging Face (champ lfs.oid des dépôts officiels) puis recontrôlées après
+téléchargement. Une entrée sans empreinte n'est pas téléchargeable.
 """
 from __future__ import annotations
 
@@ -28,18 +27,27 @@ class ModelInfo:
     notes: str = ""
 
 
+HF = "https://huggingface.co"
+
 CATALOG: list[ModelInfo] = [
     ModelInfo("qwen2.5-0.5b-q4km", "Qwen2.5 0.5B Instruct (Q4_K_M)", "0,5 G", "Apache-2.0",
-              "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf",
-              None, "Candidat principal : multilingue, aide au code correcte pour sa taille (à mesurer)."),
+              f"{HF}/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+              "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+              "Candidat léger."),
     ModelInfo("qwen3-0.6b-q8", "Qwen3 0.6B (Q8_0)", "0,6 G", "Apache-2.0",
-              "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf",
-              None, "Mode « réflexion » à désactiver pour la latence (à vérifier)."),
+              f"{HF}/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf",
+              "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+              "Mode réflexion désactivé par /no_think."),
     ModelInfo("smollm2-360m-q8", "SmolLM2 360M Instruct (Q8_0)", "0,36 G", "Apache-2.0",
-              "https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct-GGUF/resolve/main/smollm2-360m-instruct-q8_0.gguf",
-              None, "Version très légère ; français probablement faible (à mesurer)."),
+              f"{HF}/HuggingFaceTB/SmolLM2-360M-Instruct-GGUF/resolve/main/smollm2-360m-instruct-q8_0.gguf",
+              "48ab3034d0dd401fbc721eb1df3217902fee7dab9078992d66431f09b7750201",
+              "Le plus léger."),
+    ModelInfo("qwen2.5-1.5b-q4km", "Qwen2.5 1.5B Instruct (Q4_K_M)", "1,5 G", "Apache-2.0",
+              f"{HF}/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+              "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+              "Référence qualité, pour machines >= 8 Go."),
     ModelInfo("gemma3-270m", "Gemma 3 270M IT", "0,27 G", "Gemma Terms of Use",
-              None, None, "Licence spécifique : redistribution à faire valider juridiquement."),
+              None, None, "Licence spécifique : non retenu sans validation juridique."),
 ]
 
 
