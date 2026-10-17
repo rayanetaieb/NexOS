@@ -5,11 +5,14 @@
 # La machine ne s'éteint que si "nexos.autotest=1" est passé au noyau.
 state=$(systemctl is-system-running --wait)
 desktop=""
-if command -v sddm >/dev/null 2>&1; then
+if [ "$(systemctl get-default)" = graphical.target ]; then
+  # Shell de bureau : plasmashell (KDE) ou gnome-shell (GNOME) — permet de comparer d'autres systèmes.
+  # (processus d'un utilisateur ordinaire seulement : le gnome-shell de l'écran de connexion GDM est exclu)
+  usershell() { ps -eo uid=,pid=,comm= | awk '$1>=1000 && $3 ~ /^(plasmashell|gnome-shell)$/ {print $2; exit}'; }
   t0=$(cut -d. -f1 /proc/uptime)
-  for i in $(seq 1 900); do pgrep -x plasmashell >/dev/null && break; sleep 1; done
+  for i in $(seq 1 900); do [ -n "$(usershell)" ] && break; sleep 1; done
   sleep 20   # laisse la session se stabiliser avant de mesurer
-  pid=$(pgrep -x plasmashell | head -1)
+  pid=$(usershell)
   # session graphique de l'utilisateur connecté (quel qu'il soit)
   sess=$(for s in $(loginctl list-sessions --no-legend | awk '{print $1}'); do
            t=$(loginctl show-session "$s" -p Type --value); c=$(loginctl show-session "$s" -p Class --value)
