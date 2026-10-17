@@ -6,7 +6,7 @@
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 OUT="${OUT:-$PWD/out}"
-VERSION="${VERSION:-0.2}"
+VERSION="${VERSION:-0.3}"
 ISO="$OUT/nexos-$VERSION-amd64.iso"
 work="$OUT/iso-work"; root="$work/rootfs"; tree="$work/iso"
 rm -rf "$work"; mkdir -p "$root" "$tree/live" "$tree/boot/grub"
@@ -21,16 +21,24 @@ mksquashfs "$root" "$tree/live/filesystem.squashfs" -comp zstd -Xcompression-lev
   -noappend -quiet -e boot/efi
 du -h "$tree/live/filesystem.squashfs" | cut -f1 | sed 's/^/   taille squashfs : /'
 
-cp "$HERE/../branding/nexos-mark-white.svg" "$tree/boot/grub/" 2>/dev/null || true
-cat > "$tree/boot/grub/grub.cfg" <<'EOF'
+# Thème GRUB NexOS (celui du système installé, polices comprises)
+fonts=""
+if [ -d "$root/usr/share/grub/themes/nexos" ]; then
+  mkdir -p "$tree/boot/grub/themes"; cp -r "$root/usr/share/grub/themes/nexos" "$tree/boot/grub/themes/"
+  for f in "$tree"/boot/grub/themes/nexos/*.pf2; do fonts+="loadfont /boot/grub/themes/nexos/$(basename "$f")"$'\n'; done
+fi
+{ cat <<'EOF'
 set default=0
 set timeout=5
 insmod all_video
 insmod gfxterm
+insmod png
+set gfxmode=auto
 terminal_output gfxterm
-set color_normal=white/black
-set menu_color_normal=light-gray/black
-set menu_color_highlight=black/light-cyan
+EOF
+printf '%s' "$fonts"
+[ -n "$fonts" ] && echo 'set theme=/boot/grub/themes/nexos/theme.txt'
+cat <<'EOF'
 
 menuentry "Essayer ou installer NexOS" {
     linux /live/vmlinuz boot=live components quiet splash
@@ -45,9 +53,10 @@ menuentry "NexOS (console de diagnostic, sans bureau)" {
     initrd /live/initrd.img
 }
 EOF
+} > "$tree/boot/grub/grub.cfg"
 
 echo ">> ISO hybride BIOS/UEFI"
-grub-mkrescue -o "$ISO" "$tree" -- -volid NEXOS_0_2 2>"$work/mkrescue.log" || { cat "$work/mkrescue.log"; exit 1; }
+grub-mkrescue -o "$ISO" "$tree" -- -volid "NEXOS_${VERSION//./_}" 2>"$work/mkrescue.log" || { cat "$work/mkrescue.log"; exit 1; }
 rm -rf "$root"
 ( cd "$OUT" && sha256sum "$(basename "$ISO")" > "$(basename "$ISO").sha256" )
 ls -lh "$ISO"; cat "$ISO.sha256"

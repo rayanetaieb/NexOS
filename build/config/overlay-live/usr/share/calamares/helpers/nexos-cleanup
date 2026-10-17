@@ -9,3 +9,33 @@ rm -f "$CHROOT/etc/xdg/autostart/calamares-desktop-icon.desktop"
 rm -rf "$CHROOT/usr/share/nexos/installer"
 rm -rf "$CHROOT/etc/calamares"
 echo "NexOS : nettoyage du système installé terminé"
+
+# --- Instantanés Btrfs (Snapper) : configuration « root » si / est en Btrfs ---
+# Instantané avant/après chaque opération APT (crochet 80snapper du paquet Debian),
+# 10 instantanés « number » au plus, PAS d'instantanés horaires (aucune tâche de fond inutile).
+if [ "$(findmnt -no FSTYPE "$CHROOT")" = "btrfs" ] && [ -d "$CHROOT/.snapshots" ]; then
+  mkdir -p "$CHROOT/etc/snapper/configs"
+  sed -e 's/^TIMELINE_CREATE=.*/TIMELINE_CREATE="no"/' \
+      -e 's/^NUMBER_LIMIT=.*/NUMBER_LIMIT="10"/' \
+      -e 's/^NUMBER_LIMIT_IMPORTANT=.*/NUMBER_LIMIT_IMPORTANT="5"/' \
+      -e 's/^SPACE_LIMIT=.*/SPACE_LIMIT="0.3"/' \
+      -e 's/^ALLOW_GROUPS=.*/ALLOW_GROUPS="sudo"/' \
+      -e 's/^SYNC_ACL=.*/SYNC_ACL="yes"/' \
+      "$CHROOT/usr/share/snapper/config-templates/default" > "$CHROOT/etc/snapper/configs/root"
+  sed -i 's/^SNAPPER_CONFIGS=.*/SNAPPER_CONFIGS="root"/' "$CHROOT/etc/default/snapper"
+  chmod 750 "$CHROOT/.snapshots"; chgrp sudo "$CHROOT/.snapshots" 2>/dev/null || true
+  chroot "$CHROOT" systemctl disable snapper-timeline.timer >/dev/null 2>&1 || true
+  chroot "$CHROOT" systemctl enable snapper-cleanup.timer >/dev/null 2>&1 || true
+  chroot "$CHROOT" snapper --no-dbus -c root create -d "Installation de NexOS" --cleanup-algorithm number --userdata important=yes \
+    || echo "NexOS : instantané initial non créé (sera possible après démarrage)"
+  echo "NexOS : Snapper configuré (racine Btrfs)"
+fi
+
+# --- Clavier du bureau : disposition choisie dans l'installateur (+ arabe en second, Alt+Maj) ---
+if [ -f "$CHROOT/etc/default/keyboard" ]; then
+  . "$CHROOT/etc/default/keyboard"
+  lay="${XKBLAYOUT:-fr}"; var="${XKBVARIANT:-}"
+  case ",$lay," in *,ara,*) ;; *) lay="$lay,ara"; var="$var," ;; esac
+  printf '[Layout]\nLayoutList=%s\nVariantList=%s\nOptions=grp:alt_shift_toggle\nResetOldOptions=true\nShowLayoutIndicator=true\nShowSingle=false\nUse=true\n' \
+    "$lay" "$var" > "$CHROOT/etc/xdg/kxkbrc"
+fi

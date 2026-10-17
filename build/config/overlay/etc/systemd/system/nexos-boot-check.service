@@ -1,6 +1,9 @@
 [Unit]
 Description=NexOS boot self-check report
 After=systemd-user-sessions.service
+# Rapport de test : uniquement en machine virtuelle ou sur demande (jamais sur un PC réel par défaut)
+ConditionVirtualization=|vm
+ConditionKernelCommandLine=|nexos.autotest=1
 
 [Service]
 # Type=simple : le script attend lui-même la fin du démarrage (is-system-running --wait),

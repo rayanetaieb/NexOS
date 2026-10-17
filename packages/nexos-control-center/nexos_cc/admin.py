@@ -60,6 +60,15 @@ def main(argv: list[str]) -> int:
         if not DESC_RE.match(desc):
             print("description invalide", file=sys.stderr); return 2
         return run(["snapper", "-c", "root", "create", "--description", desc, "--cleanup-algorithm", "number"])
+    if action == "snapshot-undo":
+        # Annule les modifications du système (sous-volume racine) faites depuis l'instantané N.
+        # /home est un sous-volume séparé : les documents ne sont jamais touchés.
+        n = args[0] if args else ""
+        if not re.fullmatch(r"[1-9]\d{0,5}", n):
+            print("numéro d'instantané invalide", file=sys.stderr); return 2
+        run(["snapper", "-c", "root", "create", "--description", f"Avant retour à l'instantané {n}",
+             "--cleanup-algorithm", "number", "--userdata", "important=yes"])
+        return run(["snapper", "-c", "root", "undochange", f"{n}..0"])
     if action == "snapshot-list":
         return run(["snapper", "-c", "root", "list"])
     if action in ("firewall-on", "firewall-off"):

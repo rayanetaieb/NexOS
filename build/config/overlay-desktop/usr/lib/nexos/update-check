@@ -1,0 +1,13 @@
+#!/bin/sh
+# Vérification quotidienne des mises à jour (remplace le notificateur Discover résident, ~140 Mo).
+# Lancée par nexos-update-check.timer (session utilisateur) ; aucun processus ne reste en mémoire.
+# Lit simplement les listes déjà téléchargées par apt-daily.timer : pas de réseau, pas de droits.
+n=$(apt list --upgradable 2>/dev/null | grep -c /)
+sec=$(apt list --upgradable 2>/dev/null | grep -c -- '-security')
+[ "$n" -gt 0 ] || exit 0
+if [ "$sec" -gt 0 ]; then body="$n mise(s) à jour disponible(s), dont $sec de sécurité."; urg=2
+else body="$n mise(s) à jour disponible(s)."; urg=1; fi
+gdbus call --session --dest org.freedesktop.Notifications --object-path /org/freedesktop/Notifications \
+  --method org.freedesktop.Notifications.Notify "NexOS" 0 "nexos-control-center" \
+  "Mises à jour" "$body Ouvrez le Control Center → Mises à jour." "[]" \
+  "{'urgency': <byte $urg>, 'desktop-entry': <'org.nexos.ControlCenter'>}" 15000 >/dev/null

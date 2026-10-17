@@ -199,13 +199,23 @@ class Backups(Page):
         row = QHBoxLayout()
         b1 = QPushButton("Lister les instantanés"); b1.clicked.connect(lambda: self.cc.admin(["snapshot-list"], None, self.out))
         b2 = QPushButton("Créer un instantané…"); b2.clicked.connect(self.create)
+        b4 = QPushButton("Revenir à un instantané…"); b4.clicked.connect(self.undo)
         b3 = QPushButton("Btrfs Assistant (restauration)…"); b3.clicked.connect(lambda: subprocess.Popen(["btrfs-assistant-launcher"]))
-        for b in (b1, b2, b3): row.addWidget(b)
+        for b in (b1, b2, b4, b3): row.addWidget(b)
         row.addStretch(); self.lay.addLayout(row)
         self.lay.addWidget(QLabel("Récupération : au démarrage, menu GRUB → « Options avancées » ; en cas de panne "
                                   "grave, démarrer la clé NexOS → « console de diagnostic ». Voir docs/RECOVERY.md."))
     def refresh(self):
         self.out.setPlainText(f"Système de fichiers racine : {probe.root_fs()}")
+    def undo(self):
+        n, ok = QInputDialog.getInt(self, "Revenir à un instantané", "Numéro de l'instantané (voir la liste) :", 1, 1, 999999)
+        if not ok:
+            return
+        msg = (f"Les fichiers système modifiés depuis l'instantané {n} vont être remis dans leur état d'alors "
+               "(paquets installés ou mis à jour, configuration dans /etc…).\n\nVos documents (/home) ne sont pas touchés. "
+               "Un instantané de l'état actuel est créé d'abord, pour pouvoir annuler.\n\nRedémarrez ensuite. Continuer ?")
+        if QMessageBox.question(self, "Confirmer le retour arrière", msg) == QMessageBox.StandardButton.Yes:
+            self.cc.admin(["snapshot-undo", str(n)], None, self.out)
     def create(self):
         desc, ok = QInputDialog.getText(self, "Instantané", "Description :", text="Avant modification")
         if ok:

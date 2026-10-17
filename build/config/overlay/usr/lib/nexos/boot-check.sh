@@ -42,4 +42,20 @@ R
 )
 sleep 2
 printf '\n%s\n' "$report" > /dev/ttyS0
+# Mesure mémoire « au repos » : 90 s après le premier rapport, sans aucune action.
+if [ -n "$desktop" ]; then
+  sleep 90
+  mem=$(cat <<M
+NEXOS-MEM-BEGIN
+settle_s=90
+$(awk '/^(MemTotal|MemFree|MemAvailable|Buffers|Cached|Shmem|AnonPages|SwapTotal|SwapFree):/ {printf "%s=%s\n", $1, $2}' /proc/meminfo | tr -d ':')
+used_kib=$(awk '/^MemTotal:/{t=$2} /^MemAvailable:/{a=$2} END{print t-a}' /proc/meminfo)
+processes=$(ps -e --no-headers | wc -l)
+top_rss_kib:
+$(ps -eo rss=,comm= --sort=-rss | head -15 | awk '{printf "  %s %s\n", $2, $1}')
+NEXOS-MEM-END
+M
+)
+  printf '\n%s\n' "$mem" > /dev/ttyS0
+fi
 if grep -q 'nexos.autotest=1' /proc/cmdline; then systemctl --no-block poweroff; fi

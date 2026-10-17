@@ -36,6 +36,8 @@ Machine de build (2 cœurs, réseau PyPI). Journaux : `docs/measurements/python-
 | appdev | 37 s | 453 Mio | 4/4 | fenêtre Kivy/KivyMD réelle (Xvfb), PySide6, Ruff/Mypy, exécutable PyInstaller lancé |
 | ai | 233 s | **7 819 Mio** | 4/4 | entraînement PyTorch + export ONNX vérifié, Keras, XGBoost ; GPU : aucun (CPU) |
 | vision | 168 s | **5 988 Mio** | 3/3 | OpenCV, Pillow, YOLO construit et inféré hors ligne |
+| data (0.3) | — | 839 Mio | 3/3 | Pandas = Polars = DuckDB sur le même calcul, Parquet + Excel aller-retour (texte arabe), Seaborn, Plotly |
+| quality (0.3) | — | 105 Mio | 3/3 | Ruff et mypy détectent de vraies erreurs, couverture pytest-cov 100 %, Hypothesis |
 
 Taille des profils ai/vision : le PyTorch de PyPI embarque CUDA. Variante CPU seule
 (`download.pytorch.org`) non testable depuis l'environnement de build — à faire.

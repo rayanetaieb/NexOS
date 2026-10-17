@@ -38,6 +38,10 @@ if [ "$EDITION" = live ]; then
   hooks+=(--customize-hook="cp -a '$HERE/config/overlay-live/.' \"\$1/\"")
   hooks+=(--customize-hook="'$HERE/config/customize-live.sh' \"\$1\"")
 fi
+if [ "$EDITION" = desktop ] || [ "$EDITION" = live ]; then
+  # Audit « rien de lourd au démarrage » : rapport conservé avec l'image (n'arrête pas le build).
+  hooks+=(--customize-hook="'$HERE/check-autostart.sh' \"\$1\" > '$OUT/autostart-audit.txt' 2>&1 || true")
+fi
 
 case "$SUITE" in
   noble|jammy) components="main,universe" ;;
@@ -65,7 +69,7 @@ mmdebstrap \
   --customize-hook='echo nexos > "$1/etc/hostname"' \
   --customize-hook='printf "127.0.0.1 localhost\n127.0.1.1 nexos\n" > "$1/etc/hosts"' \
   --customize-hook='printf "/dev/vda / ext4 defaults 0 1\n" > "$1/etc/fstab"' \
-  --customize-hook="sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME=\"NexOS 0.2 prototype $EDITION (base $SUITE)\"/' \"\$1/usr/lib/os-release\"" \
+  --customize-hook="sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME=\"NexOS 0.3 prototype $EDITION (base $SUITE)\"/' \"\$1/usr/lib/os-release\"" \
   --customize-hook='chroot "$1" passwd -d root' \
   --customize-hook="for s in \$(grep -vE '^\\s*(#|\$)' '$HERE/config/services.list'); do chroot \"\$1\" systemctl enable \"\$s\"; done" \
   "${hooks[@]}" \

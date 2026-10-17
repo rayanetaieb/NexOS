@@ -1,0 +1,14 @@
+[SddmGreeterTheme]
+Name=NexOS
+Description=Écran de connexion NexOS
+Author=NexOS
+License=GPL-3.0-or-later
+Type=sddm-theme
+Version=0.3
+Website=https://github.com/rayanetaieb/NexOS
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Theme-Id=nexos
+Theme-API=2.0
+QtVersion=6

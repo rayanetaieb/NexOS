@@ -6,7 +6,10 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 REPO="$HERE/../.."
 
 # --- Langue et clavier (français par défaut, modifiable dans Paramètres) ---
-sed -i 's/^# *fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/; s/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' "$R/etc/locale.gen"
+# Français, anglais et arabe (Tunisie, Maroc, Égypte, Arabie saoudite) générés d'avance.
+for l in fr_FR en_US ar_TN ar_MA ar_EG ar_SA; do
+  sed -i "s/^# *${l}.UTF-8 UTF-8/${l}.UTF-8 UTF-8/" "$R/etc/locale.gen"
+done
 chroot "$R" locale-gen >/dev/null
 printf 'LANG=fr_FR.UTF-8\n' > "$R/etc/default/locale"
 cat > "$R/etc/default/keyboard" <<'EOF'
@@ -17,7 +20,9 @@ XKBOPTIONS=""
 BACKSPACE="guess"
 EOF
 mkdir -p "$R/etc/xdg"
-printf '[Layout]\nLayoutList=fr\nUse=true\n' > "$R/etc/xdg/kxkbrc"
+# Deux dispositions : français (AZERTY) et arabe ; bascule Alt+Maj, indicateur dans la barre.
+printf '[Layout]\nDisplayNames=,\nLayoutList=fr,ara\nVariantList=,\nOptions=grp:alt_shift_toggle\nResetOldOptions=true\nShowFlag=false\nShowLabel=true\nShowLayoutIndicator=true\nShowSingle=false\nUse=true\n' \
+  > "$R/etc/xdg/kxkbrc"
 
 # --- Compte de démonstration (PROTOTYPE : remplacé par l'installateur en phase 6) ---
 if ! chroot "$R" id nexos >/dev/null 2>&1; then
@@ -42,10 +47,10 @@ chroot "$R" systemctl set-default graphical.target >/dev/null
 
 # --- Identité système ---
 cat > "$R/etc/os-release.nexos" <<'EOF'
-PRETTY_NAME="NexOS 0.2 (prototype, base Debian 13)"
+PRETTY_NAME="NexOS 0.3 (prototype, base Debian 13)"
 NAME="NexOS"
-VERSION_ID="0.2"
-VERSION="0.2 (prototype)"
+VERSION_ID="0.3"
+VERSION="0.3 (prototype)"
 ID=nexos
 ID_LIKE=debian
 LOGO=nexos-logo
@@ -57,7 +62,7 @@ mv "$R/etc/os-release.nexos" "$R/usr/lib/os-release"
 ln -sf ../usr/lib/os-release "$R/etc/os-release"
 echo nexos > "$R/etc/hostname"
 ln -sf /usr/share/zoneinfo/Europe/Paris "$R/etc/localtime"; echo Europe/Paris > "$R/etc/timezone"
-printf "NexOS 0.2 \\n \\l\n\n" > "$R/etc/issue"
+printf "NexOS 0.3 \\n \\l\n\n" > "$R/etc/issue"
 
 # --- Noms d'applications NexOS (surcharges, sans toucher aux paquets Debian) ---
 LA="$R/usr/local/share/applications"; mkdir -p "$LA"
@@ -72,10 +77,31 @@ rename_app systemsettings.desktop "Paramètres"
 rename_app org.kde.plasma-systemmonitor.desktop "Moniteur système"
 rename_app org.kde.konsole.desktop "Terminal"
 
-# --- Écran de connexion : fond NexOS ---
-if [ -d "$R/usr/share/sddm/themes/breeze" ]; then
-  printf '[General]\nbackground=/usr/share/wallpapers/NexOS/contents/images_dark/3840x2160.png\ntype=image\n' \
-    > "$R/usr/share/sddm/themes/breeze/theme.conf.user"
+# --- Démarrage léger (vérifié par build/check-autostart.sh) ---
+# Attente réseau inutile pour un poste de travail ; instantanés horaires/à chaque démarrage
+# remplacés par les instantanés APT avant/après et les instantanés manuels.
+for u in NetworkManager-wait-online.service snapper-timeline.timer snapper-boot.timer; do
+  chroot "$R" systemctl disable "$u" >/dev/null 2>&1 || true
+done
+sed -i 's/^TIMELINE_CREATE=.*/TIMELINE_CREATE="no"/' "$R/usr/share/snapper/config-templates/default" 2>/dev/null || true
+# Notificateur Discover résident (≈140 Mo RSS mesurés au repos) remplacé par un minuteur
+# utilisateur quotidien qui lit les listes APT et envoie une notification (aucun processus permanent).
+if [ -f "$R/etc/xdg/autostart/org.kde.discover.notifier.desktop" ]; then
+  echo 'Hidden=true' >> "$R/etc/xdg/autostart/org.kde.discover.notifier.desktop"
+fi
+chroot "$R" systemctl --global enable nexos-update-check.timer >/dev/null 2>&1 || true
+# Indexation de fichiers Baloo : désactivée par défaut (catégorie C), activable dans Paramètres → Recherche.
+printf '[Basic Settings]\nIndexing-Enabled=false\n' > "$R/etc/xdg/baloofilerc"
+
+# --- Écran de connexion : thème SDDM « nexos » (copié par branding-root) ; Breeze reste installé en secours ---
+# --- GRUB : polices du thème NexOS générées depuis Noto Sans de l'image ---
+GT="$R/usr/share/grub/themes/nexos"
+if [ -d "$GT" ] && [ -x "$R/usr/bin/grub-mkfont" ]; then
+  for spec in "Regular 16" "Regular 20" "Bold 20" "Bold 48"; do
+    set -- $spec
+    chroot "$R" grub-mkfont -s "$2" -o "/usr/share/grub/themes/nexos/noto-${1,,}-$2.pf2" \
+      "/usr/share/fonts/truetype/noto/NotoSans-$1.ttf"
+  done
 fi
 
 # --- Assistant IA (nexai) : module Python + lanceur + raccourci Meta+Espace ---
@@ -115,6 +141,7 @@ for pkg in nexos-control-center:nexos_cc nexos-setup:nexos_setup nexos-arduino:n
   cp "$REPO/packages/$src/data/"*.desktop "$R/usr/share/applications/"
 done
 printf '#!/usr/bin/python3\nimport sys\nfrom nexos_cc.gui import main\nsys.exit(main())\n' > "$R/usr/bin/nexos-control-center"
+mkdir -p "$R/usr/share/nexos/templates"; cp -r "$REPO/packages/nexos-setup/templates/." "$R/usr/share/nexos/templates/"
 printf '#!/usr/bin/python3\nimport sys\nfrom nexos_setup.cli import main\nsys.exit(main())\n' > "$R/usr/bin/nexos-setup"
 chmod 755 "$R/usr/bin/nexos-control-center" "$R/usr/bin/nexos-setup"
 install -D -m 0755 "$REPO/packages/nexos-control-center/nexos_cc/admin.py" "$R/usr/lib/nexos/nexos-admin"

@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import subprocess
+import shutil
 import sys
+from pathlib import Path
 
 from . import android, miktex
 
@@ -62,9 +64,26 @@ def miktex_gui() -> int:
     return rc
 
 
+TEMPLATES = [Path("/usr/share/nexos/templates"), Path(__file__).resolve().parents[1] / "templates"]
+
+
+def new_android_project(dest: Path | None = None) -> Path:
+    """Copie le modèle Kotlin dans ~/AndroidStudioProjects/BonjourNexOS (sans écraser)."""
+    src = next((t / "android-kotlin" for t in TEMPLATES if (t / "android-kotlin").is_dir()), None)
+    if src is None:
+        raise FileNotFoundError("modèle android-kotlin introuvable")
+    dest = dest or Path.home() / "AndroidStudioProjects" / "BonjourNexOS"
+    if dest.exists():
+        raise FileExistsError(f"{dest} existe déjà")
+    shutil.copytree(src, dest)
+    return dest
+
+
 def main(argv=None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     cmd = argv[0] if argv else "status"
+    if cmd == "android-project":
+        print(new_android_project(Path(argv[1]) if len(argv) > 1 else None)); return 0
     return {"status": status, "android": android_gui, "miktex": miktex_gui}.get(cmd, status)()
 
 

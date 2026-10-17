@@ -2,7 +2,7 @@
 # Rejoue une installation NexOS complète dans QEMU (UEFI) depuis l'ISO, par QMP.
 # Séquence validée écran par écran le 16/10/2026 (captures dans $VMDIR/screens).
 # Les positions de clic correspondent à la fenêtre Calamares centrée en 1440x900.
-# Usage : tests/install/run_install.sh out/live/nexos-0.2-amd64.iso
+# Usage : tests/install/run_install.sh out/live/nexos-0.3-amd64.iso
 set -euo pipefail
 ISO="$1"
 export VMDIR="${VMDIR:-out/vm}"

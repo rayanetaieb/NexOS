@@ -37,4 +37,11 @@ for s in 16 22 24 32 48 64 128 256; do
   rsvg-convert -w "$s" -h "$s" --keep-aspect-ratio "$B/nexos-mark.svg" -o "$d/nexos-logo.png"
 done
 python3 "$B/plasma/make_theme.py" "$R" >/dev/null
+# Écran de connexion SDDM « nexos »
+T="$R/usr/share/sddm/themes/nexos"; mkdir -p "$T"
+cp "$B"/sddm/nexos/* "$T/"; cp "$B/nexos-mark-white.svg" "$T/logo.svg"
+cp "$WP/images_dark/1920x1080.png" "$T/background.png"
+# Thème GRUB « nexos » (polices .pf2 produites dans l'image par grub-mkfont)
+rsvg-convert -w 256 -h 256 "$B/nexos-mark-white.svg" -o "$tmp/logo-white.png"
+python3 "$B/grub/make_grub_theme.py" "$WP/images_dark/1920x1080.png" "$tmp/logo-white.png" "$R/usr/share/grub/themes/nexos" >/dev/null
 echo ">> branding rendu dans $R ($(du -sh "$R" | cut -f1))"

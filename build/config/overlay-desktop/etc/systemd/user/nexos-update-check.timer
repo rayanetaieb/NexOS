@@ -1,0 +1,10 @@
+[Unit]
+Description=NexOS : vérification quotidienne des mises à jour
+
+[Timer]
+OnStartupSec=15min
+OnUnitActiveSec=1d
+Persistent=false
+
+[Install]
+WantedBy=timers.target

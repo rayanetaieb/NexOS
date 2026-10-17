@@ -47,3 +47,9 @@ def test_gui_all_pages_render(monkeypatch):
         w.nav.setCurrentRow(i); app.processEvents()
     assert w.pages[0].ram.value() > 0
     w.close()
+
+
+def test_snapshot_undo_rejects_invalid_numbers(capsys):
+    from nexos_cc import admin
+    for bad in ("", "0", "-1", "1;rm", "1..0", "abc"):
+        assert admin.main(["snapshot-undo", bad]) == 2

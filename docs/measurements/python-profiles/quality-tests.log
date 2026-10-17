@@ -1,0 +1,5 @@
+profil quality — 2026-10-17T05:40:43Z — taille env 115M
+tests/test_quality.py::test_hypothesis_sort_idempotent PASSED            [ 33%]
+tests/test_quality.py::test_ruff_and_mypy_find_real_problems PASSED      [ 66%]
+tests/test_quality.py::test_pytest_coverage_report PASSED                [100%]
+============================== 3 passed in 6.13s ===============================

@@ -1,0 +1,5 @@
+profil data — 2026-10-17T05:40:34Z — taille env 839M
+tests/test_data.py::test_pandas_polars_duckdb_agree PASSED               [ 33%]
+tests/test_data.py::test_parquet_and_excel_roundtrip PASSED              [ 66%]
+tests/test_data.py::test_charts PASSED                                   [100%]
+============================== 3 passed in 5.54s ===============================

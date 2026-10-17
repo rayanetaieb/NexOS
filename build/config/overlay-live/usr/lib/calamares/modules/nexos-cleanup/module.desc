@@ -3,4 +3,4 @@ type:       "job"
 name:       "nexos-cleanup"
 interface:  "process"
 command:    "/usr/share/calamares/helpers/nexos-cleanup"
-timeout:    120
+timeout:    300
