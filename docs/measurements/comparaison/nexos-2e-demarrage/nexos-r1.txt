@@ -1,0 +1,61 @@
+accel=tcg cpu=Nehalem ram_mib=4096 image=nexos.img demarrage=deuxieme (chaud)
+bureau_affiche_apres_rapport_s=63
+NEXOS-REPORT-BEGIN
+os=NexOS 0.3 (prototype, base Debian 13)
+kernel=6.12.107+deb13-amd64
+state=running
+failed_units=0
+failed_list=
+boot_time: Startup finished in 17.811s (kernel) + 59.419s (userspace) = 1min 17.231s 
+desktop_plasmashell=running
+desktop_session_type=wayland
+desktop_ready_uptime_s=181
+desktop_kwin=running
+desktop_plasmashell_rss_kib=174588
+mem_used_kib=704276 mem_total_kib=4015400
+processes=158
+python=Python 3.13.5
+NEXOS-BOOT-OK
+NEXOS-REPORT-END
+NEXOS-MEM-BEGIN seq=2
+uptime_s=366
+MemTotal=4015400
+MemFree=2707532
+MemAvailable=2933024
+Buffers=25172
+Cached=432248
+SwapTotal=2007696
+SwapFree=2007696
+AnonPages=679000
+Shmem=34104
+used_kib=1082376
+processes=151
+blame_top10:
+  30.952s dev-vda.device
+  20.579s ufw.service
+  15.003s systemd-udev-trigger.service
+  14.185s apparmor.service
+  13.072s accounts-daemon.service
+  12.951s udisks2.service
+  11.419s dev-zram0.device
+  10.370s NetworkManager.service
+  7.564s keyboard-setup.service
+  6.815s systemd-udevd.service
+top_rss_kib:
+  plasmashell 519636
+  kwin_wayland 240404
+  kded6 184992
+  ksmserver 142252
+  polkit-kde-auth 131420
+  xdg-desktop-por 130536
+  kaccess 123664
+  Xwayland 88264
+  startplasma-way 43504
+  kactivitymanage 42704
+  kioworker 30596
+  kioworker 29836
+  sddm 27332
+  sddm-helper 26496
+  gmenudbusmenupr 24776
+NEXOS-MEM-END
+serie_used_mib_par_minute=968,1057,1315,1397
