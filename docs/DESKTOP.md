@@ -17,10 +17,10 @@ Dérivée du logo fourni (hexagone, tracé « pouls », point bleu) — `brandin
 ## Disposition (différente de Windows, gestes familiers conservés)
 - **Barre supérieure fine** : menu NexOS (logo, touche Meta) · horloge et date au centre · zone système à droite.
 - **Dock flottant centré en bas**, ajusté à son contenu, qui s'efface devant les fenêtres :
-  Fichiers, Firefox, Terminal, Centre Python, Assistant, Logithèque, Paramètres, Corbeille.
+  Fichiers, Firefox, Terminal, Centre Python, Assistant, NexOS Store, Paramètres, Corbeille.
 - Raccourcis : Meta (menu et recherche), Meta+E (Fichiers), Ctrl+Alt+T (Terminal),
   **Meta+Espace (Assistant IA)**, Ctrl+Échap (Moniteur système), Alt+Tab.
-- Noms d'applications NexOS en français : Fichiers, Logithèque, Paramètres, Terminal, Moniteur système.
+- Noms d'applications NexOS en français : Fichiers, NexOS Store, Paramètres, Terminal, Moniteur système.
 - Français et clavier AZERTY par défaut, fuseau Europe/Paris (modifiables dans Paramètres).
 
 ## Vérification réelle (VM QEMU, émulation logicielle sans KVM)
@@ -50,5 +50,5 @@ pas de matériel réel. Les temps mesurés ne sont **pas** représentatifs.
 
 ## Reste à faire
 - Vérification sur matériel réel et dans VirtualBox (avec accélération).
-- Assistant de premier démarrage NexOS ; Centre de mises à jour NexOS (aujourd'hui : Logithèque/Discover).
+- Assistant de premier démarrage NexOS ; Centre de mises à jour NexOS (aujourd'hui : NexOS Store/Discover).
 - Mesures comparatives de RAM (phase 5).

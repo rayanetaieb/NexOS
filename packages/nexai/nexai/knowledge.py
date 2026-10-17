@@ -21,7 +21,7 @@ FACTS: list[tuple[tuple[str, ...], str]] = [
      "est pris avant chaque mise à jour pour pouvoir revenir en arrière.")),
     (("installer un logiciel", "installer une application", "installer une appli", "desinstaller",
       "logitheque", "application", "logiciel"),
-     "Sur NexOS, les applications s'installent et se désinstallent avec « Logithèque » (menu NexOS)."),
+     "Sur NexOS, les applications s'installent et se désinstallent avec « NexOS Store » (menu NexOS), qui regroupe les paquets Debian et Flathub."),
     (("fond d'ecran", "fond ecran", "wallpaper", "theme", "mode sombre", "mode clair", "couleur",
       "apparence", "parametre", "reglage", "configurer"),
      ("Sur NexOS, l'application « Paramètres » regroupe l'apparence (mode clair/sombre, fond d'écran), "

@@ -50,6 +50,8 @@ power-profiles-daemon
 # Pare-feu ufw : règles nftables chargées au démarrage par un script, AUCUN démon résident
 # (firewalld, mesuré : 19,6 s sur le chemin critique du démarrage + 46 Mo de RAM en permanence)
 ufw
+# AppArmor : confinement des applications (activé par défaut dans Debian)
+apparmor
 plasma-firewall
 systemd-oomd
 zram-tools

@@ -1,0 +1,22 @@
+# NexOS — modules d'arrière-plan KDE (kded6) désactivés par défaut : inutiles pour la disposition
+# NexOS ou purement promotionnels. Réactivables : Paramètres → Système → Services d'arrière-plan.
+[Module-appmenu]
+autoload=false
+[Module-baloosearchmodule]
+autoload=false
+[Module-browserintegrationreminder]
+autoload=false
+[Module-browserintegrationflatpakintegrator]
+autoload=false
+[Module-donationmessage]
+autoload=false
+[Module-remotenotifier]
+autoload=false
+[Module-smbwatcher]
+autoload=false
+[Module-wpad-detector]
+autoload=false
+[Module-geotimezoned]
+autoload=false
+[Module-plasma_accentcolor_service]
+autoload=false

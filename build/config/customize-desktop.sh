@@ -72,7 +72,8 @@ rename_app() { # $1 fichier .desktop  $2 nouveau nom
   sed -E "s/^Name(\[fr\])?=.*/Name=$2/; /^Name\[[a-zA-Z_@]+\]=/d" "$src" > "$LA/$1"
 }
 rename_app org.kde.dolphin.desktop "Fichiers"
-rename_app org.kde.discover.desktop "Logithèque"
+# Un seul magasin : Discover = « NexOS Store » (paquets Debian + Flathub)
+rename_app org.kde.discover.desktop "NexOS Store"
 rename_app systemsettings.desktop "Paramètres"
 rename_app org.kde.plasma-systemmonitor.desktop "Moniteur système"
 rename_app org.kde.konsole.desktop "Terminal"
@@ -94,6 +95,12 @@ if [ -f "$R/etc/xdg/autostart/org.kde.discover.notifier.desktop" ]; then
   echo 'Hidden=true' >> "$R/etc/xdg/autostart/org.kde.discover.notifier.desktop"
 fi
 chroot "$R" systemctl --global enable nexos-update-check.timer >/dev/null 2>&1 || true
+# Flathub activé automatiquement à la première connexion Internet (minuteur, une seule fois)
+chroot "$R" systemctl enable nexos-flathub.timer >/dev/null 2>&1 || true
+# Proxy de menu global (barre de menus façon macOS) : non utilisé par la disposition NexOS
+if [ -f "$R/etc/xdg/autostart/gmenudbusmenuproxy.desktop" ]; then
+  echo 'Hidden=true' >> "$R/etc/xdg/autostart/gmenudbusmenuproxy.desktop"
+fi
 # Indexation de fichiers Baloo : désactivée par défaut (catégorie C), activable dans Paramètres → Recherche.
 printf '[Basic Settings]\nIndexing-Enabled=false\n' > "$R/etc/xdg/baloofilerc"
 

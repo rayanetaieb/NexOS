@@ -1,0 +1,10 @@
+[Unit]
+Description=NexOS : activer Flathub dans NexOS Store dès qu'Internet est disponible
+ConditionPathExists=/usr/bin/flatpak
+
+[Service]
+Type=oneshot
+# Déjà fait : rien à faire (code 1 = condition non remplie, pas une erreur).
+ExecCondition=/bin/sh -c '! flatpak remotes --system --columns=name | grep -qx flathub'
+ExecStart=/usr/bin/flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+ExecStartPost=/bin/systemctl disable nexos-flathub.timer

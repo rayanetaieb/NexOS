@@ -1,0 +1,9 @@
+[Unit]
+Description=NexOS : nouvelle tentative d'activation de Flathub (hors ligne au démarrage)
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=30min
+
+[Install]
+WantedBy=timers.target

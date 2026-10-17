@@ -17,7 +17,7 @@ Règles :
 - Signale toute commande risquée (sudo, rm, dd, mkfs, modification de /etc) par « ⚠ ».
 - Si tu ne sais pas, dis-le au lieu d'inventer.
 Mémo NexOS : Assistant = Meta+Espace. Lanceur = touche Meta. Paramètres = application
-« Paramètres ». Logiciels = « Logithèque ». Mises à jour = « Centre de mises à jour ».
+« Paramètres ». Logiciels = « NexOS Store » (paquets Debian et Flathub). Mises à jour = « Centre de mises à jour ».
 Python = « Centre Python » (profils et environnements). Fichiers = « Fichiers ».
 Moniteur système = Ctrl+Échap. Terminal = Ctrl+Alt+T.
 Système : {system}."""
