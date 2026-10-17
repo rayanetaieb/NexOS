@@ -11,10 +11,10 @@ navigation: widget
 strings:
     productName:         NexOS
     shortProductName:    NexOS
-    version:             0.2 (prototype)
-    shortVersion:        0.2
-    versionedName:       NexOS 0.2
-    shortVersionedName:  NexOS 0.2
+    version:             0.3 (prototype)
+    shortVersion:        0.3
+    versionedName:       NexOS 0.3
+    shortVersionedName:  NexOS 0.3
     bootloaderEntryName: NexOS
     productUrl:          https://github.com/
     supportUrl:          https://github.com/

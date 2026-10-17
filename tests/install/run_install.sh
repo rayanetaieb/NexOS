@@ -16,7 +16,10 @@ step "attente de la session live (rapport série)"
 until grep -q NEXOS-REPORT-END "$VMDIR/serial.log" 2>/dev/null; do sleep 10; done
 sleep 90; $V shot 01-live
 step "lancement de l'installateur"
-$V click 59 70; sleep 0.2; $V click 59 70; sleep 120; $V shot 02-bienvenue
+$V click 59 70; sleep 0.2; $V click 59 70
+# Attendre la fenêtre (zone de contenu claire) au lieu d'un délai fixe : sous émulation
+# logicielle, Calamares met de 1 à 5 minutes à s'ouvrir.
+$V waitpix 1000 300 200 255 900; sleep 20; $V shot 02-bienvenue
 $V click $NEXT; sleep 30; $V shot 03-emplacement
 $V click $NEXT; sleep 30; $V shot 04-clavier
 $V click $NEXT; sleep 45; $V shot 05-partitions

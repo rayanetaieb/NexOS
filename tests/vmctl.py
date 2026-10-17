@@ -93,6 +93,18 @@ def shot(name):
     print(out)
 
 
+def waitpix(x, y, lo, hi, timeout=900):
+    """Attend que la luminosité du pixel (x, y) soit dans [lo, hi] (ex. fenêtre claire apparue)."""
+    ppm = D / "wait.ppm"; t0 = time.time()
+    while time.time() - t0 < timeout:
+        qmp("screendump", filename=str(ppm)); time.sleep(0.5)
+        r, g, b = Image.open(ppm).convert("RGB").getpixel((x, y))[:3]
+        if lo <= (r + g + b) // 3 <= hi:
+            print(f"pixel ({x},{y}) = {(r + g + b) // 3} après {int(time.time() - t0)} s"); return True
+        time.sleep(5)
+    raise SystemExit(f"délai dépassé : pixel ({x},{y}) hors [{lo},{hi}]")
+
+
 def keys(k, hold=60):
     qmp("send-key", keys=[{"type": "qcode", "data": x} for x in k], **{"hold-time": hold})
 
@@ -144,6 +156,8 @@ if __name__ == "__main__":
         type_text(rest[0], azerty="--qwerty" not in rest)
     elif c == "click":
         click(int(rest[0]), int(rest[1]))
+    elif c == "waitpix":
+        waitpix(int(rest[0]), int(rest[1]), int(rest[2]), int(rest[3]), int(rest[4]) if len(rest) > 4 else 900)
     elif c == "serial":
         print(SERIAL.read_text(errors="replace")[-3000:] if SERIAL.exists() else "")
     elif c == "quit":
