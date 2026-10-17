@@ -22,14 +22,14 @@ case "$NAME" in
     DM=sddm; SESSION=plasma ;;
   kubuntu)      # métapaquet officiel kubuntu-desktop (Kubuntu 24.04 LTS)
     SUITE=noble; KEYRING=/usr/share/keyrings/ubuntu-archive-keyring.gpg
-    PKGS="kubuntu-desktop,linux-generic,language-pack-fr,language-pack-kde-fr"
+    PKGS="kubuntu-desktop,linux-generic,initramfs-tools,language-pack-fr,language-pack-kde-fr"
     MIRRORS=("deb https://archive.ubuntu.com/ubuntu noble main restricted universe multiverse"
              "deb https://archive.ubuntu.com/ubuntu noble-updates main restricted universe multiverse"
              "deb https://security.ubuntu.com/ubuntu noble-security main restricted universe multiverse")
     DM=sddm; SESSION=plasma ;;   # session par défaut de Kubuntu 24.04 : Plasma 5.27 X11
   ubuntu)       # métapaquet officiel ubuntu-desktop (Ubuntu 24.04 LTS, GNOME)
     SUITE=noble; KEYRING=/usr/share/keyrings/ubuntu-archive-keyring.gpg
-    PKGS="ubuntu-desktop,linux-generic,language-pack-fr,language-pack-gnome-fr"
+    PKGS="ubuntu-desktop,linux-generic,initramfs-tools,language-pack-fr,language-pack-gnome-fr"
     MIRRORS=("deb https://archive.ubuntu.com/ubuntu noble main restricted universe multiverse"
              "deb https://archive.ubuntu.com/ubuntu noble-updates main restricted universe multiverse"
              "deb https://security.ubuntu.com/ubuntu noble-security main restricted universe multiverse")
@@ -45,6 +45,7 @@ mmdebstrap --variant=important --format=directory --keyring="$KEYRING" "${PROXY[
   --customize-hook="if [ $DM = sddm ]; then mkdir -p \"\$1/etc/sddm.conf.d\"; printf '[Autologin]\nUser=test\nSession=$SESSION\n' > \"\$1/etc/sddm.conf.d/zz-autologin.conf\"; else sed -i 's/^#*\s*AutomaticLoginEnable.*/AutomaticLoginEnable = true/; s/^#*\s*AutomaticLogin\s*=.*/AutomaticLogin = test/' \"\$1/etc/gdm3/custom.conf\"; fi" \
   --customize-hook="printf '/dev/vda / ext4 defaults 0 1\n' > \"\$1/etc/fstab\"; chroot \"\$1\" systemctl set-default graphical.target" \
   --customize-hook="chroot \"\$1\" dpkg-query -W -f='\${Package} \${Version}\n' > '$OUT/packages.txt'" \
+  --customize-hook="ls \"\$1\"/boot/initrd.img-* >/dev/null 2>&1 || chroot \"\$1\" update-initramfs -c -k all" \
   --customize-hook="chroot \"\$1\" apt-get clean" \
   "$SUITE" "$ROOT" "${MIRRORS[@]}"
 cp "$(ls -1 "$ROOT"/boot/vmlinuz-* | sort -V | tail -1)" "$OUT/vmlinuz"
