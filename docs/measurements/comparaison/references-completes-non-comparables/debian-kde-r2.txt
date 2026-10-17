@@ -1,0 +1,61 @@
+accel=tcg cpu=Nehalem ram_mib=4096 image=debian-kde.img
+bureau_affiche_apres_rapport_s=204
+NEXOS-REPORT-BEGIN
+os=Debian GNU/Linux 13 (trixie)
+kernel=6.12.113+deb13-amd64
+state=running
+failed_units=0
+failed_list=
+boot_time: Startup finished in 19.929s (kernel) + 3min 627ms (userspace) = 3min 20.557s 
+desktop_plasmashell=running
+desktop_session_type=wayland
+desktop_ready_uptime_s=316
+desktop_kwin=running
+desktop_plasmashell_rss_kib=163976
+mem_used_kib=758448 mem_total_kib=4015408
+processes=173
+python=Python 3.13.5
+NEXOS-BOOT-OK
+NEXOS-REPORT-END
+NEXOS-MEM-BEGIN seq=3
+uptime_s=609
+MemTotal=4015408
+MemFree=1291124
+MemAvailable=2242404
+Buffers=32232
+Cached=1163120
+SwapTotal=0
+SwapFree=0
+AnonPages=1322472
+Shmem=56768
+used_kib=1772748
+processes=176
+blame_top10:
+  2min 6.718s apparmor.service
+  24.032s dev-vda.device
+  21.776s ldconfig.service
+  14.922s exim4.service
+  9.578s systemd-udev-trigger.service
+  8.061s NetworkManager.service
+  7.824s accounts-daemon.service
+  7.481s udisks2.service
+  7.470s networking.service
+  6.579s polkit.service
+top_rss_kib:
+  plasmashell 470708
+  kscreenlocker_g 347704
+  plasma-welcome 341328
+  kwin_wayland 294064
+  kalendarac 183208
+  kdeconnectd 179128
+  polkit-kde-auth 170580
+  xdg-desktop-por 168824
+  kded6 158112
+  xwaylandvideobr 152840
+  kaccess 142996
+  ksmserver 142184
+  DiscoverNotifie 133696
+  Xwayland 85972
+  org_kde_powerde 57120
+NEXOS-MEM-END
+serie_used_mib_par_minute=1035,1450,1731,1812,1840

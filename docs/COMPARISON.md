@@ -64,8 +64,29 @@ repose.** Il utilise environ 115 Mio de plus au repos et démarre environ 19 s p
 | Notificateur Discover résident remplacé par un minuteur quotidien | processus de ≈140 Mo absent de la liste au repos |
 | Indexation de fichiers (Baloo) désactivée par défaut | aucun indexeur au repos |
 
-## Kubuntu 24.04 et Ubuntu 24.04
-Mesures en cours avec le banc validé — section complétée quand elles sont terminées.
+## Kubuntu 24.04 et Ubuntu 24.04 (références minimales)
+
+| Médiane de 3 mesures (min–max) | NexOS 0.3 | Debian 13 KDE | Kubuntu 24.04 | Ubuntu 24.04 |
+|---|---|---|---|---|
+| Bureau | Plasma 6, Wayland | Plasma 6, Wayland | Plasma 5.27, X11 | GNOME 46, Wayland |
+| Mémoire au repos | 1 074 (1 070–1 089) Mio | 964 (956–968) Mio | 758 (743–767) Mio | 649 (638–650) Mio |
+| Démarrage, partie système | 57 (54–57) s | 37 (33–40) s | 56 (55–59) s | 48 (44–50) s |
+
+Graphiques générés à partir des fichiers bruts : `tools/make_comparison_charts.py` → `docs/assets/`.
+
+**Important : ces trois références ont été construites SANS leurs paquets recommandés** (mmdebstrap ne les
+installe pas par défaut). Exemple : la référence Kubuntu n'avait même pas le gestionnaire de fichiers.
+Elles sont donc plus légères qu'une installation réelle (pas de notificateur de mises à jour, de
+KDE Connect, d'application de bienvenue, de serveur de courrier…). Les listes de paquets sont jointes.
+
+### Tentative avec installations complètes (paquets recommandés) — non comparable
+`references-completes-non-comparables/` : Debian 13 KDE complète (2 142 paquets) et Kubuntu complète
+(1 988 paquets) mesurées 3 fois. **Résultats écartés** : sur ces systèmes plus lents à s'afficher, la
+mesure est tombée après la mise en veille de l'écran et le verrouillage automatique (captures « Display
+output is not active »), avec en plus l'application de bienvenue du premier démarrage et la compilation
+initiale des profils AppArmor (2 min). À refaire au **deuxième** démarrage avec la veille désactivée
+pour tous les systèmes. Noter aussi : l'image NexOS 0.3 ne contient **pas AppArmor** (oubli à corriger),
+ce qui l'avantage au démarrage par rapport à ces installations complètes.
 
 ## Windows, Fedora
 **Non mesurés.** Téléchargement des images impossible depuis l'environnement de construction ; Windows 11

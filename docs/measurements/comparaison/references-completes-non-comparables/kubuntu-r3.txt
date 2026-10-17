@@ -1,0 +1,61 @@
+accel=tcg cpu=Nehalem ram_mib=4096 image=kubuntu.img
+bureau_affiche_apres_rapport_s=188
+NEXOS-REPORT-BEGIN
+os=Ubuntu 24.04.5 LTS
+kernel=6.8.0-147-generic
+state=running
+failed_units=0
+failed_list=
+boot_time: Startup finished in 20.604s (kernel) + 3min 10.048s (userspace) = 3min 30.653s 
+desktop_plasmashell=running
+desktop_session_type=x11
+desktop_ready_uptime_s=345
+desktop_kwin=ABSENT
+desktop_plasmashell_rss_kib=128800
+mem_used_kib=610492 mem_total_kib=4009156
+processes=161
+python=Python 3.12.3
+NEXOS-BOOT-OK
+NEXOS-REPORT-END
+NEXOS-MEM-BEGIN seq=3
+uptime_s=623
+MemTotal=4009156
+MemFree=2619296
+MemAvailable=3055148
+Buffers=34428
+Cached=620128
+SwapTotal=0
+SwapFree=0
+AnonPages=569060
+Shmem=27624
+used_kib=955628
+processes=175
+blame_top10:
+  1min 31.984s apparmor.service
+  1min 9.342s snapd.seeded.service
+  38.611s systemd-udev-settle.service
+  34.896s dev-vda.device
+  32.636s NetworkManager.service
+  31.469s snapd.service
+  27.035s apport.service
+  23.379s accounts-daemon.service
+  21.240s ldconfig.service
+  20.979s power-profiles-daemon.service
+top_rss_kib:
+  plasmashell 323512
+  kwin_x11 204884
+  plasma-welcome 202528
+  plasma-discover 187192
+  kded5 152932
+  kdeconnectd 129112
+  DiscoverNotifie 126372
+  kaccess 116476
+  ksmserver 115908
+  Xorg 115580
+  startplasma-x11 43436
+  kactivitymanage 36072
+  kglobalaccel5 27296
+  gmenudbusmenupr 25188
+  xembedsniproxy 24232
+NEXOS-MEM-END
+serie_used_mib_par_minute=638,787,933,950,960
