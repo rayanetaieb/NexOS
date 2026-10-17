@@ -4,7 +4,7 @@
 set -uo pipefail
 IMG=$1 KERNEL=$2 INITRD=$3 D=$4 DUR=${5:-900}
 mkdir -p "$D"; SOCK="$D/qmp.sock"; rm -f "$SOCK"
-qemu-system-x86_64 -machine q35,accel=tcg -cpu max -smp 4 -m 4096 \
+qemu-system-x86_64 -machine q35,accel=tcg -cpu "${CPU:-max}" -smp 4 -m 4096 \
   -drive file="$IMG",format=raw,if=virtio,snapshot=on -kernel "$KERNEL" -initrd "$INITRD" \
   -append "root=/dev/vda rw console=ttyS0 quiet" -vga virtio -display none -serial file:"$D/serial.log" \
   -nic user,model=virtio-net-pci -qmp unix:"$SOCK",server=on,wait=off &
