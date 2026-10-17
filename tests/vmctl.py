@@ -98,7 +98,10 @@ def waitpix(x, y, lo, hi, timeout=900):
     ppm = D / "wait.ppm"; t0 = time.time()
     while time.time() - t0 < timeout:
         qmp("screendump", filename=str(ppm)); time.sleep(0.5)
-        r, g, b = Image.open(ppm).convert("RGB").getpixel((x, y))[:3]
+        im = Image.open(ppm).convert("RGB")
+        if x >= im.width or y >= im.height:     # résolution de démarrage (GRUB, console) : pas encore le bureau
+            time.sleep(5); continue
+        r, g, b = im.getpixel((x, y))[:3]
         if lo <= (r + g + b) // 3 <= hi:
             print(f"pixel ({x},{y}) = {(r + g + b) // 3} après {int(time.time() - t0)} s"); return True
         time.sleep(5)
