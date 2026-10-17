@@ -8,10 +8,10 @@ marqués « vérifié » ont été exécutés ; les autres sont décrits mais pa
 | Élément | Réglage | État |
 |---|---|---|
 | Système de fichiers | Btrfs, sous-volumes `@` (/), `@home`, `@snapshots` (/.snapshots), `@log` (/var/log), compression zstd | vérifié (installation UEFI, v0.2) |
-| Snapper | configuration `root` créée par `nexos-cleanup` ; 10 instantanés « number » au plus (5 importants), 30 % d'espace au plus | ajouté en 0.3, à vérifier en VM |
-| Instantanés automatiques | **avant et après chaque opération APT** (crochet `80snapper` du paquet Debian) ; un instantané « Installation de NexOS » | ajouté en 0.3 |
+| Snapper | configuration `root` créée par `nexos-cleanup` ; 10 instantanés « number » au plus (5 importants), 30 % d'espace au plus | **vérifié** (installation 0.3, UEFI, 17/10/2026) : instantané n° 1 « Installation de NexOS » présent |
+| Instantanés automatiques | **avant et après chaque opération APT** (crochet `80snapper` du paquet Debian) ; un instantané « Installation de NexOS » | **vérifié** : `apt-get remove kmag` → instantanés 2 (pre) et 3 (post) |
 | Instantanés horaires / à chaque démarrage | **désactivés** (`snapper-timeline.timer`, `snapper-boot.timer`) : coût disque et E/S sans bénéfice pour un poste de travail | contrôlé par `build/check-autostart.sh` |
-| Nettoyage | `snapper-cleanup.timer` (1×/jour) | |
+| Nettoyage | `snapper-cleanup.timer` (1×/jour) | vérifié : activé ; timeline et boot désactivés |
 | Menu GRUB | entrée « mode de récupération » conservée (`GRUB_DISABLE_RECOVERY=false`), délai 3 s | |
 
 `/home` est un sous-volume séparé : **un retour arrière du système ne touche jamais aux documents**.
@@ -26,6 +26,11 @@ marqués « vérifié » ont été exécutés ; les autres sont décrits mais pa
    puis exécute `snapper -c root undochange N..0` : les fichiers système modifiés depuis N
    reprennent leur état d'alors.
 4. Redémarrer.
+
+**Vérifié le 17/10/2026 sur le système installé** : après `apt-get remove kmag`, `snapper undochange 2..3`
+a recréé 159 fichiers et restauré la base dpkg (`dpkg -s kmag` → « install ok installed », `/usr/bin/kmag` présent).
+Captures : `docs/screenshots/v0.3-install/chk7.png`, `chk8.png`. Le bouton du Control Center appelle la même commande ;
+le bouton lui-même n'a pas été cliqué dans ce test.
 
 ### En ligne de commande (équivalent)
 ```bash

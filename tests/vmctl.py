@@ -105,7 +105,7 @@ def waitpix(x, y, lo, hi, timeout=900):
     raise SystemExit(f"délai dépassé : pixel ({x},{y}) hors [{lo},{hi}]")
 
 
-def keys(k, hold=60):
+def keys(k, hold=int(os.environ.get("VMCTL_HOLD", "60"))):  # VMCTL_HOLD=10 : évite la répétition auto en émulation lente
     qmp("send-key", keys=[{"type": "qcode", "data": x} for x in k], **{"hold-time": hold})
 
 
