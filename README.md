@@ -109,4 +109,4 @@ NexOS is a **prototype**. What is verified, and what is not yet:
 [Hardware](docs/HARDWARE.md) · [AI assistant](docs/AI_ASSISTANT.md) · [Python Center](docs/PYTHON_CENTER.md) ·
 [Desktop](docs/DESKTOP.md) · [Recovery](docs/RECOVERY.md)
 
-<sub>NexOS is built on Debian, KDE Plasma and many other free-software projects; each keeps its own license (see docs/DEPENDENCIES.md).</sub>
+<sub>NexOS code is licensed under **GPL-3.0-or-later** ([LICENSE](LICENSE)). It is built on Debian, KDE Plasma and many other free-software projects; each keeps its own license ([NOTICE](NOTICE.md)).</sub>
