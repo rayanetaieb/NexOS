@@ -50,8 +50,8 @@ def screenshot(sock: Path, png: Path) -> float:
     time.sleep(0.5)
     im = Image.open(ppm).convert("RGB")
     small = im.resize((160, 100))
-    px = list(small.getdata())
-    frac = sum(1 for p in px if max(p) > 8) / len(px)
+    raw = small.tobytes()
+    frac = sum(1 for i in range(0, len(raw), 3) if max(raw[i:i + 3]) > 8) / (len(raw) // 3)
     im.resize((960, int(960 * im.height / im.width))).save(png)
     ppm.unlink(missing_ok=True)
     return frac
@@ -96,9 +96,10 @@ def main() -> int:
                     visible_at = time.time()
             if visible_at is not None:
                 late = [b for (ta, b) in blocks_seen if ta - visible_at >= SETTLE_S]
-                if late:
+                if late and chosen is None:
                     chosen = late[0]
                     screenshot(sock, out.with_name(out.stem + "-preuve.png"))
+                if len(late) >= 3:      # deux blocs de plus : montre si la mémoire est stabilisée
                     break
             if len(blocks_seen) >= 8:
                 break
@@ -108,6 +109,8 @@ def main() -> int:
     if visible_at is not None:
         lines.append(f"bureau_affiche_apres_rapport_s={int(visible_at - t_report)}")
     lines += [report, chosen or "MESURE-INVALIDE : bureau jamais affiché ou aucun bloc 90 s après l'affichage"]
+    serie = [int(re.search(r"^used_kib=(\d+)", b, re.M).group(1)) // 1024 for _, b in blocks_seen]
+    lines.append("serie_used_mib_par_minute=" + ",".join(map(str, serie)))
     out.write_text("\n".join(lines) + "\n")
     print(out.read_text())
     return 0 if chosen else 1
