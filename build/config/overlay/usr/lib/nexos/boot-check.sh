@@ -54,6 +54,10 @@ settle_s=90
 $(awk '/^(MemTotal|MemFree|MemAvailable|Buffers|Cached|Shmem|AnonPages|SwapTotal|SwapFree):/ {printf "%s=%s\n", $1, $2}' /proc/meminfo | tr -d ':')
 used_kib=$(awk '/^MemTotal:/{t=$2} /^MemAvailable:/{a=$2} END{print t-a}' /proc/meminfo)
 processes=$(ps -e --no-headers | wc -l)
+blame_top10:
+$(systemd-analyze blame 2>/dev/null | head -10 | sed 's/^ */  /')
+critical_chain:
+$(systemd-analyze critical-chain graphical.target 2>/dev/null | tail -n +3 | head -12 | sed 's/^/  /')
 top_rss_kib:
 $(ps -eo rss=,comm= --sort=-rss | head -15 | awk '{printf "  %s %s\n", $2, $1}')
 NEXOS-MEM-END

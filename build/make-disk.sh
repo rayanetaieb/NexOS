@@ -7,6 +7,8 @@ SIZE="${SIZE:-2G}"
 work="$OUT/rootfs-dir"
 rm -rf "$work" && mkdir -p "$work"
 tar -C "$work" -xf "$OUT/rootfs.tar"
+# Disque de build limité : DROP_TAR=1 supprime l'archive une fois extraite.
+[ "${DROP_TAR:-0}" = 1 ] && rm -f "$OUT/rootfs.tar"
 cp "$(ls -1 "$work"/boot/vmlinuz-* | sort -V | tail -1)"  "$OUT/vmlinuz"
 cp "$(ls -1 "$work"/boot/initrd.img-* | sort -V | tail -1)" "$OUT/initrd.img"
 rm -f "$OUT/nexos.img"
