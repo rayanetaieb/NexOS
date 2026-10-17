@@ -164,7 +164,7 @@ class Network(Page):
         row.addWidget(o); row.addStretch(); self.lay.addLayout(row)
     def refresh(self):
         fill(self.t, [ln.split(":") for ln in probe.network()])
-        self.fw.setText(f"Pare-feu (firewalld) : {probe.firewall_state()}")
+        self.fw.setText(f"Pare-feu (ufw) : {probe.firewall_state()}")
 
 
 class Updates(Page):

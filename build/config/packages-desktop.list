@@ -47,7 +47,9 @@ udisks2
 upower
 power-profiles-daemon
 # Sécurité et système
-firewalld
+# Pare-feu ufw : règles nftables chargées au démarrage par un script, AUCUN démon résident
+# (firewalld, mesuré : 19,6 s sur le chemin critique du démarrage + 46 Mo de RAM en permanence)
+ufw
 plasma-firewall
 systemd-oomd
 zram-tools

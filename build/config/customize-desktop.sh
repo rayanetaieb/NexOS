@@ -77,6 +77,10 @@ rename_app systemsettings.desktop "Paramètres"
 rename_app org.kde.plasma-systemmonitor.desktop "Moniteur système"
 rename_app org.kde.konsole.desktop "Terminal"
 
+# --- Pare-feu : ufw activé, entrant refusé / sortant autorisé (politique par défaut d'ufw) ---
+sed -i 's/^ENABLED=.*/ENABLED=yes/' "$R/etc/ufw/ufw.conf"
+chroot "$R" systemctl enable ufw.service >/dev/null 2>&1
+
 # --- Démarrage léger (vérifié par build/check-autostart.sh) ---
 # Attente réseau inutile pour un poste de travail ; instantanés horaires/à chaque démarrage
 # remplacés par les instantanés APT avant/après et les instantanés manuels.

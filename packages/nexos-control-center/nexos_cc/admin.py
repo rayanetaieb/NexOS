@@ -72,7 +72,7 @@ def main(argv: list[str]) -> int:
     if action == "snapshot-list":
         return run(["snapper", "-c", "root", "list"])
     if action in ("firewall-on", "firewall-off"):
-        return run(["systemctl", "enable" if action == "firewall-on" else "disable", "--now", "firewalld.service"])
+        return run(["ufw", "--force", "enable" if action == "firewall-on" else "disable"])
     if action == "flathub-enable":
         return run(["flatpak", "remote-add", "--if-not-exists", "flathub",
                     "https://dl.flathub.org/repo/flathub.flatpakrepo"])

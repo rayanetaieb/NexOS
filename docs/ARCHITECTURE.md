@@ -41,7 +41,7 @@ outils NexOS et la qualité mesurée.
 ├────────────────────────────────────────────────────────────────────┤
 │ Apps : APT (dépôt NexOS signé + Debian) · Flatpak (isolées)        │
 ├────────────────────────────────────────────────────────────────────┤
-│ Services : systemd, NetworkManager, PipeWire, BlueZ, firewalld,    │
+│ Services : systemd, NetworkManager, PipeWire, BlueZ, ufw,    │
 │ AppArmor, snapper (instantanés Btrfs), fwupd                       │
 ├────────────────────────────────────────────────────────────────────┤
 │ Système de fichiers : Btrfs (sous-volumes @, @home, @snapshots)    │
@@ -100,7 +100,7 @@ pour la cible « PC modestes », une édition NexOS Lite (LXQt 2) sera maintenue
 4. Image ISO = support de récupération (mode live + outils).
 
 ### 3.7 Sécurité et isolation
-AppArmor (actif par défaut Debian), firewalld + module graphique (entrant
+AppArmor (actif par défaut Debian), ufw + module graphique (entrant
 refusé par défaut), Flatpak/bubblewrap pour les applis, `sudo` avec mot de
 passe, comptes non-root, Secure Boot via shim, mises à jour signées, journaux
 `journald` consultables graphiquement. Pas de télémétrie. SBOM et inventaire

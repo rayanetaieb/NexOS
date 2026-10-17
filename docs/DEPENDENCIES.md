@@ -14,7 +14,7 @@ Licences à confirmer par l'inventaire automatique (SBOM) avant toute redistribu
 | Paquets | APT/dpkg + dépôt NexOS (aptly), Flatpak | GPL / LGPL | logiciels |
 | Bureau | KDE Plasma 6 (Wayland), Dolphin, Discover, KRunner, Konsole | GPL/LGPL | interface |
 | Réseau / son / BT | NetworkManager, PipeWire, BlueZ | GPL/MIT/LGPL | matériel |
-| Sécurité | AppArmor, firewalld, bubblewrap, polkit | GPL/LGPL | isolation |
+| Sécurité | AppArmor, ufw, bubblewrap, polkit | GPL/LGPL | isolation |
 | Firmware | firmware-linux-nonfree, fwupd | variées (non libres) | Wi-Fi, GPU |
 | Installateur | Calamares | GPL-3.0 | installation |
 | Build ISO | live-build (phase 6), mmdebstrap (prototype) | GPL | images |

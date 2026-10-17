@@ -165,8 +165,13 @@ def bluetooth() -> str:
 
 # ------------------------------------------------------------------ sécurité
 def firewall_state() -> str:
-    out = sh(["systemctl", "is-active", "firewalld"]).strip()
-    return out or "inconnu"
+    """État d'ufw lisible sans droits : ufw.conf (ENABLED) + service de chargement des règles."""
+    conf = Path("/etc/ufw/ufw.conf")
+    if not conf.exists():
+        return "ufw absent"
+    enabled = any(ln.strip() == "ENABLED=yes" for ln in conf.read_text().splitlines())
+    active = sh(["systemctl", "is-active", "ufw"]).strip() == "active"
+    return "actif (entrant bloqué par défaut)" if enabled and active else ("activé, non chargé" if enabled else "désactivé")
 
 
 def apparmor_enabled() -> bool:
