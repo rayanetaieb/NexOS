@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Thème GRUB NexOS : fond (Flux sombre assombri + logo), pièces de sélection, theme.txt.
+"""Thème GRUB NexOS (positions en % : le fond est mis à l'échelle, le texte doit suivre) : fond (Flux sombre assombri + logo), pièces de sélection, theme.txt.
 Les polices .pf2 sont générées dans l'image par grub-mkfont (customize-desktop.sh).
 Usage : make_grub_theme.py <flux-dark-1920x1080.png> <logo-blanc-256.png> <dossier_sortie>"""
 import sys
@@ -26,11 +26,11 @@ terminal-font: "Noto Sans Regular 16"
 terminal-box: "select_*.png"
 
 + label {
-    left = 270  top = 162  width = 600  height = 70
+    left = 14%  top = 15%  width = 40%  height = 70
     text = "NexOS"  color = "#E8EEF8"  font = "Noto Sans Bold 48"
 }
 + boot_menu {
-    left = 150  top = 330  width = 900  height = 520
+    left = 7%  top = 30%  width = 47%  height = 50%
     item_font = "Noto Sans Regular 20"
     selected_item_font = "Noto Sans Bold 20"
     item_color = "#8A9BB8"  selected_item_color = "#FFFFFF"
@@ -41,7 +41,7 @@ terminal-box: "select_*.png"
 }
 + label {
     id = "__timeout__"
-    left = 150  top = 940  width = 900  height = 30
+    left = 7%  top = 88%  width = 80%  height = 30
     text = "Démarrage automatique dans %d s — flèches pour choisir, Entrée pour démarrer"
     color = "#8A9BB8"  font = "Noto Sans Regular 16"
 }
