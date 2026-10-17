@@ -102,7 +102,7 @@ NexOS est un **prototype**. Ce qui est vérifié, et ce qui ne l'est pas encore 
 
 - **Construire l'ISO** : [docs/INSTALL.md](docs/INSTALL.md) (Debian/Ubuntu, `mmdebstrap`, ~30 min).
 - **Dans une machine virtuelle** : EFI activé, Secure Boot désactivé, 4 Go de RAM, 2 processeurs ou plus.
-  Testé avec QEMU/virt-manager et VirtualBox.
+  Fonctionne avec QEMU/virt-manager (nos tests) et VirtualBox (retour utilisateur).
 - **Récupération en cas de problème** : [docs/RECOVERY.md](docs/RECOVERY.md).
 
 ## Documentation
