@@ -45,6 +45,9 @@ R
 )
 sleep 2
 printf '\n%s\n' "$report" > /dev/ttyS0
+# Démarrage de « préchauffage » du banc (nexos.warmup=1) : laisser les tâches du premier démarrage
+# se terminer, puis éteindre ; la mesure se fait au démarrage suivant, comme au quotidien.
+if grep -q 'nexos.warmup=1' /proc/cmdline; then sleep 90; systemctl poweroff; exit 0; fi
 # Mesures mémoire « au repos » : un bloc par minute pendant 8 minutes après le rapport.
 # Le banc de mesure (tests/perf/measure_idle.sh) retient le premier bloc émis au moins 90 s
 # après que le bureau est VISIBLEMENT affiché (capture d'écran), pas seulement lancé.

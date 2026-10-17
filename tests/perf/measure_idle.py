@@ -11,7 +11,10 @@ Protocole (docs/COMPARISON.md) :
     d'écran prise à ce moment comme preuve.
 Mémoire utilisée = MemTotal − MemAvailable (même définition que « free » et que le script Windows).
 
-Usage : measure_idle.py <disque.img> <vmlinuz> <initrd> <sortie.txt> [RAM_Mio=4096]
+Usage : measure_idle.py <disque.img> <vmlinuz> <initrd> <sortie.txt> [RAM_Mio=4096] [--chaud]
+ --chaud : mesure au DEUXIÈME démarrage (comme au quotidien) : un premier démarrage sur une copie
+           du disque (nexos.warmup=1) laisse se terminer les tâches uniques (cache AppArmor, ldconfig,
+           application de bienvenue…), puis la mesure se fait sur cette copie.
 Processeur virtuel : Nehalem (variable CPU) — avec « max », llvmpipe plante sous émulation TCG.
 """
 from __future__ import annotations
@@ -58,13 +61,28 @@ def screenshot(sock: Path, png: Path) -> float:
 
 
 def main() -> int:
-    img, kernel, initrd, out = sys.argv[1:5]
-    ram = sys.argv[5] if len(sys.argv) > 5 else "4096"
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    warm = "--chaud" in sys.argv
+    img, kernel, initrd, out = args[:4]
+    ram = args[4] if len(args) > 4 else "4096"
     out = Path(out)
     serial, sock = out.with_suffix(".serial"), out.with_suffix(".qmp")
     serial.write_text(""); sock.unlink(missing_ok=True)
     accel = "kvm" if os.access("/dev/kvm", os.W_OK) else "tcg"
     cpu = os.environ.get("CPU", "Nehalem")
+    if warm:
+        copy = out.with_suffix(".chaud.img")
+        subprocess.run(["cp", "--sparse=always", img, str(copy)], check=True)
+        w = subprocess.run(["timeout", "3600", "qemu-system-x86_64", "-machine", f"q35,accel={accel}", "-cpu", cpu,
+                            "-smp", "4", "-m", ram, "-drive", f"file={copy},format=raw,if=virtio",
+                            "-kernel", kernel, "-initrd", initrd,
+                            "-append", "root=/dev/vda rw console=ttyS0 quiet nexos.warmup=1",
+                            "-vga", "virtio", "-display", "none", "-serial", f"file:{out.with_suffix('.chauffe')}",
+                            "-nic", "user,model=virtio-net-pci", "-no-reboot"],
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+        if w.returncode != 0:
+            print("préchauffage interrompu, code", w.returncode)
+        img = str(copy)
     q = subprocess.Popen(["qemu-system-x86_64", "-machine", f"q35,accel={accel}", "-cpu", cpu, "-smp", "4", "-m", ram,
                           "-drive", f"file={img},format=raw,if=virtio,snapshot=on",
                           "-kernel", kernel, "-initrd", initrd,
@@ -105,7 +123,9 @@ def main() -> int:
                 break
     finally:
         q.kill(); q.wait()
-    lines = [f"accel={accel} cpu={cpu} ram_mib={ram} image={Path(img).name}"]
+        if warm:
+            Path(img).unlink(missing_ok=True)
+    lines = [f"accel={accel} cpu={cpu} ram_mib={ram} image={Path(args[0]).name} demarrage={'deuxieme (chaud)' if warm else 'premier'}"]
     if visible_at is not None:
         lines.append(f"bureau_affiche_apres_rapport_s={int(visible_at - t_report)}")
     lines += [report, chosen or "MESURE-INVALIDE : bureau jamais affiché ou aucun bloc 90 s après l'affichage"]

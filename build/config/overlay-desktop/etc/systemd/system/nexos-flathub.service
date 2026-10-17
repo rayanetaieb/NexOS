@@ -6,5 +6,5 @@ ConditionPathExists=/usr/bin/flatpak
 Type=oneshot
 # Déjà fait : rien à faire (code 1 = condition non remplie, pas une erreur).
 ExecCondition=/bin/sh -c '! flatpak remotes --system --columns=name | grep -qx flathub'
-ExecStart=/usr/bin/flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-ExecStartPost=/bin/systemctl disable nexos-flathub.timer
+# Hors ligne : on réessaiera au prochain passage du minuteur (pas une panne, code 0).
+ExecStart=/bin/sh -c 'if flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo; then systemctl disable nexos-flathub.timer; else echo "Flathub injoignable, nouvelle tentative plus tard"; fi'
