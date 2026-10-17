@@ -3,11 +3,13 @@
 # Usage : tests/perf/measure_idle.sh <disque.img> <vmlinuz> <initrd> <sortie.txt> [RAM_MiB=4096]
 # Démarrage direct du noyau, session ouverte automatiquement, aucune action pendant la mesure.
 # KVM utilisé s'il est disponible, sinon émulation TCG (temps de démarrage NON représentatifs).
+# Processeur virtuel Nehalem par défaut : avec « -cpu max », le pilote graphique logiciel (llvmpipe)
+# génère des instructions AVX mal émulées par TCG et plante (mesuré le 17/10/2026, voir docs/COMPARISON.md).
 set -euo pipefail
 IMG=$1 KERNEL=$2 INITRD=$3 OUT=$4 RAM=${5:-4096}
 ACCEL=tcg; [ -w /dev/kvm ] && ACCEL=kvm
 LOG="$OUT.serial"; : > "$LOG"; SOCK="$OUT.qmp"; rm -f "$SOCK"
-qemu-system-x86_64 -machine q35,accel=$ACCEL -cpu max -smp 4 -m "$RAM" \
+qemu-system-x86_64 -machine q35,accel=$ACCEL -cpu "${CPU:-Nehalem}" -smp 4 -m "$RAM" \
   -drive file="$IMG",format=raw,if=virtio,snapshot=on \
   -kernel "$KERNEL" -initrd "$INITRD" -append "root=/dev/vda rw console=ttyS0 quiet nexos.autotest=1" \
   -vga virtio -display none -serial file:"$LOG" -nic user,model=virtio-net-pci -no-reboot -qmp unix:"$SOCK",server=on,wait=off &
