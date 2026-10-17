@@ -75,6 +75,8 @@ mmdebstrap \
   "${hooks[@]}" \
   --customize-hook='chroot "$1" apt-get clean' \
   --customize-hook='rm -f "$1/etc/apt/apt.conf.d/99mmdebstrap"' \
+  --customize-hook='if [ -x "$1/usr/bin/setupcon" ]; then chroot "$1" setupcon --save-only 2>/dev/null || true; fi' \
+  --customize-hook='chroot "$1" ldconfig; touch "$1/etc/.updated" "$1/var/.updated"' \
   "$SUITE" "$ROOTFS" "$MIRROR"
 
 echo ">> rootfs : $ROOTFS ($(du -h "$ROOTFS" | cut -f1))"
