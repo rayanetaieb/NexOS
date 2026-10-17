@@ -45,24 +45,26 @@ R
 )
 sleep 2
 printf '\n%s\n' "$report" > /dev/ttyS0
-# Mesure mémoire « au repos » : 90 s après le premier rapport, sans aucune action.
+# Mesures mémoire « au repos » : un bloc par minute pendant 8 minutes après le rapport.
+# Le banc de mesure (tests/perf/measure_idle.sh) retient le premier bloc émis au moins 90 s
+# après que le bureau est VISIBLEMENT affiché (capture d'écran), pas seulement lancé.
 if [ -n "$desktop" ]; then
-  sleep 90
-  mem=$(cat <<M
-NEXOS-MEM-BEGIN
-settle_s=90
+  for seq in 1 2 3 4 5 6 7 8; do
+    sleep 60
+    mem=$(cat <<M
+NEXOS-MEM-BEGIN seq=$seq
+uptime_s=$(cut -d. -f1 /proc/uptime)
 $(awk '/^(MemTotal|MemFree|MemAvailable|Buffers|Cached|Shmem|AnonPages|SwapTotal|SwapFree):/ {printf "%s=%s\n", $1, $2}' /proc/meminfo | tr -d ':')
 used_kib=$(awk '/^MemTotal:/{t=$2} /^MemAvailable:/{a=$2} END{print t-a}' /proc/meminfo)
 processes=$(ps -e --no-headers | wc -l)
 blame_top10:
 $(systemd-analyze blame 2>/dev/null | head -10 | sed 's/^ */  /')
-critical_chain:
-$(systemd-analyze critical-chain graphical.target 2>/dev/null | tail -n +3 | head -12 | sed 's/^/  /')
 top_rss_kib:
 $(ps -eo rss=,comm= --sort=-rss | head -15 | awk '{printf "  %s %s\n", $2, $1}')
 NEXOS-MEM-END
 M
 )
-  printf '\n%s\n' "$mem" > /dev/ttyS0
+    printf '\n%s\n' "$mem" > /dev/ttyS0
+  done
 fi
 if grep -q 'nexos.autotest=1' /proc/cmdline; then systemctl --no-block poweroff; fi
