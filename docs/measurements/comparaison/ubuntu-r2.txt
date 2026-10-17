@@ -1,0 +1,61 @@
+accel=tcg cpu=Nehalem ram_mib=4096 image=ubuntu.img
+bureau_affiche_apres_rapport_s=110
+NEXOS-REPORT-BEGIN
+os=Ubuntu 24.04.5 LTS
+kernel=6.8.0-147-generic
+state=running
+failed_units=0
+failed_list=
+boot_time: Startup finished in 15.992s (kernel) + 50.467s (userspace) = 1min 6.460s 
+desktop_plasmashell=running
+desktop_session_type=wayland
+desktop_ready_uptime_s=120
+desktop_kwin=ABSENT
+desktop_plasmashell_rss_kib=169100
+mem_used_kib=440600 mem_total_kib=4009156
+processes=144
+python=Python 3.12.3
+NEXOS-BOOT-OK
+NEXOS-REPORT-END
+NEXOS-MEM-BEGIN seq=3
+uptime_s=350
+MemTotal=4009156
+MemFree=3132584
+MemAvailable=3343632
+Buffers=13316
+Cached=413460
+SwapTotal=0
+SwapFree=0
+AnonPages=307840
+Shmem=17332
+used_kib=665524
+processes=167
+blame_top10:
+  28.888s dev-vda.device
+  15.258s accounts-daemon.service
+  13.501s gpu-manager.service
+  13.253s udisks2.service
+  10.597s systemd-udev-trigger.service
+  9.012s rsyslog.service
+  8.994s ldconfig.service
+  6.722s systemd-logind.service
+  6.559s gdm.service
+  6.007s keyboard-setup.service
+top_rss_kib:
+  gnome-shell 301844
+  xdg-desktop-por 37264
+  tracker-miner-f 36648
+  gjs 27024
+  gjs 26620
+  gjs 25792
+  gsd-media-keys 24140
+  update-notifier 23240
+  gsd-power 23092
+  xdg-desktop-por 21824
+  packagekitd 20832
+  gsd-color 19296
+  gsd-wacom 19096
+  gsd-keyboard 18168
+  gnome-session-b 17812
+NEXOS-MEM-END
+serie_used_mib_par_minute=577,648,649,656,651

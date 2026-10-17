@@ -37,7 +37,9 @@ case "$NAME" in
   *) echo "inconnu : $NAME"; exit 2 ;;
 esac
 OV="$REPO/build/config/overlay"
-mmdebstrap --variant=important --format=directory --keyring="$KEYRING" "${PROXY[@]}" \
+# Recommends installés, comme une installation réelle (apt et les installateurs les installent ;
+# mmdebstrap ne le fait pas par défaut — sans cela, la référence serait artificiellement allégée).
+mmdebstrap --variant=important --format=directory --aptopt='APT::Install-Recommends "true"' --keyring="$KEYRING" "${PROXY[@]}" \
   --include="$PKGS" \
   --customize-hook="echo test-vm > \"\$1/etc/hostname\"" \
   --customize-hook="chroot \"\$1\" useradd -m -s /bin/bash -G sudo,audio,video test && echo test:test | chroot \"\$1\" chpasswd" \
@@ -52,6 +54,6 @@ cp "$(ls -1 "$ROOT"/boot/vmlinuz-* | sort -V | tail -1)" "$OUT/vmlinuz"
 cp "$(ls -1 "$ROOT"/boot/initrd.img-* | sort -V | tail -1)" "$OUT/initrd.img"
 du -sb "$ROOT" | awk '{printf "taille_installee_octets=%s\n", $1}' > "$OUT/size.txt"
 wc -l < "$OUT/packages.txt" | sed 's/^/paquets=/' >> "$OUT/size.txt"
-mke2fs -q -t ext4 -L root -d "$ROOT" "$OUT/$NAME.img" 14G
+mke2fs -q -t ext4 -L root -d "$ROOT" "$OUT/$NAME.img" 20G
 rm -rf "$ROOT"
 cat "$OUT/size.txt"
