@@ -93,7 +93,7 @@ NexOS est un **prototype**. Ce qui est vérifié, et ce qui ne l'est pas encore 
 | ✅ Vérifié (machine virtuelle) | ⚠️ Pas encore |
 |---|---|
 | ISO live + installateur graphique (Calamares), installation UEFI sur Btrfs, redémarrage | test sur PC réel |
-| Écran de connexion, menu de démarrage, bureau NexOS | **écran noir signalé sous VirtualBox (carte VMSVGA)** : reproduit, correction en cours |
+| Écran de connexion, menu de démarrage, bureau NexOS | |
 | Instantanés + retour arrière | AppArmor absent de l'image 0.3 : à réintégrer |
 | Arduino, KiCad, LaTeX, Java, Python, assistant IA | construction d'un projet Android (Gradle) et MiKTeX : non testables ici |
 | | ISO non signée (Secure Boot à désactiver pour démarrer la clé) |
@@ -102,7 +102,7 @@ NexOS est un **prototype**. Ce qui est vérifié, et ce qui ne l'est pas encore 
 
 - **Construire l'ISO** : [docs/INSTALL.md](docs/INSTALL.md) (Debian/Ubuntu, `mmdebstrap`, ~30 min).
 - **Dans une machine virtuelle** : EFI activé, Secure Boot désactivé, 4 Go de RAM, 2 processeurs ou plus.
-  QEMU/virt-manager fonctionne ; VirtualBox : voir le problème connu ci-dessus.
+  Testé avec QEMU/virt-manager et VirtualBox.
 - **Récupération en cas de problème** : [docs/RECOVERY.md](docs/RECOVERY.md).
 
 ## Documentation

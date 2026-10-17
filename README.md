@@ -91,7 +91,7 @@ NexOS is a **prototype**. What is verified, and what is not yet:
 | ✅ Verified (virtual machine) | ⚠️ Not yet |
 |---|---|
 | Live ISO + graphical installer (Calamares), UEFI install on Btrfs, reboot | testing on real hardware |
-| Login screen, boot menu, NexOS desktop | **black screen reported on VirtualBox (VMSVGA adapter)**: reproduced, fix in progress |
+| Login screen, boot menu, NexOS desktop | |
 | Snapshots + rollback | AppArmor missing from the 0.3 image: to be restored |
 | Arduino, KiCad, LaTeX, Java, Python, AI assistant | Android project build (Gradle) and MiKTeX: not testable in the build environment |
 | | Unsigned ISO (disable Secure Boot to boot the USB stick) |
@@ -99,8 +99,7 @@ NexOS is a **prototype**. What is verified, and what is not yet:
 ## Try it
 
 - **Build the ISO**: [docs/INSTALL.md](docs/INSTALL.md) (Debian/Ubuntu host, `mmdebstrap`, ~30 min).
-- **In a virtual machine**: EFI on, Secure Boot off, 4 GB RAM, 2+ CPUs. QEMU/virt-manager works;
-  VirtualBox: see the known issue above.
+- **In a virtual machine**: EFI on, Secure Boot off, 4 GB RAM, 2+ CPUs. Tested with QEMU/virt-manager and VirtualBox.
 - **If something goes wrong**: [docs/RECOVERY.md](docs/RECOVERY.md).
 
 ## Documentation (French)
