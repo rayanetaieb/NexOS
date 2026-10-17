@@ -1,0 +1,2072 @@
+{
+ "fqbn": "arduino:avr:mega:cpu=atmega2560",
+ "results": [
+  {
+   "id": 1,
+   "name": "Bounce2",
+   "repository": "https://github.com/thomasfredericks/Bounce2",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/bounce_basic/bounce_basic.ino",
+   "detail": "Sketch uses 1896 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/bounce_basic/bounce_basic.ino",
+     "ok": true,
+     "detail": "Sketch uses 1896 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Encoder",
+   "repository": "https://github.com/PaulStoffregen/Encoder",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Basic/Basic.ino",
+   "detail": "Sketch uses 3472 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Basic/Basic.ino",
+     "ok": true,
+     "detail": "Sketch uses 3472 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Keypad",
+   "repository": "https://github.com/Chris--A/Keypad",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/HelloKeypad/HelloKeypad.ino",
+   "detail": "Sketch uses 3658 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/HelloKeypad/HelloKeypad.ino",
+     "ok": true,
+     "detail": "Sketch uses 3658 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "OneButton",
+   "repository": "https://github.com/mathertel/OneButton",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/FunctionalButton/FunctionalButton.ino",
+   "detail": "Sketch uses 4254 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/SimpleOneButton/SimpleOneButton.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SimpleOneButton/SimpleOneButton.ino:66:11: error: ‘PIN_LED’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/SimpleOneButton/SimpleOneButton.ino:70:16: error: ‘PIN_INPUT’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/SimpleOneButton/SimpleOneButton.ino:94:16: error: ‘PIN_LED’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/TwoButtons/TwoButtons.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/TwoButtons/TwoButtons.ino:55:19: error: ‘PIN_INPUT1’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/TwoButtons/TwoButtons.ino:57:19: error: ‘PIN_INPUT2’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/BlinkMachine/BlinkMachine.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/BlinkMachine/BlinkMachine.ino:88:22: error: ‘PIN_INPUT’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/BlinkMachine/BlinkMachine.ino:96:11: error: ‘PIN_LED’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/BlinkMachine/BlinkMachine.ino:123:18: error: ‘PIN_LED’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/BlinkMachine/BlinkMachine.ino:127:18: error: ‘PIN_LED’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/SpecialInput/SpecialInput.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SpecialInput/SpecialInput.ino:75:11: error: ‘PIN_INPUT’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/SpecialInput/SpecialInput.ino:81:33: error: ‘PIN_INPUT’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/LongPressEvents/LongPressEvents.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/LongPressEvents/LongPressEvents.ino:47:18: error: ‘PIN_INPUT’ was not declared in this scope",
+     "seconds": 0.6
+    },
+    {
+     "example": "examples/FunctionalButton/FunctionalButton.ino",
+     "ok": true,
+     "detail": "Sketch uses 4254 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "TaskScheduler",
+   "repository": "https://github.com/arkhipenko/TaskScheduler",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Scheduler_template/Scheduler_template.ino",
+   "detail": "Sketch uses 4560 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Scheduler_template/Scheduler_template.ino",
+     "ok": true,
+     "detail": "Sketch uses 4560 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "TimerOne",
+   "repository": "https://github.com/PaulStoffregen/TimerOne",
+   "architectures": "avr",
+   "status": "ok",
+   "example": "examples/ATTiny85/ATTiny85.ino",
+   "detail": "Sketch uses 1448 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/ATTiny85/ATTiny85.ino",
+     "ok": true,
+     "detail": "Sketch uses 1448 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "name": "Adafruit BusIO",
+   "repository": "https://github.com/adafruit/Adafruit_BusIO",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/spi_modetest/spi_modetest.ino",
+   "detail": "Sketch uses 5378 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/spi_modetest/spi_modetest.ino",
+     "ok": true,
+     "detail": "Sketch uses 5378 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.1
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "name": "AltSoftSerial",
+   "repository": "https://github.com/PaulStoffregen/AltSoftSerial",
+   "architectures": "avr",
+   "status": "ok",
+   "example": "examples/ReceiveTest/ReceiveTest.ino",
+   "detail": "Sketch uses 4474 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/ReceiveTest/ReceiveTest.ino",
+     "ok": true,
+     "detail": "Sketch uses 4474 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "name": "EspSoftwareSerial",
+   "repository": "https://github.com/plerup/espsoftwareserial",
+   "architectures": "esp8266,esp32",
+   "status": "non testable",
+   "detail": "architectures esp8266,esp32 : cœur absent hors ligne"
+  },
+  {
+   "id": 10,
+   "name": "CmdMessenger",
+   "repository": "https://github.com/thijse/Arduino-CmdMessenger",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/SimpleWatchdog/SimpleWatchdog.ino",
+   "detail": "Sketch uses 3550 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/SimpleWatchdog/SimpleWatchdog.ino",
+     "ok": true,
+     "detail": "Sketch uses 3550 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.9
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "name": "HID-Project",
+   "repository": "https://github.com/NicoHood/HID",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/KeylayoutTest/KeylayoutTest.ino",
+   "detail": "Sketch uses 6556 bytes (22%) of program storage space. Maximum is 28672 bytes.",
+   "fqbn": "arduino:avr:leonardo",
+   "essais": [
+    {
+     "example": "examples/KeylayoutTest/KeylayoutTest.ino",
+     "ok": true,
+     "detail": "Sketch uses 6556 bytes (22%) of program storage space. Maximum is 28672 bytes.",
+     "seconds": 3.3
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "name": "Keyboard",
+   "repository": "https://github.com/arduino-libraries/Keyboard",
+   "architectures": "avr, samd, sam, renesas_uno",
+   "status": "ok",
+   "example": "examples/Serial/Serial.ino",
+   "detail": "Sketch uses 5130 bytes (17%) of program storage space. Maximum is 28672 bytes.",
+   "fqbn": "arduino:avr:leonardo",
+   "essais": [
+    {
+     "example": "examples/Serial/Serial.ino",
+     "ok": true,
+     "detail": "Sketch uses 5130 bytes (17%) of program storage space. Maximum is 28672 bytes.",
+     "seconds": 2.4
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "name": "Adafruit BME280 Library",
+   "repository": "https://github.com/adafruit/Adafruit_BME280_Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/bme280test/bme280test.ino",
+   "detail": "Sketch uses 14060 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/bme280test/bme280test.ino",
+     "ok": true,
+     "detail": "Sketch uses 14060 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.4
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "name": "Adafruit BMP280 Library",
+   "repository": "https://github.com/adafruit/Adafruit_BMP280_Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/bmp280test/bmp280test.ino",
+   "detail": "Sketch uses 13634 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/bmp280test/bmp280test.ino",
+     "ok": true,
+     "detail": "Sketch uses 13634 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.4
+    }
+   ]
+  },
+  {
+   "id": 15,
+   "name": "Adafruit MPU6050",
+   "repository": "https://github.com/adafruit/Adafruit_MPU6050",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/basic_readings/basic_readings.ino",
+   "detail": "Sketch uses 13944 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/basic_readings/basic_readings.ino",
+     "ok": true,
+     "detail": "Sketch uses 13944 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.5
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "name": "Adafruit Unified Sensor",
+   "repository": "https://github.com/adafruit/Adafruit_Sensor",
+   "architectures": "*",
+   "status": "ok",
+   "detail": "compilée comme dépendance de Adafruit BME280 Library (examples/bme280test/bme280test.ino) ; son propre exemple échoue : /tmp/tmpx_6mlxi8/sk/sensortest/sensortest.ino:3:10: fatal error: Adafruit_ADXL343.h: No such file or directory",
+   "essais": [
+    {
+     "example": "examples/sensortest/sensortest.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/sensortest/sensortest.ino:3:10: fatal error: Adafruit_ADXL343.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ],
+   "indirect": true
+  },
+  {
+   "id": 17,
+   "name": "Adafruit_VL53L0X",
+   "repository": "https://github.com/adafruit/Adafruit_VL53L0X",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/vl53l0x/vl53l0x.ino",
+   "detail": "Sketch uses 17114 bytes (6%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/vl53l0x/vl53l0x.ino",
+     "ok": true,
+     "detail": "Sketch uses 17114 bytes (6%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 3.3
+    }
+   ]
+  },
+  {
+   "id": 18,
+   "name": "BH1750",
+   "repository": "https://github.com/claws/BH1750",
+   "architectures": "avr,sam,esp8266,esp32,stm32",
+   "status": "ok",
+   "example": "examples/BH1750test/BH1750test.ino",
+   "detail": "Sketch uses 7332 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/BH1750test/BH1750test.ino",
+     "ok": true,
+     "detail": "Sketch uses 7332 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.9
+    }
+   ]
+  },
+  {
+   "id": 19,
+   "name": "DallasTemperature",
+   "repository": "https://github.com/milesburton/Arduino-Temperature-Control-Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Simple/Simple.ino",
+   "detail": "Sketch uses 6344 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Simple/Simple.ino",
+     "ok": true,
+     "detail": "Sketch uses 6344 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.8
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "name": "DHT sensor library",
+   "repository": "https://github.com/adafruit/DHT-sensor-library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/DHTtester/DHTtester.ino",
+   "detail": "Sketch uses 6920 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/DHTtester/DHTtester.ino",
+     "ok": true,
+     "detail": "Sketch uses 6920 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 21,
+   "name": "HX711 Arduino Library",
+   "repository": "https://github.com/bogde/HX711",
+   "architectures": "non déclarées",
+   "status": "ok",
+   "example": "examples/HX711_basic_example/HX711_basic_example.ino",
+   "detail": "Sketch uses 3850 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/HX711_basic_example/HX711_basic_example.ino",
+     "ok": true,
+     "detail": "Sketch uses 3850 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "name": "OneWire",
+   "repository": "https://github.com/PaulStoffregen/OneWire",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/DS250x_PROM/DS250x_PROM.ino",
+   "detail": "Sketch uses 3496 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/DS250x_PROM/DS250x_PROM.ino",
+     "ok": true,
+     "detail": "Sketch uses 3496 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 23,
+   "name": "Adafruit GFX Library",
+   "repository": "https://github.com/adafruit/Adafruit-GFX-Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/GFXcanvas/GFXcanvas.ino",
+   "detail": "Sketch uses 15624 bytes (6%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/GFXcanvas/GFXcanvas.ino",
+     "ok": true,
+     "detail": "Sketch uses 15624 bytes (6%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.8
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "name": "Adafruit ILI9341",
+   "repository": "https://github.com/adafruit/Adafruit_ILI9341",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/graphicstest/graphicstest.ino",
+   "detail": "Sketch uses 18954 bytes (7%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/graphicstest/graphicstest.ino",
+     "ok": true,
+     "detail": "Sketch uses 18954 bytes (7%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 3.1
+    }
+   ]
+  },
+  {
+   "id": 25,
+   "name": "Adafruit NeoPixel",
+   "repository": "https://github.com/adafruit/Adafruit_NeoPixel",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/simple/simple.ino",
+   "detail": "Sketch uses 3012 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/simple/simple.ino",
+     "ok": true,
+     "detail": "Sketch uses 3012 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 26,
+   "name": "Adafruit SSD1306",
+   "repository": "https://github.com/adafruit/Adafruit_SSD1306",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/ssd1306_64x32_i2c/ssd1306_64x32_i2c.ino",
+   "detail": "Sketch uses 21538 bytes (8%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/ssd1306_64x32_i2c/ssd1306_64x32_i2c.ino",
+     "ok": true,
+     "detail": "Sketch uses 21538 bytes (8%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 3.3
+    }
+   ]
+  },
+  {
+   "id": 27,
+   "name": "Adafruit ST7735 and ST7789 Library",
+   "repository": "https://github.com/adafruit/Adafruit-ST7735-Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/shieldtest/shieldtest.ino",
+   "detail": "Sketch uses 25016 bytes (9%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/miniTFTWing/basic/basic.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/basic/basic.ino:4:10: fatal error: Adafruit_miniTFTWing.h: No such file or directory",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/shieldtest/shieldtest.ino",
+     "ok": true,
+     "detail": "Sketch uses 25016 bytes (9%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 4.0
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "name": "FastLED",
+   "repository": "https://github.com/FastLED/FastLED",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Test/Test.ino",
+   "detail": "Sketch uses 2686 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Test/Test.ino",
+     "ok": true,
+     "detail": "Sketch uses 2686 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 39.4
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "name": "LiquidCrystal",
+   "repository": "https://github.com/arduino-libraries/LiquidCrystal",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/HelloWorld/HelloWorld.ino",
+   "detail": "Sketch uses 2350 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/HelloWorld/HelloWorld.ino",
+     "ok": true,
+     "detail": "Sketch uses 2350 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 30,
+   "name": "LiquidCrystal_I2C",
+   "repository": "https://github.com/johnrickman/LiquidCrystal_I2C",
+   "architectures": "avr",
+   "status": "ok",
+   "example": "examples/HelloWorld/HelloWorld.pde",
+   "detail": "Sketch uses 3872 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/HelloWorld/HelloWorld.pde",
+     "ok": true,
+     "detail": "Sketch uses 3872 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 31,
+   "name": "MD_MAX72XX",
+   "repository": "https://github.com/MajicDesigns/MD_MAX72XX",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/MD_MAX72xx_SimplePong/MD_MAX72xx_SimplePong.ino",
+   "detail": "Sketch uses 8038 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/MD_MAX72xx_SimplePong/MD_MAX72xx_SimplePong.ino",
+     "ok": true,
+     "detail": "Sketch uses 8038 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.0
+    }
+   ]
+  },
+  {
+   "id": 32,
+   "name": "TFT_eSPI",
+   "repository": "https://github.com/Bodmer/TFT_eSPI",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/160 x 128/RLE_Font_test/RLE_Font_test.ino",
+   "detail": "Sketch uses 39370 bytes (15%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/DMA test/boing_ball/boing_ball.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text.startup+0x508): undefined reference to `_ZN8TFT_eSPI7initDMAEb'\n<artificial>:(.text.startup+0xb2a): undefined reference to `_ZN8TFT_eSPI13pushPixelsDMAEPjm'\ncollect2: error: ld returned 1 exit status",
+     "seconds": 3.6
+    },
+    {
+     "example": "examples/DMA test/Flash_Jpg_DMA/Flash_Jpg_DMA.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/Flash_Jpg_DMA/Flash_Jpg_DMA.ino:13:10: fatal error: TJpg_Decoder.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/160 x 128/RLE_Font_test/RLE_Font_test.ino",
+     "ok": true,
+     "detail": "Sketch uses 39370 bytes (15%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 3.5
+    }
+   ]
+  },
+  {
+   "id": 33,
+   "name": "U8g2",
+   "repository": "https://github.com/olikraus/U8g2_Arduino",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/u8x8/HelloWorld/HelloWorld.ino",
+   "detail": "Sketch uses 6694 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "preparation": "constructeur SSD1306 128×64 I²C activé",
+   "essais": [
+    {
+     "example": "examples/mui/MUIInputSimpleRotary/MUIInputSimpleRotary.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/MUIInputSimpleRotary/MUIInputSimpleRotary.ino:42:10: fatal error: SimpleRotary.h: No such file or directory",
+     "seconds": 0.5,
+     "preparation": "constructeur SSD1306 128×64 I²C activé"
+    },
+    {
+     "example": "examples/mui/MUIWaveformSimpleRotary/MUIWaveformSimpleRotary.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/MUIWaveformSimpleRotary/MUIWaveformSimpleRotary.ino:44:10: fatal error: SimpleRotary.h: No such file or directory",
+     "seconds": 0.5,
+     "preparation": "constructeur SSD1306 128×64 I²C activé"
+    },
+    {
+     "example": "examples/u8x8/HelloWorld/HelloWorld.ino",
+     "ok": true,
+     "detail": "Sketch uses 6694 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 14.2,
+     "preparation": "constructeur SSD1306 128×64 I²C activé"
+    }
+   ]
+  },
+  {
+   "id": 34,
+   "name": "Adafruit TouchScreen",
+   "repository": "https://github.com/adafruit/Adafruit_TouchScreen",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/touchscreendemo/touchscreendemo.ino",
+   "detail": "Sketch uses 4290 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/touchscreendemo/touchscreendemo.ino",
+     "ok": true,
+     "detail": "Sketch uses 4290 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 35,
+   "name": "lvgl",
+   "repository": "https://github.com/lvgl/lvgl",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/libraries/lvgl__lvgl/src/../include/lvgl/3d/../config/lv_conf_internal.h:147:18: fatal error: ../../../../lv_conf.h: No such file or directory",
+   "essais": [
+    {
+     "example": "examples/arduino/LVGL_Arduino/LVGL_Arduino.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/lvgl__lvgl/src/../include/lvgl/3d/../config/lv_conf_internal.h:147:18: fatal error: ../../../../lv_conf.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ]
+  },
+  {
+   "id": 36,
+   "name": "MCUFRIEND_kbv",
+   "repository": "https://github.com/prenticedavid/MCUFRIEND_kbv",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Font_simple/Font_simple.ino",
+   "detail": "Sketch uses 28686 bytes (11%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Font_simple/Font_simple.ino",
+     "ok": true,
+     "detail": "Sketch uses 28686 bytes (11%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 3.1
+    }
+   ]
+  },
+  {
+   "id": 37,
+   "name": "XPT2046_Touchscreen",
+   "repository": "https://github.com/PaulStoffregen/XPT2046_Touchscreen",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/TouchTest/TouchTest.ino",
+   "detail": "Sketch uses 4732 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/TouchTest/TouchTest.ino",
+     "ok": true,
+     "detail": "Sketch uses 4732 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.9
+    }
+   ]
+  },
+  {
+   "id": 38,
+   "name": "ArduinoBLE",
+   "repository": "https://github.com/arduino-libraries/ArduinoBLE",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : <artificial>:(.text+0x11ce): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11d2): undefined reference to `HCITransport'\n<artificial>:(.text+0",
+   "essais": [
+    {
+     "example": "examples/Central/Scan/Scan.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x11ce): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11d2): undefined reference to `HCITransport'\n<artificial>:(.text+0x11e4): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11e8): undefined reference to `HCITransport'",
+     "seconds": 5.3
+    },
+    {
+     "example": "examples/Peripheral/LED/LED.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x125e): undefined reference to `HCITransport'\n<artificial>:(.text+0x1262): undefined reference to `HCITransport'\n<artificial>:(.text+0x1274): undefined reference to `HCITransport'\n<artificial>:(.text+0x1278): undefined reference to `HCITransport'",
+     "seconds": 5.2
+    },
+    {
+     "example": "examples/Central/LedControl/LedControl.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x11ce): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11d2): undefined reference to `HCITransport'\n<artificial>:(.text+0x11e4): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11e8): undefined reference to `HCITransport'",
+     "seconds": 5.2
+    },
+    {
+     "example": "examples/Peripheral/ButtonLED/ButtonLED.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x125e): undefined reference to `HCITransport'\n<artificial>:(.text+0x1262): undefined reference to `HCITransport'\n<artificial>:(.text+0x1274): undefined reference to `HCITransport'\n<artificial>:(.text+0x1278): undefined reference to `HCITransport'",
+     "seconds": 5.2
+    },
+    {
+     "example": "examples/Central/ScanCallback/ScanCallback.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x11ce): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11d2): undefined reference to `HCITransport'\n<artificial>:(.text+0x11e4): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11e8): undefined reference to `HCITransport'",
+     "seconds": 5.0
+    },
+    {
+     "example": "examples/Peripheral/CallbackLED/CallbackLED.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x125e): undefined reference to `HCITransport'\n<artificial>:(.text+0x1262): undefined reference to `HCITransport'\n<artificial>:(.text+0x1274): undefined reference to `HCITransport'\n<artificial>:(.text+0x1278): undefined reference to `HCITransport'",
+     "seconds": 5.1
+    },
+    {
+     "example": "examples/Central/SensorTagButton/SensorTagButton.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x11ce): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11d2): undefined reference to `HCITransport'\n<artificial>:(.text+0x11e4): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x11e8): undefined reference to `HCITransport'",
+     "seconds": 5.0
+    },
+    {
+     "example": "examples/Peripheral/BatteryMonitor/BatteryMonitor.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x125e): undefined reference to `HCITransport'\n<artificial>:(.text+0x1262): undefined reference to `HCITransport'\n<artificial>:(.text+0x1274): undefined reference to `HCITransport'\n<artificial>:(.text+0x1278): undefined reference to `HCITransport'",
+     "seconds": 5.1
+    },
+    {
+     "example": "examples/Central/PeripheralExplorer/PeripheralExplorer.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x12de): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x12e2): undefined reference to `HCITransport'\n<artificial>:(.text+0x12f4): undefined reference to `HCITransport'\n/usr/lib/gcc/avr/14.2.0/../../../avr/bin/ld: <artificial>:(.text+0x12f8): undefined reference to `HCITransport'",
+     "seconds": 5.1
+    },
+    {
+     "example": "examples/Peripheral/EncryptedBatteryMonitor/EncryptedBatteryMonitor.ino",
+     "ok": false,
+     "detail": "<artificial>:(.text+0x126c): undefined reference to `HCITransport'\n<artificial>:(.text+0x1270): undefined reference to `HCITransport'\n<artificial>:(.text+0x1282): undefined reference to `HCITransport'\n<artificial>:(.text+0x1286): undefined reference to `HCITransport'",
+     "seconds": 5.5
+    }
+   ]
+  },
+  {
+   "id": 39,
+   "name": "NimBLE-Arduino",
+   "repository": "https://github.com/h2zero/NimBLE-Arduino",
+   "architectures": "esp32,arm-ble",
+   "status": "non testable",
+   "detail": "architectures esp32,arm-ble : cœur absent hors ligne"
+  },
+  {
+   "id": 40,
+   "name": "WiFiManager",
+   "repository": "https://github.com/tzapu/WiFiManager",
+   "architectures": "esp8266,esp32",
+   "status": "non testable",
+   "detail": "architectures esp8266,esp32 : cœur absent hors ligne"
+  },
+  {
+   "id": 41,
+   "name": "WiFiNINA",
+   "repository": "https://github.com/arduino-libraries/WiFiNINA",
+   "architectures": "samd,mbed_nano,megaavr,zephyr_main",
+   "status": "non testable",
+   "detail": "architectures samd,mbed_nano,megaavr,zephyr_main : cœur absent hors ligne"
+  },
+  {
+   "id": 42,
+   "name": "Async TCP",
+   "repository": "https://github.com/mathieucarbou/AsyncTCP",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/libraries/mathieucarbou__AsyncTCP/src/AsyncTCP.h:33:12: fatal error: IPv6Address.h: No such file or directory",
+   "essais": [
+    {
+     "example": "examples/Client/Client.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/mathieucarbou__AsyncTCP/src/AsyncTCP.h:33:12: fatal error: IPv6Address.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ]
+  },
+  {
+   "id": 43,
+   "name": "ESP Async WebServer",
+   "repository": "https://github.com/mathieucarbou/ESPAsyncWebServer",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/libraries/mathieucarbou__ESPAsyncWebServer/src/ESPAsyncWebServer.h:26:10: fatal error: FS.h: No such file or directory",
+   "essais": [
+    {
+     "example": "examples/SimpleServer/SimpleServer.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/mathieucarbou__ESPAsyncWebServer/src/ESPAsyncWebServer.h:26:10: fatal error: FS.h: No such file or directory",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/SSE_perftest/SSE_perftest.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/mathieucarbou__ESPAsyncWebServer/src/ESPAsyncWebServer.h:26:10: fatal error: FS.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/Filters/Filters.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/Filters/Filters.ino:3:10: fatal error: DNSServer.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/Issue85/Issue85.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/mathieucarbou__ESPAsyncWebServer/src/ESPAsyncWebServer.h:26:10: fatal error: FS.h: No such file or directory",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/Issue162/Issue162.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/mathieucarbou__ESPAsyncWebServer/src/ESPAsyncWebServer.h:26:10: fatal error: FS.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/StreamFiles/StreamFiles.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/StreamFiles/StreamFiles.ino:2:10: fatal error: DNSServer.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/CaptivePortal/CaptivePortal.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/CaptivePortal/CaptivePortal.ino:1:10: fatal error: DNSServer.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ]
+  },
+  {
+   "id": 44,
+   "name": "ESP32Servo",
+   "repository": "https://github.com/madhephaestus/ESP32Servo",
+   "architectures": "esp32",
+   "status": "non testable",
+   "detail": "architectures esp32 : cœur absent hors ligne"
+  },
+  {
+   "id": 45,
+   "name": "ESP32Time",
+   "repository": "https://github.com/fbiego/ESP32Time",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/libraries/fbiego__ESP32Time/ESP32Time.cpp:27:10: fatal error: sys/time.h: No such file or directory",
+   "essais": [
+    {
+     "example": "examples/esp32_time/esp32_time.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/fbiego__ESP32Time/ESP32Time.cpp:27:10: fatal error: sys/time.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/esp32_time_sleep/esp32_time_sleep.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/fbiego__ESP32Time/ESP32Time.cpp:27:10: fatal error: sys/time.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/esp32_time_multiple/esp32_time_multiple.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/fbiego__ESP32Time/ESP32Time.cpp:27:10: fatal error: sys/time.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ]
+  },
+  {
+   "id": 46,
+   "name": "ArduinoHttpClient",
+   "repository": "https://github.com/arduino-libraries/ArduinoHttpClient",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/ParseURL/ParseURL.ino",
+   "detail": "Sketch uses 5338 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/BasicAuthGet/BasicAuthGet.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/BasicAuthGet/BasicAuthGet.ino:15:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SimpleGet/SimpleGet.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SimpleGet/SimpleGet.ino:12:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SimplePut/SimplePut.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SimplePut/SimplePut.ino:13:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SimplePost/SimplePost.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SimplePost/SimplePost.ino:13:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SimpleDelete/SimpleDelete.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SimpleDelete/SimpleDelete.ino:13:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SimpleWebSocket/SimpleWebSocket.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SimpleWebSocket/SimpleWebSocket.ino:14:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/SimpleHttpExample/SimpleHttpExample.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SimpleHttpExample/SimpleHttpExample.ino:9:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/DweetGet/DweetGet.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/DweetGet/DweetGet.ino:19:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/HueBlink/HueBlink.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/HueBlink/HueBlink.ino:21:10: fatal error: WiFi101.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/ParseURL/ParseURL.ino",
+     "ok": true,
+     "detail": "Sketch uses 5338 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.0
+    }
+   ]
+  },
+  {
+   "id": 47,
+   "name": "ArduinoJson",
+   "repository": "https://github.com/bblanchon/ArduinoJson",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/JsonServer/JsonServer.ino",
+   "detail": "Sketch uses 24502 bytes (9%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/JsonServer/JsonServer.ino",
+     "ok": true,
+     "detail": "Sketch uses 24502 bytes (9%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 3.4
+    }
+   ]
+  },
+  {
+   "id": 48,
+   "name": "ArduinoModbus",
+   "repository": "https://github.com/arduino-libraries/ArduinoModbus",
+   "architectures": "megaavr,samd,mbed_nano,mbed_portenta,mbed_opta",
+   "status": "non testable",
+   "detail": "architectures megaavr,samd,mbed_nano,mbed_portenta,mbed_opta : cœur absent hors ligne"
+  },
+  {
+   "id": 49,
+   "name": "ArduinoMqttClient",
+   "repository": "https://github.com/arduino-libraries/ArduinoMqttClient",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/sk/WiFiSimpleSender/WiFiSimpleSender.ino:39:1: error: ‘WiFiClient’ does not name a type\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleSender/WiFiSimpleSender.ino:40:23: error: ‘wifiClient’ was not de",
+   "essais": [
+    {
+     "example": "examples/WiFiSimpleSender/WiFiSimpleSender.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WiFiSimpleSender/WiFiSimpleSender.ino:39:1: error: ‘WiFiClient’ does not name a type\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleSender/WiFiSimpleSender.ino:40:23: error: ‘wifiClient’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleSender/WiFiSimpleSender.ino:61:10: error: ‘WiFi’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleSender/WiFiSimpleSender.ino:61:36: error: ‘WL_CONNECTED’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/WiFiSimpleReceive/WiFiSimpleReceive.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceive/WiFiSimpleReceive.ino:39:1: error: ‘WiFiClient’ does not name a type\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceive/WiFiSimpleReceive.ino:40:23: error: ‘wifiClient’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceive/WiFiSimpleReceive.ino:56:10: error: ‘WiFi’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceive/WiFiSimpleReceive.ino:56:36: error: ‘WL_CONNECTED’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/WiFiSimpleReceiveCallback/WiFiSimpleReceiveCallback.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceiveCallback/WiFiSimpleReceiveCallback.ino:40:1: error: ‘WiFiClient’ does not name a type\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceiveCallback/WiFiSimpleReceiveCallback.ino:41:23: error: ‘wifiClient’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceiveCallback/WiFiSimpleReceiveCallback.ino:57:10: error: ‘WiFi’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiSimpleReceiveCallback/WiFiSimpleReceiveCallback.ino:57:36: error: ‘WL_CONNECTED’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/WiFiEcho/WiFiEcho.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WiFiEcho/WiFiEcho.ino:40:1: error: ‘WiFiClient’ does not name a type\n/tmp/tmpx_6mlxi8/sk/WiFiEcho/WiFiEcho.ino:41:23: error: ‘wifiClient’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiEcho/WiFiEcho.ino:63:10: error: ‘WiFi’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiEcho/WiFiEcho.ino:63:36: error: ‘WL_CONNECTED’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/WiFiEchoCallback/WiFiEchoCallback.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WiFiEchoCallback/WiFiEchoCallback.ino:41:1: error: ‘WiFiClient’ does not name a type\n/tmp/tmpx_6mlxi8/sk/WiFiEchoCallback/WiFiEchoCallback.ino:42:23: error: ‘wifiClient’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiEchoCallback/WiFiEchoCallback.ino:63:10: error: ‘WiFi’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiEchoCallback/WiFiEchoCallback.ino:63:36: error: ‘WL_CONNECTED’ was not declared in this scope",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/WiFiAdvancedCallback/WiFiAdvancedCallback.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WiFiAdvancedCallback/WiFiAdvancedCallback.ino:44:1: error: ‘WiFiClient’ does not name a type\n/tmp/tmpx_6mlxi8/sk/WiFiAdvancedCallback/WiFiAdvancedCallback.ino:45:23: error: ‘wifiClient’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiAdvancedCallback/WiFiAdvancedCallback.ino:68:10: error: ‘WiFi’ was not declared in this scope\n/tmp/tmpx_6mlxi8/sk/WiFiAdvancedCallback/WiFiAdvancedCallback.ino:68:36: error: ‘WL_CONNECTED’ was not declared in this scope",
+     "seconds": 0.5
+    }
+   ]
+  },
+  {
+   "id": 50,
+   "name": "ArduinoRS485",
+   "repository": "https://github.com/arduino-libraries/ArduinoRS485",
+   "architectures": "samd,mbed_portenta,mbed_opta,mbed_nano,renesas_uno,zephyr",
+   "status": "non testable",
+   "detail": "architectures samd,mbed_portenta,mbed_opta,mbed_nano,renesas_uno,zephyr : cœur absent hors ligne"
+  },
+  {
+   "id": 51,
+   "name": "Ethernet",
+   "repository": "https://github.com/arduino-libraries/Ethernet",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/WebClient/WebClient.ino",
+   "detail": "Sketch uses 17350 bytes (6%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/WebClient/WebClient.ino",
+     "ok": true,
+     "detail": "Sketch uses 17350 bytes (6%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.7
+    }
+   ]
+  },
+  {
+   "id": 52,
+   "name": "NTPClient",
+   "repository": "https://github.com/arduino-libraries/NTPClient",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/sk/Basic/Basic.ino:3:10: fatal error: ESP8266WiFi.h: No such file or directory",
+   "essais": [
+    {
+     "example": "examples/Basic/Basic.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/Basic/Basic.ino:3:10: fatal error: ESP8266WiFi.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/Advanced/Advanced.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/Advanced/Advanced.ino:3:10: fatal error: ESP8266WiFi.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/IsTimeSet/IsTimeSet.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/IsTimeSet/IsTimeSet.ino:3:10: fatal error: ESP8266WiFi.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ]
+  },
+  {
+   "id": 53,
+   "name": "PubSubClient",
+   "repository": "https://github.com/knolleary/pubsubclient",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/mqtt_basic/mqtt_basic.ino",
+   "detail": "Sketch uses 15182 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/mqtt_basic/mqtt_basic.ino",
+     "ok": true,
+     "detail": "Sketch uses 15182 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.9
+    }
+   ]
+  },
+  {
+   "id": 54,
+   "name": "WebSockets",
+   "repository": "https://github.com/Links2004/arduinoWebSockets",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/libraries/Links2004__arduinoWebSockets/src/WebSockets.h:37:2: error: #error Version 2.x.x currently does not support Arduino with AVR since there is no support for std namespace of c+",
+   "essais": [
+    {
+     "example": "examples/avr/WebSocketClientAVR/WebSocketClientAVR.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/Links2004__arduinoWebSockets/src/WebSockets.h:37:2: error: #error Version 2.x.x currently does not support Arduino with AVR since there is no support for std namespace of c++.\n   37 | #error Version 2.x.x currently does not support Arduino with AVR since there is no support for std namespace of c++.\n/tmp/tmpx_6mlxi8/libraries/Links2004__arduinoWebSockets/src/WebSockets.h:38:2: error: #error Use Version 1.x.x. (ATmega branch)\n   38 | #error Use Version 1.x.x. (ATmega branch)",
+     "seconds": 0.8
+    },
+    {
+     "example": "examples/seeed-studio/xio-wio-terminal/WebSocketClient/WebSocketClient.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WebSocketClient/WebSocketClient.ino:9:10: fatal error: rpcWiFi.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/arduino_wifinina/arduino_wifinina.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/arduino-libraries__WiFiNINA/src/utility/server_drv.cpp:26:10: fatal error: Arduino_SpiNINA.h: No such file or directory",
+     "seconds": 0.7
+    },
+    {
+     "example": "examples/esp32/WebSocketClient/WebSocketClient.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WebSocketClient/WebSocketClient.ino:11:10: fatal error: WiFiMulti.h: No such file or directory",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/esp32/WebSocketServer/WebSocketServer.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WebSocketServer/WebSocketServer.ino:11:10: fatal error: WiFiMulti.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/esp32/WebSocketClientSSL/WebSocketClientSSL.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WebSocketClientSSL/WebSocketClientSSL.ino:13:10: fatal error: WiFiMulti.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/esp8266_pico/WebSocketClient/WebSocketClient.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WebSocketClient/WebSocketClient.ino:10:10: fatal error: ESP8266WiFi.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/esp8266_pico/WebSocketServer/WebSocketServer.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WebSocketServer/WebSocketServer.ino:10:10: fatal error: ESP8266WiFi.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/esp8266_pico/WebSocketClientOTA/WebSocketClientOTA.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/libraries/arduino-libraries__WiFiNINA/src/utility/server_drv.cpp:26:10: fatal error: Arduino_SpiNINA.h: No such file or directory",
+     "seconds": 0.8
+    },
+    {
+     "example": "examples/esp8266_pico/WebSocketClientSSL/WebSocketClientSSL.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/WebSocketClientSSL/WebSocketClientSSL.ino:12:10: fatal error: ESP8266WiFi.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ]
+  },
+  {
+   "id": 55,
+   "name": "SD",
+   "repository": "https://github.com/arduino-libraries/SD",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Files/Files.ino",
+   "detail": "Sketch uses 12694 bytes (4%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Files/Files.ino",
+     "ok": true,
+     "detail": "Sketch uses 12694 bytes (4%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.3
+    }
+   ]
+  },
+  {
+   "id": 56,
+   "name": "SdFat",
+   "repository": "https://github.com/greiman/SdFat",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/examplesV1/#attic/HelloWorld/HelloWorld.ino",
+   "detail": "Sketch uses 2274 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/examplesV1/#attic/HelloWorld/HelloWorld.ino",
+     "ok": true,
+     "detail": "Sketch uses 2274 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 5.6
+    }
+   ]
+  },
+  {
+   "id": 57,
+   "name": "SparkFun External EEPROM Arduino Library",
+   "repository": "https://github.com/sparkfun/SparkFun_External_EEPROM_Arduino_Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Example1_BasicReadWrite/Example1_BasicReadWrite.ino",
+   "detail": "Sketch uses 9370 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Example1_BasicReadWrite/Example1_BasicReadWrite.ino",
+     "ok": true,
+     "detail": "Sketch uses 9370 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.0
+    }
+   ]
+  },
+  {
+   "id": 58,
+   "name": "RTClib",
+   "repository": "https://github.com/adafruit/RTClib",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/ds1307/ds1307.ino",
+   "detail": "Sketch uses 7570 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/ds1307/ds1307.ino",
+     "ok": true,
+     "detail": "Sketch uses 7570 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.6
+    }
+   ]
+  },
+  {
+   "id": 59,
+   "name": "Time",
+   "repository": "https://github.com/PaulStoffregen/Time",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/TimeSerialDateStrings/TimeSerialDateStrings.ino",
+   "detail": "Sketch uses 4320 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/TimeSerialDateStrings/TimeSerialDateStrings.ino",
+     "ok": true,
+     "detail": "Sketch uses 4320 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 60,
+   "name": "Timezone",
+   "repository": "https://github.com/JChristensen/Timezone",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/tzTest/tzTest.ino",
+   "detail": "Sketch uses 7182 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/tzTest/tzTest.ino",
+     "ok": true,
+     "detail": "Sketch uses 7182 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.8
+    }
+   ]
+  },
+  {
+   "id": 61,
+   "name": "AccelStepper",
+   "repository": "https://github.com/waspinator/AccelStepper",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Bounce/Bounce.pde",
+   "detail": "Sketch uses 6344 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Bounce/Bounce.pde",
+     "ok": true,
+     "detail": "Sketch uses 6344 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 62,
+   "name": "Adafruit Motor Shield V2 Library",
+   "repository": "https://github.com/adafruit/Adafruit_Motor_Shield_V2_Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/DCMotorTest/DCMotorTest.ino",
+   "detail": "Sketch uses 6390 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/DCMotorTest/DCMotorTest.ino",
+     "ok": true,
+     "detail": "Sketch uses 6390 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.3
+    }
+   ]
+  },
+  {
+   "id": 63,
+   "name": "Adafruit PWM Servo Driver Library",
+   "repository": "https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/pwmtest/pwmtest.ino",
+   "detail": "Sketch uses 7136 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/pwmtest/pwmtest.ino",
+     "ok": true,
+     "detail": "Sketch uses 7136 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.1
+    }
+   ]
+  },
+  {
+   "id": 64,
+   "name": "Servo",
+   "repository": "https://github.com/arduino-libraries/Servo",
+   "architectures": "avr,megaavr,sam,samd,nrf52,stm32f4,mbed,mbed_nano,mbed_portenta,mbed_rp2040,renesas,renesas_portenta,renesas_uno,zephyr",
+   "status": "ok",
+   "example": "examples/Knob/Knob.ino",
+   "detail": "Sketch uses 3008 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Knob/Knob.ino",
+     "ok": true,
+     "detail": "Sketch uses 3008 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 65,
+   "name": "Stepper",
+   "repository": "https://github.com/arduino-libraries/Stepper",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/MotorKnob/MotorKnob.ino",
+   "detail": "Sketch uses 2506 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/MotorKnob/MotorKnob.ino",
+     "ok": true,
+     "detail": "Sketch uses 2506 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 66,
+   "name": "TMCStepper",
+   "repository": "https://github.com/teemuatlut/TMCStepper",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Simple/Simple.ino",
+   "detail": "Sketch uses 6484 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Simple/Simple.ino",
+     "ok": true,
+     "detail": "Sketch uses 6484 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 4.0
+    }
+   ]
+  },
+  {
+   "id": 67,
+   "name": "Adafruit ADS1X15",
+   "repository": "https://github.com/adafruit/Adafruit_ADS1X15",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/comparator/comparator.ino",
+   "detail": "Sketch uses 6152 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/comparator/comparator.ino",
+     "ok": true,
+     "detail": "Sketch uses 6152 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.0
+    }
+   ]
+  },
+  {
+   "id": 68,
+   "name": "Adafruit MCP3008",
+   "repository": "https://github.com/adafruit/Adafruit_MCP3008",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/simpletest/simpletest.ino",
+   "detail": "Sketch uses 5478 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/simpletest/simpletest.ino",
+     "ok": true,
+     "detail": "Sketch uses 5478 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.1
+    }
+   ]
+  },
+  {
+   "id": 69,
+   "name": "Adafruit MCP4725",
+   "repository": "https://github.com/adafruit/Adafruit_MCP4725",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/sinewave/sinewave.ino",
+   "detail": "Sketch uses 5530 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/sinewave/sinewave.ino",
+     "ok": true,
+     "detail": "Sketch uses 5530 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.0
+    }
+   ]
+  },
+  {
+   "id": 70,
+   "name": "Adafruit INA219",
+   "repository": "https://github.com/adafruit/Adafruit_INA219",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/getcurrent/getcurrent.ino",
+   "detail": "Sketch uses 9946 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/getcurrent/getcurrent.ino",
+     "ok": true,
+     "detail": "Sketch uses 9946 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.2
+    }
+   ]
+  },
+  {
+   "id": 71,
+   "name": "Adafruit MAX31855 library",
+   "repository": "https://github.com/adafruit/Adafruit-MAX31855-library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/lcdthermocouple/lcdthermocouple.ino",
+   "detail": "Sketch uses 8540 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/lcdthermocouple/lcdthermocouple.ino",
+     "ok": true,
+     "detail": "Sketch uses 8540 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.3
+    }
+   ]
+  },
+  {
+   "id": 72,
+   "name": "Adafruit MAX31865 library",
+   "repository": "https://github.com/adafruit/Adafruit_MAX31865",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/max31865/max31865.ino",
+   "detail": "Sketch uses 8354 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/max31865/max31865.ino",
+     "ok": true,
+     "detail": "Sketch uses 8354 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.3
+    }
+   ]
+  },
+  {
+   "id": 73,
+   "name": "EmonLib",
+   "repository": "https://github.com/openenergymonitor/EmonLib",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/current_only/current_only.ino",
+   "detail": "Sketch uses 4494 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/current_only/current_only.ino",
+     "ok": true,
+     "detail": "Sketch uses 4494 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 74,
+   "name": "INA226",
+   "repository": "https://github.com/RobTillaart/INA226",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/INA226_test_I2C/INA226_test_I2C.ino",
+   "detail": "Sketch uses 5396 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/INA226_test_I2C/INA226_test_I2C.ino",
+     "ok": true,
+     "detail": "Sketch uses 5396 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.8
+    }
+   ]
+  },
+  {
+   "id": 75,
+   "name": "arduinoFFT",
+   "repository": "https://github.com/kosme/arduinoFFT",
+   "architectures": "*",
+   "status": "ok",
+   "example": "Examples/FFT_01/FFT_01.ino",
+   "detail": "Sketch uses 7342 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "Examples/FFT_01/FFT_01.ino",
+     "ok": true,
+     "detail": "Sketch uses 7342 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 76,
+   "name": "PID",
+   "repository": "https://github.com/br3ttb/Arduino-PID-Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/PID_Basic/PID_Basic.ino",
+   "detail": "Sketch uses 3854 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/PID_Basic/PID_Basic.ino",
+     "ok": true,
+     "detail": "Sketch uses 3854 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 77,
+   "name": "RunningAverage",
+   "repository": "https://github.com/RobTillaart/RunningAverage",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/ra_test/ra_test.ino",
+   "detail": "Sketch uses 6328 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/ra_test/ra_test.ino",
+     "ok": true,
+     "detail": "Sketch uses 6328 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 78,
+   "name": "RunningMedian",
+   "repository": "https://github.com/RobTillaart/RunningMedian",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/RunningMedianTest1/RunningMedianTest1.ino",
+   "detail": "Sketch uses 7488 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/RunningMedianTest1/RunningMedianTest1.ino",
+     "ok": true,
+     "detail": "Sketch uses 7488 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 79,
+   "name": "SimpleKalmanFilter",
+   "repository": "https://github.com/denyssene/SimpleKalmanFilter",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/BasicKalmanFilterExample/BasicKalmanFilterExample.ino",
+   "detail": "Sketch uses 4436 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/BasicKalmanFilterExample/BasicKalmanFilterExample.ino",
+     "ok": true,
+     "detail": "Sketch uses 4436 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 80,
+   "name": "Adafruit MAX1704X",
+   "repository": "https://github.com/adafruit/Adafruit_MAX1704X",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/MAX17048_basic/MAX17048_basic.ino",
+   "detail": "Sketch uses 10086 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/MAX17048_basic/MAX17048_basic.ino",
+     "ok": true,
+     "detail": "Sketch uses 10086 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.2
+    }
+   ]
+  },
+  {
+   "id": 81,
+   "name": "Arduino Low Power",
+   "repository": "https://github.com/arduino-libraries/ArduinoLowPower",
+   "architectures": "samd,nrf52",
+   "status": "non testable",
+   "detail": "architectures samd,nrf52 : cœur absent hors ligne"
+  },
+  {
+   "id": 82,
+   "name": "Battery Sense",
+   "repository": "https://github.com/rlogiacco/BatterySense",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/CustomRatio/CustomRatio.ino",
+   "detail": "Sketch uses 4096 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/CustomRatio/CustomRatio.ino",
+     "ok": true,
+     "detail": "Sketch uses 4096 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 83,
+   "name": "Low-Power",
+   "repository": "https://github.com/rocketscream/Low-Power",
+   "architectures": "avr,samd",
+   "status": "ok",
+   "example": "Examples/powerDownWakePeriodic/powerDownWakePeriodic.ino",
+   "detail": "Sketch uses 868 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "Examples/idleWakePeriodic/idleWakePeriodic.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/idleWakePeriodic/idleWakePeriodic.ino:16:16: error: no matching function for call to ‘LowPowerClass::idle(period_t, adc_t, timer2_t, timer1_t, timer0_t, spi_t, usart0_t, twi_t)’",
+     "seconds": 0.5
+    },
+    {
+     "example": "Examples/powerDownWakePeriodic/powerDownWakePeriodic.ino",
+     "ok": true,
+     "detail": "Sketch uses 868 bytes (0%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.4
+    }
+   ]
+  },
+  {
+   "id": 84,
+   "name": "Adafruit MCP23017 Arduino Library",
+   "repository": "https://github.com/adafruit/Adafruit-MCP23017-Arduino-Library",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/mcp23xxx_blink/mcp23xxx_blink.ino",
+   "detail": "Sketch uses 7834 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/mcp23xxx_blink/mcp23xxx_blink.ino",
+     "ok": true,
+     "detail": "Sketch uses 7834 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.4
+    }
+   ]
+  },
+  {
+   "id": 85,
+   "name": "Adafruit PN532",
+   "repository": "https://github.com/adafruit/Adafruit-PN532",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/readMifare/readMifare.ino",
+   "detail": "Sketch uses 10150 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/readMifare/readMifare.ino",
+     "ok": true,
+     "detail": "Sketch uses 10150 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.4
+    }
+   ]
+  },
+  {
+   "id": 86,
+   "name": "IRremote",
+   "repository": "https://github.com/Arduino-IRremote/Arduino-IRremote",
+   "architectures": "avr,megaavr,samd,esp8266,esp32,stm32,STM32F1,mbed,mbed_nano,rp2040,mbed_rp2040,renesas_uno,riscv,nRF5",
+   "status": "ok",
+   "example": "examples/SimpleSender/SimpleSender.ino",
+   "detail": "Sketch uses 3986 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/SimpleSender/SimpleSender.ino",
+     "ok": true,
+     "detail": "Sketch uses 3986 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.8
+    }
+   ]
+  },
+  {
+   "id": 87,
+   "name": "LoRa",
+   "repository": "https://github.com/sandeepmistry/arduino-LoRa",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/LoRaSimpleNode/LoRaSimpleNode.ino",
+   "detail": "Sketch uses 7208 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/LoRaSimpleNode/LoRaSimpleNode.ino",
+     "ok": true,
+     "detail": "Sketch uses 7208 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.7
+    }
+   ]
+  },
+  {
+   "id": 88,
+   "name": "MFRC522",
+   "repository": "https://github.com/miguelbalboa/rfid",
+   "architectures": "avr,megaavr,STM32F1,teensy,esp8266,esp32,samd,atmelsam,rp2040",
+   "status": "ok",
+   "example": "examples/DumpInfo/DumpInfo.ino",
+   "detail": "Sketch uses 8612 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/DumpInfo/DumpInfo.ino",
+     "ok": true,
+     "detail": "Sketch uses 8612 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.0
+    }
+   ]
+  },
+  {
+   "id": 89,
+   "name": "PCF8574",
+   "repository": "https://github.com/RobTillaart/PCF8574",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/PCF8574_test/PCF8574_test.ino",
+   "detail": "Sketch uses 5080 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/PCF8574_test/PCF8574_test.ino",
+     "ok": true,
+     "detail": "Sketch uses 5080 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.8
+    }
+   ]
+  },
+  {
+   "id": 90,
+   "name": "RF24",
+   "repository": "https://github.com/nRF24/RF24",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/scanner/scanner.ino",
+   "detail": "Sketch uses 5712 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/scanner/scanner.ino",
+     "ok": true,
+     "detail": "Sketch uses 5712 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.9
+    }
+   ]
+  },
+  {
+   "id": 91,
+   "name": "TinyGPSPlus",
+   "repository": "https://github.com/mikalhart/TinyGPSPlus",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/BasicExample/BasicExample.ino",
+   "detail": "Sketch uses 7590 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/BasicExample/BasicExample.ino",
+     "ok": true,
+     "detail": "Sketch uses 7590 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 92,
+   "name": "Adafruit SPIFlash",
+   "repository": "https://github.com/adafruit/Adafruit_SPIFlash",
+   "architectures": "*",
+   "status": "non testable",
+   "detail": "exemples réservés à d'autres cartes (Wi-Fi, ESP, 32 bits) : /tmp/tmpx_6mlxi8/sk/flash_speedtest/flash_speedtest.ino:4:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+   "essais": [
+    {
+     "example": "examples/flash_speedtest/flash_speedtest.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/flash_speedtest/flash_speedtest.ino:4:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/flash_info/flash_info.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/flash_info/flash_info.ino:4:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/flash_erase/flash_erase.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/flash_erase/flash_erase.ino:22:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SdFat_format/SdFat_format.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SdFat_format/SdFat_format.ino:21:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SdFat_OpenNext/SdFat_OpenNext.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SdFat_OpenNext/SdFat_OpenNext.ino:6:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SdFat_ReadWrite/SdFat_ReadWrite.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SdFat_ReadWrite/SdFat_ReadWrite.ino:22:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.5
+    },
+    {
+     "example": "examples/SdFat_full_usage/SdFat_full_usage.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SdFat_full_usage/SdFat_full_usage.ino:25:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SdFat_print_file/SdFat_print_file.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SdFat_print_file/SdFat_print_file.ino:22:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/SdFat_datalogging/SdFat_datalogging.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/SdFat_datalogging/SdFat_datalogging.ino:18:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    },
+    {
+     "example": "examples/flash_manipulator/flash_manipulator.ino",
+     "ok": false,
+     "detail": "/tmp/tmpx_6mlxi8/sk/flash_manipulator/flash_manipulator.ino:4:10: fatal error: SdFat_Adafruit_Fork.h: No such file or directory",
+     "seconds": 0.4
+    }
+   ]
+  },
+  {
+   "id": 93,
+   "name": "SPIMemory",
+   "repository": "https://github.com/Marzogh/SPIMemory",
+   "architectures": "avr,sam,samd,esp8266,esp32,Simblee,stm32,nrf52",
+   "status": "ok",
+   "example": "examples/TestFlash/TestFlash.ino",
+   "detail": "Sketch uses 22294 bytes (8%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/TestFlash/TestFlash.ino",
+     "ok": true,
+     "detail": "Sketch uses 22294 bytes (8%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.6
+    }
+   ]
+  },
+  {
+   "id": 94,
+   "name": "ArduinoBearSSL",
+   "repository": "https://github.com/arduino-libraries/ArduinoBearSSL",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/DES/DES.ino",
+   "detail": "Sketch uses 48420 bytes (19%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/DES/DES.ino",
+     "ok": true,
+     "detail": "Sketch uses 48420 bytes (19%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 17.5
+    }
+   ]
+  },
+  {
+   "id": 95,
+   "name": "ArduinoECCX08",
+   "repository": "https://github.com/arduino-libraries/ArduinoECCX08",
+   "architectures": "samd,megaavr,mbed,mbed_nano,mbed_portenta,mbed_opta,mbed_giga,esp32,zephyr_main",
+   "status": "non testable",
+   "detail": "architectures samd,megaavr,mbed,mbed_nano,mbed_portenta,mbed_opta,mbed_giga,esp32,zephyr_main : cœur absent hors ligne"
+  },
+  {
+   "id": 96,
+   "name": "base64",
+   "repository": "https://github.com/Densaugeo/base64_arduino",
+   "architectures": "*",
+   "status": "ok",
+   "example": "arduino-test/arduino-test.ino",
+   "detail": "Sketch uses 2794 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "arduino-test/arduino-test.ino",
+     "ok": true,
+     "detail": "Sketch uses 2794 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.5
+    }
+   ]
+  },
+  {
+   "id": 97,
+   "name": "Crypto",
+   "repository": "https://github.com/OperatorFoundation/Crypto",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/AES128_Basics/AES128_Basics.ino",
+   "detail": "Sketch uses 5970 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/AES128_Basics/AES128_Basics.ino",
+     "ok": true,
+     "detail": "Sketch uses 5970 bytes (2%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 3.3
+    }
+   ]
+  },
+  {
+   "id": 98,
+   "name": "ArduinoLog",
+   "repository": "https://github.com/thijse/Arduino-Log",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/Log/Log.ino",
+   "detail": "Sketch uses 8184 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/Log/Log.ino",
+     "ok": true,
+     "detail": "Sketch uses 8184 bytes (3%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 1.6
+    }
+   ]
+  },
+  {
+   "id": 99,
+   "name": "AUnit",
+   "repository": "https://github.com/bxparks/AUnit",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/basic/basic.ino",
+   "detail": "Sketch uses 4794 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/basic/basic.ino",
+     "ok": true,
+     "detail": "Sketch uses 4794 bytes (1%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.4
+    }
+   ]
+  },
+  {
+   "id": 100,
+   "name": "Streaming",
+   "repository": "https://github.com/janelia-arduino/Streaming",
+   "architectures": "*",
+   "status": "ok",
+   "example": "examples/StreamingTests/StreamingTests.ino",
+   "detail": "Sketch uses 13668 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+   "fqbn": "arduino:avr:mega:cpu=atmega2560",
+   "essais": [
+    {
+     "example": "examples/StreamingTests/StreamingTests.ino",
+     "ok": true,
+     "detail": "Sketch uses 13668 bytes (5%) of program storage space. Maximum is 253952 bytes.",
+     "seconds": 2.0
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+[project]
+name = "nexos-arduino"
+version = "0.3.0"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+[tool.setuptools]
+packages = ["nexos_arduino"]
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

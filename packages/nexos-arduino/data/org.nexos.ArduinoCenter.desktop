@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Centre Arduino
+Comment=100 bibliothèques Arduino vérifiées, installation, mises à jour et diagnostic des cartes
+Exec=python3 -m nexos_arduino.gui
+Icon=nexos-arduino-center
+Terminal=false
+Categories=Development;Electronics;
+Keywords=arduino;esp32;bibliothèque;capteur;série;

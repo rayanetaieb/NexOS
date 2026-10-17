@@ -1,0 +1,20 @@
+Java : compilation + exécution            OK           Bonjour depuis Java 21
+adb (outils Android)                       OK           Android Debug Bridge version 1.0.41
+Règles udev Android (51-android)          OK           
+Kotlin + Gradle : projet Android           NON-EXÉCUTÉ Gradle, Kotlin et le plugin Android viennent de services.gradle.org / maven.google.com, bloqués dans l'environnement de build
+Arduino : compilation Blink (Uno, hors ligne) OK           Sketch uses 970 bytes (3%) of program storage space. Maximum is 32256 bytes.
+Arduino : téléversement sur carte        NON-EXÉCUTÉ aucune carte physique connectée à l'environnement de test
+Arduino IDE 1.8.19 présent                OK           
+KiCad : kicad-cli                          OK           9.0.2
+KiCad : ERC (schéma)                      OK            ** ERC messages: 1  Errors 0  Warnings 1
+KiCad : export PDF du schéma              OK           660K
+KiCad : export netlist                     OK           63 composants
+KiCad : DRC (PCB)                          OK           ** Found 23 DRC violations **
+KiCad : Gerber + perçage (fabrication)    OK           48 fichiers
+KiCad : rendu 3D de la carte               OK           Successfully created 3D render image
+KiCad : schéma → PCB (API pcbnew)       OK           OK 60/63 empreintes placées, 111 réseaux, empreintes manquantes : 3
+LaTeX : rapport (maths, image, tableau, biber, FR) OK           rapport.pdf, 2 page(s)
+LaTeX : document arabe (XeLaTeX + Amiri)   OK           arabe.pdf, 2 police(s) Amiri incorporée(s)
+TeXmaker présent                          OK           
+MiKTeX                                     NON-EXÉCUTÉ dépôt miktex.org bloqué dans l'environnement de build ; installation assistée fournie
+Bilan : 16 OK, 0 ÉCHEC, 3 non exécutés

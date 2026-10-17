@@ -108,7 +108,7 @@ if [ -x "$REPO/out/uv-dist/uv" ]; then
 fi
 
 # --- Control Center, nexos-admin (polkit), installations assistées ---
-for pkg in nexos-control-center:nexos_cc nexos-setup:nexos_setup; do
+for pkg in nexos-control-center:nexos_cc nexos-setup:nexos_setup nexos-arduino:nexos_arduino; do
   src="${pkg%%:*}"; mod="${pkg##*:}"
   rm -rf "$PY/$mod"; cp -r "$REPO/packages/$src/$mod" "$PY/$mod"
   find "$PY/$mod" -name '__pycache__' -prune -exec rm -rf {} +
@@ -118,6 +118,7 @@ printf '#!/usr/bin/python3\nimport sys\nfrom nexos_cc.gui import main\nsys.exit(
 printf '#!/usr/bin/python3\nimport sys\nfrom nexos_setup.cli import main\nsys.exit(main())\n' > "$R/usr/bin/nexos-setup"
 chmod 755 "$R/usr/bin/nexos-control-center" "$R/usr/bin/nexos-setup"
 install -D -m 0755 "$REPO/packages/nexos-control-center/nexos_cc/admin.py" "$R/usr/lib/nexos/nexos-admin"
+install -D -m 0644 "$REPO/electronics/arduino/catalog.json" "$R/usr/share/nexos/arduino/catalog.json"
 install -D -m 0644 "$REPO/packages/nexos-control-center/data/org.nexos.admin.policy" "$R/usr/share/polkit-1/actions/org.nexos.admin.policy"
 
 # Lanceurs sur le bureau (demandés) : TeXmaker et MiKTeX

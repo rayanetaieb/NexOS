@@ -1,0 +1,25 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,graphicx,booktabs,siunitx}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{refs.bib}
+\title{Rapport de test NexOS}
+\author{Banc de test automatique}
+\begin{document}
+\maketitle
+\section{Formules}
+L'équation de Schrödinger indépendante du temps s'écrit
+\begin{equation}
+  -\frac{\hbar^2}{2m}\nabla^2\psi + V\psi = E\psi .
+\end{equation}
+La transformée de Fourier : $\hat f(\xi)=\int_{-\infty}^{+\infty} f(x)\,e^{-2i\pi x\xi}\,\mathrm{d}x$.
+\section{Image et tableau}
+\begin{figure}[h]\centering\includegraphics[width=.4\linewidth]{example-image-a}\caption{Image d'exemple}\end{figure}
+\begin{table}[h]\centering
+\begin{tabular}{lS[table-format=2.1]}\toprule Grandeur & {Valeur} \\ \midrule Tension (\si{\volt}) & 12.0 \\ Courant (\si{\milli\ampere}) & 35.5 \\ \bottomrule\end{tabular}
+\caption{Mesures}\end{table}
+\section{Références}
+Voir \cite{knuth1984} et \cite{lamport1994}.
+\printbibliography
+\end{document}
