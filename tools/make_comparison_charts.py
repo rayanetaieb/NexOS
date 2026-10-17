@@ -12,7 +12,15 @@ import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "docs/measurements/comparaison"
 OUT = ROOT / "docs/assets"
+import sys
+LANG = sys.argv[1] if len(sys.argv) > 1 else "fr"
 SYSTEMS = [("nexos", "NexOS 0.3"), ("debian-kde", "Debian 13 KDE*"), ("kubuntu", "Kubuntu 24.04*"), ("ubuntu", "Ubuntu 24.04*")]
+T = {"fr": dict(mem="Mémoire utilisée au repos (plus court = mieux)", boot="Démarrage, partie système (plus court = mieux)",
+                memu="Mio", memn="Médiane de 3 mesures (points). VM 4 Gio, 90 s après l'affichage du bureau. * référence minimale, sans paquets recommandés.",
+                bootn="Premier démarrage en émulation logicielle : valeurs relatives seulement. * référence minimale (sans paquets recommandés).", sfx=""),
+     "en": dict(mem="Idle memory used (shorter is better)", boot="Boot time, userspace (shorter is better)",
+                memu="MiB", memn="Median of 3 runs (dots). 4 GiB VM, 90 s after the desktop is displayed. * minimal reference, without recommended packages.",
+                bootn="First boot under software emulation: relative values only. * minimal reference (without recommended packages).", sfx="-en")}[LANG]
 
 
 def runs(key):
@@ -44,7 +52,7 @@ def chart(idx, title, unit, fname, note):
             ax.barh(y, med, height=0.52, color=col, zorder=2)
             ax.scatter(vals, [y] * len(vals), s=14, color=c["bg"], edgecolors=c["ink"], linewidths=0.8, zorder=3)
             ax.text(max(vals) + max(max(v[idx]) for v in data.values()) * 0.015, y,
-                    f"{med:,.0f} {unit}".replace(",", " "), va="center", ha="left", color=c["ink"], fontsize=9.5,
+                    (f"{med:,.0f} {unit}".replace(",", " ") if LANG == "fr" else f"{med:,.0f} {unit}"), va="center", ha="left", color=c["ink"], fontsize=9.5,
                     fontweight="bold" if key == "nexos" else "normal")
         ax.set_yticks(range(len(labels)), labels, color=c["ink"], fontsize=10)
         ax.tick_params(axis="x", colors=c["muted"], labelsize=8.5); ax.tick_params(axis="y", length=0)
@@ -57,10 +65,8 @@ def chart(idx, title, unit, fname, note):
         fig.savefig(OUT / f"{fname}-{mode}.png", facecolor=c["bg"]); plt.close(fig)
 
 
-chart(0, "Mémoire utilisée au repos (plus court = mieux)", "Mio", "comparaison-memoire",
-      "Médiane de 3 mesures (points). VM 4 Gio, 90 s après l'affichage du bureau. * référence minimale, sans paquets recommandés.")
-chart(1, "Démarrage, partie système (plus court = mieux)", "s", "comparaison-demarrage",
-      "Premier démarrage en émulation logicielle : valeurs relatives seulement. * référence minimale (sans paquets recommandés).")
+chart(0, T["mem"], T["memu"], "comparaison-memoire" + T["sfx"], T["memn"])
+chart(1, T["boot"], "s", "comparaison-demarrage" + T["sfx"], T["bootn"])
 for k, lab in SYSTEMS:
     m, b = data[k]
     print(f"{lab}: mémoire {[round(x) for x in m]} médiane {statistics.median(m):.0f} | démarrage {[round(x,1) for x in b]} médiane {statistics.median(b):.1f}")
