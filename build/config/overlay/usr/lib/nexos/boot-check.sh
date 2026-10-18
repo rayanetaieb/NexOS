@@ -31,6 +31,7 @@ report=$(cat <<R
 NEXOS-REPORT-BEGIN
 os=$PRETTY_NAME
 kernel=$(uname -r)
+secure_boot=$(od -An -t u1 /sys/firmware/efi/efivars/SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c 2>/dev/null | awk '{print ($NF==1)?"active":"inactive"}' || echo bios)
 state=$state
 failed_units=$(systemctl --failed --no-legend | wc -l)
 failed_list=$(systemctl --failed --no-legend --plain | awk '{print $1}' | paste -sd, -)

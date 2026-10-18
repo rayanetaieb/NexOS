@@ -59,13 +59,15 @@ def start(argv):
     ap = argparse.ArgumentParser(); ap.add_argument("--iso"); ap.add_argument("--disk", required=True)
     ap.add_argument("--uefi", action="store_true"); ap.add_argument("--mem", default="4096")
     ap.add_argument("--size", default="24G")
+    ap.add_argument("--secureboot", action="store_true", help="UEFI + Secure Boot activé (clés Microsoft)")
     a = ap.parse_args(argv)
     D.mkdir(parents=True, exist_ok=True); (D / "screens").mkdir(exist_ok=True)
     disk = Path(a.disk)
     if not disk.exists():
         subprocess.run(["qemu-img", "create", "-q", "-f", "qcow2", str(disk), a.size], check=True)
     accel = "kvm" if os.access("/dev/kvm", os.W_OK) else "tcg"
-    cmd = ["qemu-system-x86_64", "-machine", f"q35,accel={accel}", "-m", a.mem, "-smp", "2",
+    cmd = ["qemu-system-x86_64", "-machine", f"q35,accel={accel}" + (",smm=on" if a.secureboot else ""),
+           "-cpu", "Nehalem", "-m", a.mem, "-smp", "2",
            "-vga", "none", "-device", f"virtio-vga,xres={W},yres={H}",
            "-device", "qemu-xhci", "-device", "usb-tablet",
            "-drive", f"file={disk},format=qcow2,if=virtio",
@@ -73,7 +75,14 @@ def start(argv):
            "-nic", "user,model=virtio-net-pci", "-daemonize", "-pidfile", str(PIDF)]
     if a.iso:
         cmd += ["-drive", f"file={a.iso},media=cdrom,readonly=on", "-boot", "order=dc"]
-    if a.uefi:
+    if a.secureboot:
+        vars_ = D / "OVMF_VARS.fd"
+        if not vars_.exists():
+            vars_.write_bytes(Path("/usr/share/OVMF/OVMF_VARS_4M.ms.fd").read_bytes())
+        cmd += ["-global", "driver=cfi.pflash01,property=secure,value=on",
+                "-drive", "if=pflash,format=raw,unit=0,readonly=on,file=/usr/share/OVMF/OVMF_CODE_4M.secboot.fd",
+                "-drive", f"if=pflash,format=raw,unit=1,file={vars_}"]
+    elif a.uefi:
         vars_ = D / "OVMF_VARS.fd"
         if not vars_.exists():
             vars_.write_bytes(Path("/usr/share/OVMF/OVMF_VARS_4M.fd").read_bytes())
@@ -82,7 +91,7 @@ def start(argv):
     for p in (SOCK, SERIAL):
         p.unlink(missing_ok=True)
     subprocess.run(cmd, check=True)
-    print(f"VM démarrée ({accel}, {'UEFI' if a.uefi else 'BIOS'})")
+    print(f"VM démarrée ({accel}, {'UEFI Secure Boot' if a.secureboot else 'UEFI' if a.uefi else 'BIOS'})")
 
 
 def shot(name):
