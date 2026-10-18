@@ -31,7 +31,7 @@ permissions… **NexOS comes ready**, and every bundled tool has been **actually
 | 🛠️ **PCB design** | KiCad 9 with symbol, footprint and template libraries | ERC, DRC, PDF export, netlist, **22 Gerber/drill files**, 3D render, schematic → PCB |
 | 📄 **Scientific writing** | TeX Live (French, Arabic, science), TeXmaker, Biber, Amiri font | report with maths, images, table and bibliography; **Arabic** document (XeLaTeX) |
 | 🐍 **Python** | **Python Center**: 8 ready-made environments (base, science, AI, vision, electronics, app development, data analysis, code quality) with pinned versions | every profile's test suite passes |
-| 🤖 **Local AI assistant** | Qwen 2.5 model running **on your PC, offline**, loaded only when used and unloaded afterwards | 20/24 tasks passed; ≈1.3 GB RAM peak; ≈10 tokens/s on CPU |
+| 🤖 **Local AI assistant** | Qwen 2.5 model running **on your PC, offline**, loaded only when used and unloaded afterwards | 20/24 tasks passed; ≈1.3 GB RAM peak useage; ≈10 tokens/s on CPU |
 | ↩️ **Rollback** | automatic Btrfs snapshots before/after every update, "Revert to a snapshot" button | removing an app then a **real restore** (159 files) on an installed system |
 | 🎛️ **Control Center** | startup, services, network, updates, firewall, backups, optional components — admin actions require confirmation | automated tests |
 | 🌍 **Languages** | French by default, Arabic (fr + ar keyboard layouts, Alt+Shift), Arabic documents | |
