@@ -7,6 +7,7 @@ arbitraire n'est acceptée. Journalisation dans le journal système (logger).
 """
 from __future__ import annotations
 
+import os
 import re
 import subprocess
 import sys
@@ -20,6 +21,16 @@ OPTIONAL_PACKAGES = {
     "texlive-full-extra": ["texlive-fonts-extra", "texlive-publishers", "texlive-humanities"],
     "android-emulator-deps": ["qemu-system-x86", "libvirt-daemon"],
 }
+# Applications de jeu installables en un clic depuis Flathub (via NexOS Store).
+GAME_APPS = {
+    "com.valvesoftware.Steam": "Steam",
+    "com.heroicgameslauncher.hgl": "Heroic (Epic Games, GOG, Amazon)",
+    "net.lutris.Lutris": "Lutris",
+    "org.libretro.RetroArch": "RetroArch (émulateurs)",
+    "net.davidotek.pupgui2": "ProtonUp-Qt (versions de Proton)",
+}
+FLATHUB = "https://dl.flathub.org/repo/flathub.flatpakrepo"
+MOK_PUB = "/var/lib/dkms/mok.pub"
 UNIT_RE = re.compile(r"^[A-Za-z0-9@._\-]+\.(service|socket|timer)$")
 DESC_RE = re.compile(r"^[\w .,:'éèàçùâêîôûÉ\-]{1,80}$")
 
@@ -76,6 +87,31 @@ def main(argv: list[str]) -> int:
     if action == "flathub-enable":
         return run(["flatpak", "remote-add", "--if-not-exists", "flathub",
                     "https://dl.flathub.org/repo/flathub.flatpakrepo"])
+    if action == "install-nvidia":
+        # Pilote propriétaire Debian (non-free) compilé par DKMS pour le noyau installé ;
+        # DKMS signe le module avec une clé locale (MOK) → à valider au redémarrage si Secure Boot.
+        rc = run(["apt-get", "update"])
+        if rc:
+            return rc
+        return run(["apt-get", "install", "-y", "linux-headers-amd64", "nvidia-kernel-dkms", "nvidia-driver",
+                    "firmware-misc-nonfree", "nvidia-settings"])
+    if action == "mok-import":
+        # Mot de passe à usage unique lu sur l'entrée standard (jamais dans la ligne de commande).
+        pw = sys.stdin.readline().rstrip("\n")
+        if not (8 <= len(pw) <= 64):
+            print("mot de passe : 8 à 64 caractères", file=sys.stderr); return 2
+        if not os.path.exists(MOK_PUB):
+            print("clé DKMS absente : installez d'abord le pilote", file=sys.stderr); return 3
+        log("mokutil --import " + MOK_PUB)
+        return subprocess.run(["mokutil", "--import", MOK_PUB], input=f"{pw}\n{pw}\n", text=True, check=False).returncode
+    if action == "install-app":
+        app = args[0] if args else ""
+        if app not in GAME_APPS:
+            print("application non autorisée", file=sys.stderr); return 2
+        rc = run(["flatpak", "remote-add", "--system", "--if-not-exists", "flathub", FLATHUB])
+        if rc:
+            return rc
+        return run(["flatpak", "install", "--system", "-y", "--noninteractive", "flathub", app])
     if action == "install-optional":
         key = args[0] if args else ""
         if key not in OPTIONAL_PACKAGES:

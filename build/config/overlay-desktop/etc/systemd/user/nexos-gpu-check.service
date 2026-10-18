@@ -1,0 +1,7 @@
+[Unit]
+Description=NexOS : proposer le pilote NVIDIA si une carte NVIDIA est présente
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/nexos/gpu-check

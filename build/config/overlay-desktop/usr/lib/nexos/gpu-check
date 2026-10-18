@@ -1,0 +1,11 @@
+#!/bin/sh
+# Signale une fois par session qu'une carte NVIDIA n'a pas son pilote propriétaire (jeux, CUDA).
+# Lancé par nexos-gpu-check.timer (session utilisateur), se termine aussitôt : aucun processus permanent.
+lspci -n 2>/dev/null | awk '$2 ~ /^03/ && tolower($3) ~ /^10de:/ {f=1} END {exit !f}' || exit 0
+[ -e /proc/driver/nvidia/version ] && exit 0
+dpkg-query -W -f='${Status}' nvidia-driver 2>/dev/null | grep -q "installed$" && exit 0
+gdbus call --session --dest org.freedesktop.Notifications --object-path /org/freedesktop/Notifications \
+  --method org.freedesktop.Notifications.Notify "NexOS" 0 "nexos-control-center" \
+  "Carte graphique NVIDIA détectée" \
+  "Pour les jeux et les meilleures performances, installez le pilote NVIDIA : Control Center → Jeux et pilotes." \
+  "[]" "{'desktop-entry': <'org.nexos.ControlCenter'>}" 20000 >/dev/null

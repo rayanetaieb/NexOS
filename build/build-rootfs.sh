@@ -45,7 +45,7 @@ fi
 
 case "$SUITE" in
   noble|jammy) components="main,universe" ;;
-  *)           components="main,non-free-firmware" ;;
+  *)           components="main,contrib,non-free,non-free-firmware" ;;  # contrib/non-free : pilote NVIDIA, steam-devices
 esac
 
 # NB : root sans mot de passe = PROTOTYPE VM UNIQUEMENT (console de test).
@@ -69,7 +69,7 @@ mmdebstrap \
   --customize-hook='echo nexos > "$1/etc/hostname"' \
   --customize-hook='printf "127.0.0.1 localhost\n127.0.1.1 nexos\n" > "$1/etc/hosts"' \
   --customize-hook='printf "/dev/vda / ext4 defaults 0 1\n" > "$1/etc/fstab"' \
-  --customize-hook="sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME=\"NexOS 0.3 prototype $EDITION (base $SUITE)\"/' \"\$1/usr/lib/os-release\"" \
+  --customize-hook="sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME=\"NexOS 0.4 prototype $EDITION (base $SUITE)\"/' \"\$1/usr/lib/os-release\"" \
   --customize-hook='chroot "$1" passwd -d root' \
   --customize-hook="for s in \$(grep -vE '^\\s*(#|\$)' '$HERE/config/services.list'); do chroot \"\$1\" systemctl enable \"\$s\"; done" \
   "${hooks[@]}" \
@@ -77,6 +77,7 @@ mmdebstrap \
   --customize-hook='rm -f "$1/etc/apt/apt.conf.d/99mmdebstrap"' \
   --customize-hook='if [ -x "$1/usr/bin/setupcon" ]; then chroot "$1" setupcon --save-only 2>/dev/null || true; fi' \
   --customize-hook='chroot "$1" ldconfig; touch "$1/etc/.updated" "$1/var/.updated"' \
+  --customize-hook="case '$SUITE' in noble|jammy) ;; *) '$HERE/config/apt-sources-final.sh' \"\$1\" ;; esac" \
   "$SUITE" "$ROOTFS" "$MIRROR"
 
 echo ">> rootfs : $ROOTFS ($(du -h "$ROOTFS" | cut -f1))"

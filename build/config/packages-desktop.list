@@ -71,3 +71,17 @@ qemu-guest-agent
 spice-vdagent
 xdg-user-dirs
 xdg-user-dirs-gtk
+# --- Jeux (0.4) : performances à la demande, surcouche FPS, Vulkan, décodage vidéo matériel ---
+gamemode
+mangohud
+mesa-vulkan-drivers
+vulkan-tools
+mesa-va-drivers
+intel-media-va-driver
+vainfo
+steam-devices
+# --- Pilotes graphiques (0.4) : détection NVIDIA, signature des modules pour Secure Boot ---
+nvidia-detect
+mokutil
+# --- Sécurité (0.4) : correctifs de sécurité installés automatiquement ---
+unattended-upgrades

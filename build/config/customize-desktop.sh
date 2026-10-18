@@ -47,10 +47,10 @@ chroot "$R" systemctl set-default graphical.target >/dev/null
 
 # --- Identité système ---
 cat > "$R/etc/os-release.nexos" <<'EOF'
-PRETTY_NAME="NexOS 0.3 (prototype, base Debian 13)"
+PRETTY_NAME="NexOS 0.4 (prototype, base Debian 13)"
 NAME="NexOS"
-VERSION_ID="0.3"
-VERSION="0.3 (prototype)"
+VERSION_ID="0.4"
+VERSION="0.4 (prototype)"
 ID=nexos
 ID_LIKE=debian
 LOGO=nexos-logo
@@ -62,7 +62,7 @@ mv "$R/etc/os-release.nexos" "$R/usr/lib/os-release"
 ln -sf ../usr/lib/os-release "$R/etc/os-release"
 echo nexos > "$R/etc/hostname"
 ln -sf /usr/share/zoneinfo/Europe/Paris "$R/etc/localtime"; echo Europe/Paris > "$R/etc/timezone"
-printf "NexOS 0.3 \\n \\l\n\n" > "$R/etc/issue"
+printf "NexOS 0.4 \\n \\l\n\n" > "$R/etc/issue"
 
 # --- Noms d'applications NexOS (surcharges, sans toucher aux paquets Debian) ---
 LA="$R/usr/local/share/applications"; mkdir -p "$LA"
@@ -77,6 +77,12 @@ rename_app org.kde.discover.desktop "NexOS Store"
 rename_app systemsettings.desktop "Paramètres"
 rename_app org.kde.plasma-systemmonitor.desktop "Moniteur système"
 rename_app org.kde.konsole.desktop "Terminal"
+
+# --- Légèreté : proxy de menu global lancé par systemd --user sous Plasma 6 (la ligne
+# « Hidden » de l'autostart ne suffit pas, mesuré en 0.3) → masqué pour toutes les sessions.
+for u in plasma-gmenudbusmenuproxy.service; do
+  [ -f "$R/usr/lib/systemd/user/$u" ] && chroot "$R" systemctl --global mask "$u" >/dev/null 2>&1 || true
+done
 
 # --- Pare-feu : ufw activé, entrant refusé / sortant autorisé (politique par défaut d'ufw) ---
 sed -i 's/^ENABLED=.*/ENABLED=yes/' "$R/etc/ufw/ufw.conf"
@@ -94,7 +100,7 @@ sed -i 's/^TIMELINE_CREATE=.*/TIMELINE_CREATE="no"/' "$R/usr/share/snapper/confi
 if [ -f "$R/etc/xdg/autostart/org.kde.discover.notifier.desktop" ]; then
   echo 'Hidden=true' >> "$R/etc/xdg/autostart/org.kde.discover.notifier.desktop"
 fi
-chroot "$R" systemctl --global enable nexos-update-check.timer >/dev/null 2>&1 || true
+chroot "$R" systemctl --global enable nexos-update-check.timer nexos-gpu-check.timer >/dev/null 2>&1 || true
 # Flathub activé automatiquement à la première connexion Internet (minuteur, une seule fois)
 chroot "$R" systemctl enable nexos-flathub.timer >/dev/null 2>&1 || true
 # Proxy de menu global (barre de menus façon macOS) : non utilisé par la disposition NexOS

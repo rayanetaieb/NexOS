@@ -179,6 +179,32 @@ def apparmor_enabled() -> bool:
     return p.exists() and p.read_text().strip() == "Y"
 
 
+def nvidia_gpu() -> bool:
+    """Carte NVIDIA présente (identifiant PCI fabricant 10de, classe affichage 03xx)."""
+    for ln in sh(["lspci", "-n"]).splitlines():
+        parts = ln.split()
+        if len(parts) >= 3 and parts[1].startswith("03") and parts[2].lower().startswith("10de:"):
+            return True
+    return False
+
+
+def nvidia_driver_state() -> str:
+    """État du pilote NVIDIA propriétaire : actif, installé (redémarrage/clé à valider) ou absent."""
+    if Path("/proc/driver/nvidia/version").exists():
+        return "actif"
+    if sh(["dpkg-query", "-W", "-f=${Status}", "nvidia-driver"]).strip().endswith("installed"):
+        return "installé — redémarrage (et validation de la clé Secure Boot) nécessaire"
+    return "non installé"
+
+
+def secure_boot_enabled() -> bool:
+    return "enabled" in sh(["mokutil", "--sb-state"]).lower()
+
+
+def flatpak_installed(app_id: str) -> bool:
+    return app_id in sh(["flatpak", "list", "--app", "--columns=application"], timeout=20).split()
+
+
 def secure_boot() -> str:
     out = sh(["mokutil", "--sb-state"]).strip()
     if out:

@@ -1,0 +1,5 @@
+// NexOS : correctifs de SÉCURITÉ Debian installés automatiquement chaque jour
+// (unattended-upgrades, origine Debian-Security par défaut ; instantané Btrfs avant/après).
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::AutocleanInterval "7";

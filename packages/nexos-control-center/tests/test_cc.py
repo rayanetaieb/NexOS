@@ -53,3 +53,27 @@ def test_snapshot_undo_rejects_invalid_numbers(capsys):
     from nexos_cc import admin
     for bad in ("", "0", "-1", "1;rm", "1..0", "abc"):
         assert admin.main(["snapshot-undo", bad]) == 2
+
+
+def test_gaming_actions_are_restricted(capsys):
+    from nexos_cc import admin
+    assert admin.main(["install-app", "org.evil.App"]) == 2          # hors liste autorisée
+    assert admin.main(["install-app"]) == 2
+
+
+def test_mok_import_validates_password(monkeypatch, capsys):
+    import io
+    from nexos_cc import admin
+    monkeypatch.setattr("sys.stdin", io.StringIO("court\n"))
+    assert admin.main(["mok-import"]) == 2                            # trop court
+    monkeypatch.setattr("sys.stdin", io.StringIO("assezlong123\n"))
+    monkeypatch.setattr(admin, "MOK_PUB", "/nonexistent/mok.pub")
+    assert admin.main(["mok-import"]) == 3                            # pas de clé DKMS
+
+
+def test_nvidia_detection(monkeypatch):
+    from nexos_cc import probe
+    monkeypatch.setattr(probe, "sh", lambda cmd, timeout=10: "01:00.0 0300: 10de:2484 (rev a1)\n00:02.0 0300: 8086:9bc4\n")
+    assert probe.nvidia_gpu() is True
+    monkeypatch.setattr(probe, "sh", lambda cmd, timeout=10: "00:02.0 0300: 8086:9bc4\n02:00.0 0200: 10de:0001\n")
+    assert probe.nvidia_gpu() is False                                # 10de mais pas une carte graphique

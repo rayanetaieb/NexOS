@@ -17,3 +17,6 @@ rsync
 cracklib-runtime
 squashfs-tools
 e2fsprogs
+# Installation à côté de Windows (0.4) : détection des autres systèmes, redimensionnement NTFS
+os-prober
+ntfs-3g

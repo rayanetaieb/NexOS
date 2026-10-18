@@ -39,3 +39,11 @@ if [ -f "$CHROOT/etc/default/keyboard" ]; then
   printf '[Layout]\nLayoutList=%s\nVariantList=%s\nOptions=grp:alt_shift_toggle\nResetOldOptions=true\nShowLayoutIndicator=true\nShowSingle=false\nUse=true\n' \
     "$lay" "$var" > "$CHROOT/etc/xdg/kxkbrc"
 fi
+
+# --- Double démarrage avec Windows : horloge matérielle en heure locale ---
+# Windows lit l'horloge du PC en heure locale, Linux en UTC : sans ce réglage, l'heure de Windows
+# serait décalée d'1 à 2 h après chaque passage par NexOS.
+if [ -x "$CHROOT/usr/bin/os-prober" ] && chroot "$CHROOT" os-prober 2>/dev/null | grep -qi windows; then
+  printf '0.0 0 0.0\n0\nLOCAL\n' > "$CHROOT/etc/adjtime"
+  echo "NexOS : Windows détecté, horloge matérielle réglée en heure locale"
+fi

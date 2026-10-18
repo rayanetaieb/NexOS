@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
     QApplication,
     QHBoxLayout,
     QInputDialog,
+    QLineEdit,
     QLabel,
     QListWidget,
     QListWidgetItem,
@@ -39,13 +40,13 @@ def human(mb: float) -> str:
 class Runner(QObject):
     done = Signal(int, str)
 
-    def __init__(self, cmd):
-        super().__init__(); self.cmd = cmd
+    def __init__(self, cmd, stdin: str | None = None):
+        super().__init__(); self.cmd = cmd; self.stdin = stdin
 
     @Slot()
     def run(self):
         try:
-            r = subprocess.run(self.cmd, capture_output=True, text=True, check=False)
+            r = subprocess.run(self.cmd, capture_output=True, text=True, check=False, input=self.stdin)
             self.done.emit(r.returncode, (r.stdout + r.stderr)[-4000:])
         except FileNotFoundError as e:
             self.done.emit(127, str(e))
@@ -271,6 +272,61 @@ class Components(Page):
             self.cc.admin(["install-optional", key], self.refresh)
 
 
+class Gaming(Page):
+    title = "Jeux et pilotes"
+    APPS = [("com.valvesoftware.Steam", "Steam — jeux Windows via Proton"),
+            ("com.heroicgameslauncher.hgl", "Heroic — Epic Games, GOG, Amazon"),
+            ("net.lutris.Lutris", "Lutris — autres lanceurs et émulateurs"),
+            ("org.libretro.RetroArch", "RetroArch — consoles rétro"),
+            ("net.davidotek.pupgui2", "ProtonUp-Qt — versions de Proton/GE")]
+    def __init__(self, cc):
+        super().__init__(cc)
+        self.info = QLabel(); self.info.setWordWrap(True); self.lay.addWidget(self.info)
+        row = QHBoxLayout()
+        self.b_nv = QPushButton("Installer le pilote NVIDIA…"); self.b_nv.clicked.connect(self.install_nvidia)
+        self.b_mok = QPushButton("Valider la clé Secure Boot…"); self.b_mok.clicked.connect(self.mok)
+        row.addWidget(self.b_nv); row.addWidget(self.b_mok); row.addStretch(); self.lay.addLayout(row)
+        self.lay.addWidget(QLabel("Applications de jeu (NexOS Store / Flathub) :"))
+        self.t = table(["Application", "État"]); self.lay.addWidget(self.t, 1)
+        b = QPushButton("Installer l'application sélectionnée"); b.clicked.connect(self.install_app); self.lay.addWidget(b)
+        self.lay.addWidget(QLabel("Astuce : dans Steam, Propriétés du jeu → Options de lancement : "
+                                  "<code>gamemoderun mangohud %command%</code> (performances + compteur d'images/s)."))
+        self.out = QPlainTextEdit(); self.out.setReadOnly(True); self.out.setMaximumHeight(120); self.lay.addWidget(self.out)
+    def refresh(self):
+        nv = probe.nvidia_gpu(); sb = probe.secure_boot_enabled()
+        gp = "<br>".join(probe.gpus()) or "aucune carte détectée"
+        self.info.setText(f"<b>Cartes graphiques</b><br>{gp}<br><br>"
+                          f"<b>Pilote NVIDIA propriétaire</b> : {probe.nvidia_driver_state() if nv else 'sans objet (pas de carte NVIDIA)'}<br>"
+                          f"<b>Secure Boot</b> : {'activé' if sb else 'désactivé ou BIOS'}"
+                          + ("<br><i>Avec Secure Boot, le pilote NVIDIA est signé par une clé propre à ce PC : "
+                             "validez-la une fois (bouton à droite), puis au redémarrage choisissez « Enroll MOK » "
+                             "et tapez le même mot de passe.</i>" if nv and sb else ""))
+        self.b_nv.setEnabled(nv and probe.nvidia_driver_state() == "non installé")
+        self.b_mok.setEnabled(nv and sb and probe.nvidia_driver_state() != "non installé")
+        fill(self.t, [(name, "installée" if probe.flatpak_installed(i) else "non installée") for i, name in self.APPS])
+    def install_nvidia(self):
+        if QMessageBox.question(self, "Pilote NVIDIA", "Télécharger et installer le pilote NVIDIA de Debian "
+                                "(≈ 500 Mo, plusieurs minutes) ?") == QMessageBox.StandardButton.Yes:
+            self.out.setPlainText("Installation en cours…"); self.cc.admin(["install-nvidia"], self.after_nvidia, self.out)
+    def after_nvidia(self):
+        self.refresh()
+        if probe.secure_boot_enabled():
+            QMessageBox.information(self, "Étape suivante", "Pilote installé. Secure Boot est activé : cliquez sur "
+                                    "« Valider la clé Secure Boot… » avant de redémarrer.")
+    def mok(self):
+        pw, ok = QInputDialog.getText(self, "Clé Secure Boot", "Choisissez un mot de passe temporaire (8 caractères ou plus).\n"
+                                      "Au redémarrage, un écran bleu « MOK management » s'affichera :\n"
+                                      "Enroll MOK → Continue → Yes → tapez ce mot de passe → Reboot.",
+                                      QLineEdit.EchoMode.Password)
+        if ok and pw:
+            self.cc.admin(["mok-import"], self.refresh, self.out, stdin=pw + "\n")
+    def install_app(self):
+        r = self.t.currentRow()
+        if r < 0: return
+        self.out.setPlainText(f"Installation de {self.APPS[r][1]}… (téléchargement depuis Flathub, quelques minutes)")
+        self.cc.admin(["install-app", self.APPS[r][0]], self.refresh, self.out)
+
+
 class AI(Page):
     title = "Assistant IA et Python"
     def __init__(self, cc):
@@ -301,7 +357,7 @@ class ControlCenter(QMainWindow):
         self.resize(1100, 720)
         self.nav = QListWidget(); self.nav.setFixedWidth(230); self.stack = QStackedWidget()
         self.pages = [Overview(self), Startup(self), Devices(self), Network(self), Updates(self),
-                      Backups(self), Security(self), Components(self), AI(self)]
+                      Backups(self), Security(self), Gaming(self), Components(self), AI(self)]
         for p in self.pages:
             self.nav.addItem(QListWidgetItem(p.title)); self.stack.addWidget(p)
         self.nav.currentRowChanged.connect(self.show_page)
@@ -312,9 +368,9 @@ class ControlCenter(QMainWindow):
     def show_page(self, i):
         self.stack.setCurrentIndex(i); self.pages[i].refresh()
 
-    def admin(self, args, then=None, output: QPlainTextEdit | None = None):
+    def admin(self, args, then=None, output: QPlainTextEdit | None = None, stdin: str | None = None):
         """Action administrateur : pkexec (authentification polkit) + nexos-admin (liste fermée)."""
-        th = QThread(self); job = Runner(["pkexec", ADMIN, *args]); job.moveToThread(th)
+        th = QThread(self); job = Runner(["pkexec", ADMIN, *args], stdin); job.moveToThread(th)
         th.started.connect(job.run)
         def finished(code, text):
             th.quit(); th.wait()

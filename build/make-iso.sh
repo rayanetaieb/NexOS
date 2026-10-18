@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Fabrique l'ISO live/installable NexOS à partir de $OUT/rootfs.tar (EDITION=live).
 # Démarrage hybride BIOS + UEFI (grub-mkrescue), système en squashfs (live-boot).
-# Limite connue : le chargeur de l'ISO n'est pas signé (Secure Boot à désactiver pour
-# démarrer l'ISO) — le système INSTALLÉ, lui, reçoit shim/GRUB signés Debian.
+# Secure Boot : l'ISO démarre avec shim + GRUB signés de Debian (vérifié sous OVMF avec les clés
+# Microsoft, et une ISO non signée y est refusée « Access Denied ») — voir build/iso-pack.sh.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 OUT="${OUT:-$PWD/out}"
-VERSION="${VERSION:-0.3}"
+VERSION="${VERSION:-0.4}"
 ISO="$OUT/nexos-$VERSION-amd64.iso"
 work="$OUT/iso-work"; root="$work/rootfs"; tree="$work/iso"
 rm -rf "$work"; mkdir -p "$root" "$tree/live" "$tree/boot/grub"
@@ -55,8 +55,8 @@ menuentry "NexOS (console de diagnostic, sans bureau)" {
 EOF
 } > "$tree/boot/grub/grub.cfg"
 
-echo ">> ISO hybride BIOS/UEFI"
-grub-mkrescue -o "$ISO" "$tree" -- -volid "NEXOS_${VERSION//./_}" 2>"$work/mkrescue.log" || { cat "$work/mkrescue.log"; exit 1; }
+echo ">> ISO hybride BIOS/UEFI (UEFI : shim + GRUB signés Debian → Secure Boot activé accepté)"
+"$HERE/iso-pack.sh" "$tree" "$ISO" "NEXOS_${VERSION//./_}" "$root"
 rm -rf "$root"
 ( cd "$OUT" && sha256sum "$(basename "$ISO")" > "$(basename "$ISO").sha256" )
 ls -lh "$ISO"; cat "$ISO.sha256"

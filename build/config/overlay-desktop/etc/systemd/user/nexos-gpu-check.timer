@@ -1,0 +1,8 @@
+[Unit]
+Description=NexOS : vérification de la carte graphique une minute après l'ouverture de session
+
+[Timer]
+OnStartupSec=1min
+
+[Install]
+WantedBy=timers.target
