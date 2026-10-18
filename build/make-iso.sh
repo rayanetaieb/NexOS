@@ -56,6 +56,12 @@ EOF
 } > "$tree/boot/grub/grub.cfg"
 
 echo ">> ISO hybride BIOS/UEFI (UEFI : shim + GRUB signés Debian → Secure Boot activé accepté)"
+need=$(( $(du -sm "$tree" | cut -f1) + 300 )); free=$(df -Pm "$OUT" | awk 'NR==2{print $4}')
+if [ "$free" -lt "$need" ]; then
+  echo "ERREUR : espace disque insuffisant pour écrire l'ISO ($free Mo libres, $need Mo nécessaires)."
+  echo "Libérez de la place puis relancez : build/iso-pack.sh $tree $ISO NEXOS_${VERSION//./_} $root"
+  exit 1
+fi
 "$HERE/iso-pack.sh" "$tree" "$ISO" "NEXOS_${VERSION//./_}" "$root"
 rm -rf "$root"
 ( cd "$OUT" && sha256sum "$(basename "$ISO")" > "$(basename "$ISO").sha256" )
