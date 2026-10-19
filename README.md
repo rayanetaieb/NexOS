@@ -91,10 +91,9 @@ NexOS is a **prototype**. What is verified, and what is not yet:
 | ✅ Verified (virtual machine) | ⚠️ Not yet |
 |---|---|
 | Live ISO + graphical installer (Calamares), UEFI install on Btrfs, reboot | testing on real hardware |
-| Login screen, boot menu, NexOS desktop | |
+| Login screen, boot menu, NexOS desktop | Unsigned ISO (disable Secure Boot to boot the USB stick) |
 | Snapshots + rollback | AppArmor missing from the 0.3 image: to be restored |
-| Arduino, KiCad, LaTeX, Java, Python, AI assistant | Android project build (Gradle) and MiKTeX: not testable in the build environment |
-| | Unsigned ISO (disable Secure Boot to boot the USB stick) |
+| Arduino, KiCad, LaTeX, Java, Python, AI assistant | Android project build (Gradle) and MiKTeX: not tested yet |
 
 ## Try it
 
